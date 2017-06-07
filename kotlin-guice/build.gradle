@@ -1,0 +1,10 @@
+dependencies {
+    compile "com.google.inject:guice:4.1.0"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version" // managing version up
+
+    testCompile 'org.amshove.kluent:kluent:1.22'
+    testCompile 'org.jetbrains.spek:spek-api:1.1.2'
+    testCompile 'org.jetbrains.spek:spek-junit-platform-engine:1.1.2'
+    testCompile 'org.junit.platform:junit-platform-runner:1.0.0-M4'
+}
