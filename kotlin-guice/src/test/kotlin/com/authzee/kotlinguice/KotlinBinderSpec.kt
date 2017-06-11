@@ -22,7 +22,7 @@ import javax.inject.Singleton
  */
 object KotlinBinderSpec : Spek({
     beforeEachTest {
-        StaticInjectionObj.staticInjectionSite = ""
+        StaticInjectionObj.reset()
     }
 
     describe("KotlinBinder") {

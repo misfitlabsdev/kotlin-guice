@@ -23,7 +23,7 @@ import javax.inject.Singleton
  */
 object KotlinModuleSpec : Spek({
     beforeEachTest {
-        StaticInjectionObj.staticInjectionSite = ""
+        StaticInjectionObj.reset()
     }
 
     describe("KotlinModule") {

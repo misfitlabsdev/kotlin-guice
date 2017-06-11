@@ -31,8 +31,7 @@ open class AImpl : A {
     }
 }
 
-@Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION,
-        AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.EXPRESSION, AnnotationTarget.FIELD)
+@Target(AnnotationTarget.FIELD, AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
 @BindingAnnotation
 annotation class Annotated
@@ -73,5 +72,14 @@ class TProvider<T> : Provider<T> {
 }
 
 object StaticInjectionObj {
-    @Inject var staticInjectionSite: String = ""
+    @Inject var staticInjectionSite: String? = null
+
+    fun reset() {
+        staticInjectionSite = null
+    }
+}
+
+class MembersInjection {
+    @Inject var memberInjectionSite: String? = null
+    @Inject @Annotated var annotatedMemberInjectionSite: String? = null
 }
