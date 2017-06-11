@@ -4,6 +4,9 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
 
     dependencies {
@@ -11,6 +14,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.14"
         classpath "org.junit.platform:junit-platform-gradle-plugin:1.0.0-M4"
+        classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:2.0.1"
     }
 }
 
@@ -20,6 +24,7 @@ subprojects {
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'org.junit.platform.gradle.plugin'
     apply plugin: 'org.jetbrains.dokka'
+    apply plugin: "org.jlleitschuh.gradle.ktlint"
 
     sourceCompatibility = 1.8
 
@@ -53,4 +58,6 @@ subprojects {
             "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
         }
     }
+
+    build.dependsOn ktlintCheck
 }

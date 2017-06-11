@@ -44,7 +44,7 @@ class KotlinBinder(private val self: Binder) : Binder by self {
      * @see Binder
      */
     inline fun <reified T> bind() : KotlinAnnotatedBindingBuilder<T> {
-        return KotlinBindingBuilder<T>(bind(object : TypeLiteral<T>(){}))
+        return KotlinBindingBuilder<T>(bind(object : TypeLiteral<T>() {}))
     }
 
     /**
@@ -71,7 +71,7 @@ class KotlinBinder(private val self: Binder) : Binder by self {
      * @see Binder
      */
     inline fun <reified T> getMembersInjector() : MembersInjector<T> {
-        return getMembersInjector(object : TypeLiteral<T>(){})
+        return getMembersInjector(object : TypeLiteral<T>() {})
     }
 
     /**

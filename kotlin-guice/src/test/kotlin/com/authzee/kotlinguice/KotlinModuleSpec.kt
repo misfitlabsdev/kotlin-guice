@@ -18,7 +18,6 @@ import java.util.concurrent.Callable
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
 /**
  * @author John Leacox
  */
@@ -149,7 +148,7 @@ object KotlinModuleSpec : Spek({
                 })
 
                 val callable: Callable<*> = injector
-                        .getInstance(Key.get(object : TypeLiteral<Callable<*>>(){}))
+                        .getInstance(Key.get(object : TypeLiteral<Callable<*>>() {}))
                 callable shouldBeInstanceOf ACallable::class.java
             }
         }

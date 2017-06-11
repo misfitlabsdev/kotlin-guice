@@ -17,7 +17,6 @@ import java.util.concurrent.Callable
 import javax.inject.Inject
 import javax.inject.Singleton
 
-
 /**
  * @author John Leacox
  */
@@ -220,5 +219,4 @@ object KotlinBinderSpec : Spek({
         }
     }
 })
-
 
