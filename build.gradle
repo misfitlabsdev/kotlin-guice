@@ -16,6 +16,7 @@ buildscript {
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.14"
         classpath "org.junit.platform:junit-platform-gradle-plugin:1.0.0-M4"
         classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:2.0.1"
+        classpath "me.champeau.gradle:jmh-gradle-plugin:0.3.1"
     }
 }
 
@@ -26,6 +27,7 @@ subprojects {
     apply plugin: 'org.junit.platform.gradle.plugin'
     apply plugin: 'org.jetbrains.dokka'
     apply plugin: "org.jlleitschuh.gradle.ktlint"
+    apply plugin: "me.champeau.gradle.jmh"
 
     sourceCompatibility = 1.8
 
@@ -54,10 +56,28 @@ subprojects {
         }
     }
 
+    jmh {
+        // For some reason jmh, the annotation processor, or the jmh-gradle-plugin is creating
+        // duplicates of the jmh generated classes; one in the build/jmh-generated-classes and
+        // one in the build/classes directory. This leads to duplicates being found when copying
+        // classes for the jar. Changing this to 'warn' allows us to run the benchmarks even though
+        // something isn't configured correctly somewhere.
+        duplicateClassesStrategy = 'warn'
+    }
+
+    sourceSets {
+        jmh
+    }
+
     dependencyManagement {
         dependencies {
             "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
         }
+    }
+
+    dependencies {
+        jmh 'org.openjdk.jmh:jmh-core:1.19'
+        jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.19'
     }
 
     build.dependsOn ktlintCheck
