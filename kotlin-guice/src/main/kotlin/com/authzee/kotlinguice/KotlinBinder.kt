@@ -6,7 +6,6 @@ import com.google.inject.Binder
 import com.google.inject.MembersInjector
 import com.google.inject.Provider
 import com.google.inject.Scope
-import com.google.inject.TypeLiteral
 
 /**
  * A wrapper of [Binder] that enhances the binding DSL to allow binding using reified type
@@ -44,7 +43,7 @@ class KotlinBinder(private val self: Binder) : Binder by self {
      * @see Binder
      */
     inline fun <reified T> bind() : KotlinAnnotatedBindingBuilder<T> {
-        return KotlinBindingBuilder<T>(bind(object : TypeLiteral<T>() {}))
+        return KotlinBindingBuilder<T>(bind(typeLiteral<T>()))
     }
 
     /**
@@ -71,7 +70,7 @@ class KotlinBinder(private val self: Binder) : Binder by self {
      * @see Binder
      */
     inline fun <reified T> getMembersInjector() : MembersInjector<T> {
-        return getMembersInjector(object : TypeLiteral<T>() {})
+        return getMembersInjector(typeLiteral<T>())
     }
 
     /**

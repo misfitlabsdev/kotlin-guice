@@ -3,7 +3,6 @@ package com.authzee.kotlinguice
 import com.google.inject.ConfigurationException
 import com.google.inject.Guice
 import com.google.inject.Key
-import com.google.inject.TypeLiteral
 import com.google.inject.multibindings.MapBinder
 import com.google.inject.multibindings.Multibinder
 import com.google.inject.multibindings.OptionalBinder
@@ -75,7 +74,7 @@ object InjectorExtensionsSpec : Spek({
                 getBinding shouldNotThrow ConfigurationException::class
 
                 val binding = getBinding()
-                binding.key shouldEqual Key.get(object : TypeLiteral<Callable<A>>() {})
+                binding.key shouldEqual Key.get(typeLiteral<Callable<A>>())
             }
 
             it("should return a binding for an implicit binding") {

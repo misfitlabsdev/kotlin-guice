@@ -5,7 +5,6 @@ import com.authzee.kotlinguice.binder.to
 import com.google.inject.CreationException
 import com.google.inject.Guice
 import com.google.inject.Key
-import com.google.inject.TypeLiteral
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldEqual
@@ -66,7 +65,7 @@ object KotlinModuleSpec : Spek({
                     }
                 })
 
-                val a = injector.getInstance(Key.get(object : TypeLiteral<Callable<A>>() {}))
+                val a = injector.getInstance(Key.get(typeLiteral<Callable<A>>()))
                 a.call().get() shouldEqual "Impl of A"
             }
 
@@ -89,7 +88,7 @@ object KotlinModuleSpec : Spek({
                     }
                 })
 
-                val callable = injector.getInstance(Key.get(object : TypeLiteral<Callable<A>>() {}))
+                val callable = injector.getInstance(Key.get(typeLiteral<Callable<A>>()))
                 callable.call() shouldEqual null
             }
 
@@ -125,7 +124,7 @@ object KotlinModuleSpec : Spek({
                     }
                 })
 
-                val iterable = injector.getInstance(Key.get(object : TypeLiteral<Iterable<A>>() {}))
+                val iterable = injector.getInstance(Key.get(typeLiteral<Iterable<A>>()))
                 iterable shouldEqual null
             }
 
@@ -148,7 +147,7 @@ object KotlinModuleSpec : Spek({
                 })
 
                 val callable: Callable<*> = injector
-                        .getInstance(Key.get(object : TypeLiteral<Callable<*>>() {}))
+                        .getInstance(Key.get(typeLiteral<Callable<*>>()))
                 callable shouldBeInstanceOf ACallable::class.java
             }
         }

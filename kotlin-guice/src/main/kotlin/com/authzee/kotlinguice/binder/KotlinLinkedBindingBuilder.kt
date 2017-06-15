@@ -1,6 +1,6 @@
 package com.authzee.kotlinguice.binder
 
-import com.google.inject.TypeLiteral
+import com.authzee.kotlinguice.typeLiteral
 import com.google.inject.binder.LinkedBindingBuilder
 import javax.inject.Provider
 
@@ -21,13 +21,13 @@ abstract class KotlinLinkedBindingBuilder<T>(private val self: LinkedBindingBuil
 
     /** Binds to the implementation class specified by the type parameter. */
     inline fun <reified TImpl : T> to(): KotlinScopedBindingBuilder {
-        delegate.to(object : TypeLiteral<TImpl>() {})
+        delegate.to(typeLiteral<TImpl>())
         return this
     }
 
     /** Binds to the provider class specified by the type parameter. */
     inline fun <reified TProvider : Provider<out T>> toProvider(): KotlinScopedBindingBuilder {
-        delegate.toProvider(object : TypeLiteral<TProvider>() {})
+        delegate.toProvider(typeLiteral<TProvider>())
         return this
     }
 }

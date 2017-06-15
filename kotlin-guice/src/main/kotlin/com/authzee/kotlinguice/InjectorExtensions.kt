@@ -5,7 +5,6 @@ import com.google.inject.Injector
 import com.google.inject.Key
 import com.google.inject.MembersInjector
 import com.google.inject.Provider
-import com.google.inject.TypeLiteral
 
 /**
  * Returns the member injector used to inject dependencies into methods and fields on instances of
@@ -17,7 +16,7 @@ import com.google.inject.TypeLiteral
  * @since 1.0
  */
 inline fun <reified T> Injector.getMembersInjector(): MembersInjector<T> {
-    return getMembersInjector(object : TypeLiteral<T>() {})
+    return getMembersInjector(typeLiteral<T>())
 }
 
 /**
@@ -33,7 +32,7 @@ inline fun <reified T> Injector.getMembersInjector(): MembersInjector<T> {
  * @since 1.0
  */
 inline fun <reified T> Injector.getBinding(): Binding<T> {
-    return getBinding(Key.get(object : TypeLiteral<T>() {}))
+    return getBinding(Key.get(typeLiteral<T>()))
 }
 
 /**
@@ -47,7 +46,7 @@ inline fun <reified T> Injector.getBinding(): Binding<T> {
  * @since 1.0
  */
 inline fun <reified T> Injector.findBindingsByType(): List<Binding<T>> {
-    return findBindingsByType(object : TypeLiteral<T>() {})
+    return findBindingsByType(typeLiteral<T>())
 }
 
 /**
@@ -61,7 +60,7 @@ inline fun <reified T> Injector.findBindingsByType(): List<Binding<T>> {
  * @since 1.0
  */
 inline fun <reified T> Injector.getProvider(): Provider<T> {
-    return getProvider(Key.get(object : TypeLiteral<T>() {}))
+    return getProvider(Key.get(typeLiteral<T>()))
 }
 
 /**
@@ -75,5 +74,5 @@ inline fun <reified T> Injector.getProvider(): Provider<T> {
  * @since 1.0
  */
 inline fun <reified T> Injector.getInstance(): T {
-    return getInstance(Key.get(object : TypeLiteral<T>() {}))
+    return getInstance(Key.get(typeLiteral<T>()))
 }
