@@ -64,7 +64,7 @@ object KotlinBinderSpec : Spek({
                     }
                 })
 
-                val a = injector.getInstance(Key.get(typeLiteral<Callable<A>>()))
+                val a = injector.getInstance(key<Callable<A>>())
                 a.call().get() shouldEqual "Impl of A"
             }
 
@@ -87,7 +87,7 @@ object KotlinBinderSpec : Spek({
                     }
                 })
 
-                val callable = injector.getInstance(Key.get(typeLiteral<Callable<A>>()))
+                val callable = injector.getInstance(key<Callable<A>>())
                 callable.call() shouldEqual null
             }
 
@@ -123,7 +123,7 @@ object KotlinBinderSpec : Spek({
                     }
                 })
 
-                val iterable = injector.getInstance(Key.get(typeLiteral<Iterable<A>>()))
+                val iterable = injector.getInstance(key<Iterable<A>>())
                 iterable shouldEqual null
             }
 

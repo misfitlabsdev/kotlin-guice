@@ -2,7 +2,6 @@ package com.authzee.kotlinguice
 
 import com.google.inject.Binding
 import com.google.inject.Injector
-import com.google.inject.Key
 import com.google.inject.MembersInjector
 import com.google.inject.Provider
 
@@ -32,7 +31,7 @@ inline fun <reified T> Injector.getMembersInjector(): MembersInjector<T> {
  * @since 1.0
  */
 inline fun <reified T> Injector.getBinding(): Binding<T> {
-    return getBinding(Key.get(typeLiteral<T>()))
+    return getBinding(key<T>())
 }
 
 /**
@@ -60,7 +59,7 @@ inline fun <reified T> Injector.findBindingsByType(): List<Binding<T>> {
  * @since 1.0
  */
 inline fun <reified T> Injector.getProvider(): Provider<T> {
-    return getProvider(Key.get(typeLiteral<T>()))
+    return getProvider(key<T>())
 }
 
 /**
@@ -74,5 +73,5 @@ inline fun <reified T> Injector.getProvider(): Provider<T> {
  * @since 1.0
  */
 inline fun <reified T> Injector.getInstance(): T {
-    return getInstance(Key.get(typeLiteral<T>()))
+    return getInstance(key<T>())
 }
