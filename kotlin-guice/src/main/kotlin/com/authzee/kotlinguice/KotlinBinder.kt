@@ -14,7 +14,7 @@ import com.google.inject.Scope
  * By using this class instead of [Binder] you can replace the following DSL lines:
  * ```
  * bind(Service::class.java).to(ServiceImpl::class.java).`in`(Singleton::class.java)
- * bind(object : TypeLiteral<PaymentService<CreditCard>>{})
+ * bind(object : TypeLiteral<PaymentService<CreditCard>>() {})
  *         .to(CreditCardPaymentService::class.java)
  * ```
  * with
@@ -27,7 +27,7 @@ import com.google.inject.Scope
  * @author John Leacox
  * @since 1.0
  */
-class KotlinBinder(private val self: Binder) : Binder by self {
+open class KotlinBinder(open val delegate: Binder) : Binder by delegate {
     /**
      * Binds a [Scope] to an [Annotation] using an annotation type parameter.
      *
@@ -71,14 +71,5 @@ class KotlinBinder(private val self: Binder) : Binder by self {
      */
     inline fun <reified T> getMembersInjector() : MembersInjector<T> {
         return getMembersInjector(typeLiteral<T>())
-    }
-
-    /**
-     * Skips a source using a type parameter.
-     *
-     * @see Binder
-     */
-    inline fun <reified T> skipSource(): KotlinBinder {
-        return KotlinBinder(skipSources(T::class.java))
     }
 }

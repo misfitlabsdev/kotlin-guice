@@ -1,10 +1,7 @@
 package com.authzee.kotlinguice
 
-import com.authzee.kotlinguice.binder.annotatedWith
-import com.authzee.kotlinguice.binder.to
 import com.google.inject.CreationException
 import com.google.inject.Guice
-import com.google.inject.Key
 import com.google.inject.spi.ElementSource
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeInstanceOf
@@ -15,22 +12,100 @@ import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
 import java.util.concurrent.Callable
-import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * @author John Leacox
+ * @author Brian van de Boogaard.
  */
-object KotlinModuleSpec : Spek({
-    beforeEachTest {
-        StaticInjectionObj.reset()
-    }
+class KotlinPrivateModuleSpec : Spek({
+    describe("KotlinPrivateModule") {
 
-    describe("KotlinModule") {
-        it("should skip the KotlinBinder class in the source trace") {
-            val outerModule = object : KotlinModule() {
+        beforeEachTest {
+            StaticInjectionObj.reset()
+        }
+
+        it("should throw a CreationException when a non-exposed binding is attempted to be used") {
+            val injector = {
+                Guice.createInjector(object : KotlinModule() {
+                    override fun configure() {
+                        install(object : KotlinPrivateModule() {
+                            override fun configure() {
+                                bind<A>().to<AImpl>()
+
+                                // Do not expose A
+                            }
+                        })
+
+                        bind<AContainer>() // Bind a type that requires an A
+                    }
+                })
+            }
+
+            injector shouldThrow CreationException::class
+        }
+
+        it("should allow getting an instance of the exposed binding") {
+            val injector = Guice.createInjector(object : KotlinModule() {
+                override fun configure() {
+                    install(object : KotlinPrivateModule() {
+                        override fun configure() {
+                            bind<A>().to<AImpl>()
+
+                            expose<A>()
+                        }
+                    })
+
+                    bind<AContainer>() // Bind a type that requires an A
+                }
+            })
+
+            val a = injector.getInstance<A>()
+            a.get() shouldBe "Impl of A"
+        }
+
+        it("should inject an exposed binding into classes using the binding") {
+            val injector = Guice.createInjector(object : KotlinModule() {
+                override fun configure() {
+                    install(object : KotlinPrivateModule() {
+                        override fun configure() {
+                            bind<A>().to<AImpl>()
+
+                            expose<A>()
+                        }
+                    })
+
+                    bind<AContainer>() // Bind a type that requires an A
+                }
+            })
+
+            val aContainer = injector.getInstance<AContainer>()
+            aContainer.a.get() shouldBe "Impl of A"
+        }
+
+        it("should inject a private binding into an exposed class configured in the same module") {
+            val injector = Guice.createInjector(object : KotlinModule() {
+                override fun configure() {
+                    install(object : KotlinPrivateModule() {
+                        override fun configure() {
+                            bind<A>().to<AImpl>()
+                            bind<AContainer>() // Bind a type that requires an A
+
+                            expose<AContainer>() // Only expose the container
+                        }
+                    })
+
+                }
+            })
+
+            val aContainer = injector.getInstance<AContainer>()
+            aContainer.a.get() shouldBe "Impl of A"
+        }
+
+        it("should skip the KotlinPrivateBinder class in the source trace") {
+            val outerModule = object : KotlinPrivateModule() {
                 override fun configure() {
                     bind<A>().to<AImpl>()
+                    expose<A>()
                 }
             }
 
@@ -45,10 +120,12 @@ object KotlinModuleSpec : Spek({
         describe("#bindScope") {
             it("should bind a custom scope using a scope annotation type parameter") {
                 val scope = TestScope()
-                val injector = Guice.createInjector(object : KotlinModule() {
+                val injector = Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
                         bindScope<TestScoped>(scope)
                         bind<A>().to<AImpl>().`in`<TestScoped>()
+
+                        expose<A>()
                     }
                 })
 
@@ -63,9 +140,11 @@ object KotlinModuleSpec : Spek({
 
         describe("#bind") {
             it("should bind source using a type parameter") {
-                val injector = Guice.createInjector(object : KotlinModule() {
+                val injector = Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
                         bind<A>().to(AImpl::class.java)
+
+                        expose<A>()
                     }
                 })
 
@@ -75,9 +154,11 @@ object KotlinModuleSpec : Spek({
             }
 
             it("should bind a complex source using a type parameter") {
-                val injector = Guice.createInjector(object : KotlinModule() {
+                val injector = Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
                         bind<Callable<A>>().to(ACallable::class.java)
+
+                        expose<Callable<A>>()
                     }
                 })
 
@@ -86,9 +167,11 @@ object KotlinModuleSpec : Spek({
             }
 
             it("should bind to a target using a type parameter") {
-                val injector = Guice.createInjector(object : KotlinModule() {
+                val injector = Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
                         bind<A>().to<AImpl>()
+
+                        expose<A>()
                     }
                 })
 
@@ -98,9 +181,11 @@ object KotlinModuleSpec : Spek({
             }
 
             it("should bind to a complex target using a type parameter") {
-                val injector = Guice.createInjector(object : KotlinModule() {
+                val injector = Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
                         bind<Callable<A>>().to<TCallable<A>>()
+
+                        expose<Callable<A>>()
                     }
                 })
 
@@ -109,22 +194,26 @@ object KotlinModuleSpec : Spek({
             }
 
             it("should bind with an annotation using a type parameter") {
-                val injector = Guice.createInjector(object : KotlinModule() {
+                val injector = Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
                         bind<A>().to<B>()
                         bind<A>().annotatedWith<Annotated>().to<AImpl>()
+
+                        expose<A>().annotatedWith<Annotated>()
                     }
                 })
 
-                val a = injector.getInstance(Key.get(A::class.java, Annotated::class.java))
+                val a = injector.getInstance(annotatedKey<A, Annotated>())
 
                 a.get() shouldEqual "Impl of A"
             }
 
             it("should bind to a provider using a type parameter") {
-                val injector = Guice.createInjector(object : KotlinModule() {
+                val injector = Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
                         bind<A>().toProvider<BProvider>()
+
+                        expose<A>()
                     }
                 })
 
@@ -134,9 +223,11 @@ object KotlinModuleSpec : Spek({
             }
 
             it("should bind to a complex provider using a type parameter") {
-                val injector = Guice.createInjector(object : KotlinModule() {
+                val injector = Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
                         bind<Iterable<A>>().toProvider<TProvider<List<A>>>()
+
+                        expose<Iterable<A>>()
                     }
                 })
 
@@ -145,9 +236,11 @@ object KotlinModuleSpec : Spek({
             }
 
             it("should bind in a scope") {
-                val injector = Guice.createInjector(object : KotlinModule() {
+                val injector = Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
                         bind<A>().to<AImpl>().`in`<Singleton>()
+
+                        expose<A>()
                     }
                 })
 
@@ -156,9 +249,11 @@ object KotlinModuleSpec : Spek({
             }
 
             it("should bind wildcard types") {
-                val injector = Guice.createInjector(object : KotlinModule() {
+                val injector = Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
                         bind<Callable<*>>().to<ACallable>()
+
+                        expose<Callable<*>>()
                     }
                 })
 
@@ -167,24 +262,29 @@ object KotlinModuleSpec : Spek({
             }
         }
 
-        describe("#bindConstant") {
-            it("should bind to a target using a type parameter and annotation") {
-                class ClassWithConstant @Inject constructor(@Annotated val constant: Class<Nothing>)
-
-                val injector = Guice.createInjector(object : KotlinModule() {
-                    override fun configure() {
-                        bindConstant().annotatedWith<Annotated>().to<Iterator<*>>()
-                    }
-                })
-
-                val classWithConstant = injector.getInstance(ClassWithConstant::class.java)
-                classWithConstant.constant shouldEqual Iterator::class.java
-            }
-        }
+        // TODO: Consider removing the to<T>() method for bindConstant()
+//        describe("#bindConstant") {
+//            it("should bind to a target using a type parameter and annotation") {
+//                class ClassWithConstant @Inject constructor(@Annotated val constant: Class<Nothing>)
+//
+//                val injector = Guice.createInjector(object : KotlinPrivateModule() {
+//                    override fun configure() {
+//                        bindConstant()
+//                                .annotatedWith<Annotated>()
+//                                .to<Iterator<*>>()
+//
+//                        expose(annotatedKey<Class<*>, Annotated>())
+//                    }
+//                })
+//
+//                val classWithConstant = injector.getInstance(ClassWithConstant::class.java)
+//                classWithConstant.constant shouldEqual Iterator::class.java
+//            }
+//        }
 
         describe("#requestStaticInjection") {
             it("should inject static fields") {
-                Guice.createInjector(object : KotlinModule() {
+                Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
                         bind<String>().toInstance("Statically Injected")
                         requestStaticInjection<StaticInjectionObj>()
@@ -193,12 +293,11 @@ object KotlinModuleSpec : Spek({
 
                 StaticInjectionObj.staticInjectionSite shouldEqual "Statically Injected"
             }
-
         }
 
         describe("#requireBinding") {
             val createInjector = {
-                Guice.createInjector(object : KotlinModule() {
+                Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
                         kotlinBinder.requireExplicitBindings()
                         requireBinding<String>()
@@ -212,20 +311,19 @@ object KotlinModuleSpec : Spek({
 
         describe("#getProvider") {
             it("should get a provider") {
-                Guice.createInjector(object : KotlinModule() {
+                Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
                         bind<A>().to<AImpl>()
                         val provider = getProvider<A>()
                         provider.toString() shouldEqual "Provider<com.authzee.kotlinguice.A>"
                     }
-
                 })
             }
         }
 
         describe("#getMembersInjector") {
             it("should inject member fields") {
-                Guice.createInjector(object : KotlinModule() {
+                Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
                         val membersInjector = getMembersInjector<AImpl>()
                         membersInjector.toString() shouldEqual
@@ -236,4 +334,3 @@ object KotlinModuleSpec : Spek({
         }
     }
 })
-

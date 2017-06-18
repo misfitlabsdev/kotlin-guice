@@ -12,6 +12,8 @@ interface A {
     fun get(): String
 }
 
+class AContainer @Inject constructor(val a: A)
+
 class ACallable : Callable<A> {
     override fun call(): A {
         return AImpl()

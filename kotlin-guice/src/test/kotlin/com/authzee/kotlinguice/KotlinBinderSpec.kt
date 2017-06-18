@@ -4,7 +4,6 @@ import com.authzee.kotlinguice.binder.annotatedWith
 import com.authzee.kotlinguice.binder.to
 import com.google.inject.Guice
 import com.google.inject.Key
-import com.google.inject.spi.ElementSource
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldEqual
@@ -166,30 +165,6 @@ object KotlinBinderSpec : Spek({
                 StaticInjectionObj.staticInjectionSite shouldEqual "Statically Injected"
             }
 
-        }
-
-        describe("#skipSource") {
-            it("should do skip the class in the source trace") {
-                class SkipSourceModule : KotlinModule() {
-                    override fun configure() {
-                        kotlinBinder.skipSource<SkipSourceModule>().bind<A>().to<AImpl>()
-                    }
-                }
-
-                val outerModule = object : KotlinModule() {
-                    override fun configure() {
-                        install(SkipSourceModule())
-                    }
-
-                }
-
-                val injector = Guice.createInjector(outerModule)
-
-                val source = injector.getBinding(A::class.java).source as ElementSource
-                val stackTraceElement = source.declaringSource as StackTraceElement
-
-                outerModule::class.java.name shouldEqual stackTraceElement.className
-            }
         }
 
         describe("#getProvider") {
