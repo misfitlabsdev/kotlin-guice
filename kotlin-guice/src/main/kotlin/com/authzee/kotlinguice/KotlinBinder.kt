@@ -78,7 +78,7 @@ open class KotlinBinder(open val delegate: Binder) : Binder by delegate {
      * @see Binder
      */
     inline fun <reified T> getProvider() : Provider<T> {
-        return getProvider(T::class.java)
+        return getProvider(key<T>())
     }
 
     /**

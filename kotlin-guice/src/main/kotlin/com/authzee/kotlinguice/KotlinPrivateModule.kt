@@ -87,7 +87,7 @@ abstract class KotlinPrivateModule : PrivateModule() {
 
     /** @see PrivateModule.requireBinding */
     protected inline fun <reified T> requireBinding() {
-        requireBinding(T::class.java)
+        requireBinding(key<T>())
     }
 
     /** @see KotlinPrivateBinder.getProvider */

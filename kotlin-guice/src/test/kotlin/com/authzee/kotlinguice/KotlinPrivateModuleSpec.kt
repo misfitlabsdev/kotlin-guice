@@ -313,27 +313,56 @@ class KotlinPrivateModuleSpec : Spek({
         }
 
         describe("#requireBinding") {
-            val createInjector = {
+            it("should throw a CreationException for a simple type that is unbound") {
+                val createInjector = {
+                    Guice.createInjector(object : KotlinPrivateModule() {
+                        override fun configure() {
+                            requireBinding<A>()
+                        }
+
+                    })
+                }
+
+                createInjector shouldThrow CreationException::class
+            }
+
+            it("should throw a CreationException for a complex type that is unbound") {
+                val createInjector = {
+                    Guice.createInjector(object : KotlinPrivateModule() {
+                        override fun configure() {
+                            requireBinding<Callable<A>>()
+                            // Bind something that matches Callable::class but not the reified type
+                            bind(Callable::class.java).to(ACallable::class.java)
+                        }
+
+                    })
+                }
+
+                createInjector shouldThrow CreationException::class
+            }
+        }
+
+        describe("#getProvider") {
+            it("should get a provider for a simple type") {
                 Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
-                        kotlinBinder.requireExplicitBindings()
-                        requireBinding<String>()
+                        kotlinBinder.bind<A>().to<AImpl>()
+                        val provider = kotlinBinder.getProvider<A>()
+                        provider.toString() shouldEqual "Provider<com.authzee.kotlinguice.A>"
                     }
 
                 })
             }
 
-            createInjector shouldThrow CreationException::class
-        }
-
-        describe("#getProvider") {
-            it("should get a provider") {
+            it("should get a provider for an annotated key") {
                 Guice.createInjector(object : KotlinPrivateModule() {
                     override fun configure() {
-                        bind<A>().to<AImpl>()
-                        val provider = getProvider<A>()
-                        provider.toString() shouldEqual "Provider<com.authzee.kotlinguice.A>"
+                        kotlinBinder.bind<Callable<A>>().to<TCallable<A>>()
+                        val provider = kotlinBinder.getProvider<Callable<A>>()
+                        provider.toString() shouldEqual
+                                "Provider<java.util.concurrent.Callable<com.authzee.kotlinguice.A>>"
                     }
+
                 })
             }
         }

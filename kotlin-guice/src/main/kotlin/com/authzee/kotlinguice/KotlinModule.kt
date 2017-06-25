@@ -75,7 +75,7 @@ abstract class KotlinModule : AbstractModule() {
 
     /** @see AbstractModule.requireBinding */
     protected inline fun <reified T> requireBinding() {
-        requireBinding(T::class.java)
+        requireBinding(key<T>())
     }
 
     /** @see KotlinBinder.getProvider */

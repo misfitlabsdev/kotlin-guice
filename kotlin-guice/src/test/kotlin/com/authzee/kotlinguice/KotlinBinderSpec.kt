@@ -185,12 +185,24 @@ object KotlinBinderSpec : Spek({
         }
 
         describe("#getProvider") {
-            it("should get a provider") {
+            it("should get a provider for a simple type") {
                 Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.bind<A>().to<AImpl>()
                         val provider = kotlinBinder.getProvider<A>()
                         provider.toString() shouldEqual "Provider<com.authzee.kotlinguice.A>"
+                    }
+
+                })
+            }
+
+            it("should get a provider for an annotated key") {
+                Guice.createInjector(object : KotlinModule() {
+                    override fun configure() {
+                        kotlinBinder.bind<Callable<A>>().to<TCallable<A>>()
+                        val provider = kotlinBinder.getProvider<Callable<A>>()
+                        provider.toString() shouldEqual
+                                "Provider<java.util.concurrent.Callable<com.authzee.kotlinguice.A>>"
                     }
 
                 })
