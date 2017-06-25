@@ -1,84 +1,105 @@
 buildscript {
-    ext.guice_version = '4.1.0'
-    ext.kotlin_version = '1.1.2-4'
+  ext.guice_version = '4.1.0'
+  ext.kotlin_version = '1.1.4-2'
 
-    repositories {
-        jcenter()
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
+  repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+      url "https://plugins.gradle.org/m2/"
     }
+    maven {
+      url "https://dl.bintray.com/kotlin/kotlin-eap-1.1"
+    }
+  }
 
-    dependencies {
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.0.RELEASE"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.14"
-        classpath "org.junit.platform:junit-platform-gradle-plugin:1.0.0-M4"
-        classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:2.0.1"
-        classpath "me.champeau.gradle:jmh-gradle-plugin:0.3.1"
-    }
+  dependencies {
+    classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
+    classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:2.0.1"
+    classpath "io.spring.gradle:dependency-management-plugin:1.0.0.RELEASE"
+    classpath "me.champeau.gradle:jmh-gradle-plugin:0.3.1"
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.14"
+    classpath "org.junit.platform:junit-platform-gradle-plugin:1.0.0-M5"
+  }
 }
 
 subprojects {
-    apply plugin: 'java'
-    apply plugin: 'kotlin'
-    apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'org.junit.platform.gradle.plugin'
-    apply plugin: 'org.jetbrains.dokka'
-    apply plugin: "org.jlleitschuh.gradle.ktlint"
-    apply plugin: "me.champeau.gradle.jmh"
+  apply plugin: 'java'
+  apply plugin: 'kotlin'
+  apply plugin: 'io.spring.dependency-management'
+  apply plugin: 'org.junit.platform.gradle.plugin'
+  apply plugin: 'org.jetbrains.dokka'
+  apply plugin: "org.jlleitschuh.gradle.ktlint"
+  apply plugin: "me.champeau.gradle.jmh"
+  apply plugin: "com.github.ben-manes.versions"
 
-    sourceCompatibility = 1.8
+  sourceCompatibility = 1.8
 
-    group 'com.authzee'
-    version '1.0-SNAPSHOT'
+  group 'com.authzee'
+  version '1.0-SNAPSHOT'
 
-    repositories {
-        jcenter()
-        mavenCentral()
+  repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+      url "https://dl.bintray.com/kotlin/kotlin-eap-1.1"
     }
+  }
 
-    dokka {
-        outputFormat = 'html'
-        outputDirectory = "$buildDir/javadoc"
+  dokka {
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/javadoc"
 
-        externalDocumentationLink {
-            url =  new URL("http://google.github.io/guice/api-docs/4.1/javadoc/")
-        }
+    externalDocumentationLink {
+      url = new URL("http://google.github.io/guice/api-docs/4.1/javadoc/")
     }
+  }
 
-    junitPlatform {
-        filters {
-            engines {
-                include 'spek'
-            }
-        }
+  junitPlatform {
+    filters {
+      engines {
+        include 'spek'
+      }
     }
+  }
 
-    jmh {
-        // For some reason jmh, the annotation processor, or the jmh-gradle-plugin is creating
-        // duplicates of the jmh generated classes; one in the build/jmh-generated-classes and
-        // one in the build/classes directory. This leads to duplicates being found when copying
-        // classes for the jar. Changing this to 'warn' allows us to run the benchmarks even though
-        // something isn't configured correctly somewhere.
-        duplicateClassesStrategy = 'warn'
-    }
+  jmh {
+    // For some reason jmh, the annotation processor, or the jmh-gradle-plugin is creating
+    // duplicates of the jmh generated classes; one in the build/jmh-generated-classes and
+    // one in the build/classes directory. This leads to duplicates being found when copying
+    // classes for the jar. Changing this to 'warn' allows us to run the benchmarks even though
+    // something isn't configured correctly somewhere.
+    duplicateClassesStrategy = 'warn'
+  }
 
-    sourceSets {
-        jmh
-    }
+  ktlint {
+    version = "0.8.3"
+  }
 
-    dependencyManagement {
-        dependencies {
-            "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
-        }
-    }
+  sourceSets {
+    jmh
+  }
 
+  dependencyManagement {
     dependencies {
-        jmh 'org.openjdk.jmh:jmh-core:1.19'
-        jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.19'
-    }
+      dependency "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+      dependency "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version" // managing version up
+      dependency "com.google.inject:guice:$guice_version"
+      dependency "com.google.inject.extensions:guice-multibindings:$guice_version"
 
-    build.dependsOn ktlintCheck
+      // Test Dependencies
+      dependency 'org.amshove.kluent:kluent:1.24'
+      dependency 'org.jetbrains.spek:spek-api:1.1.2'
+      dependency 'org.jetbrains.spek:spek-junit-platform-engine:1.1.2'
+      dependency 'org.junit.platform:junit-platform-runner:1.0.0-M4'
+    }
+  }
+
+  dependencies {
+    jmh 'org.openjdk.jmh:jmh-core:1.19'
+    jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.19'
+  }
+
+  build.dependsOn ktlintCheck
 }

@@ -17,6 +17,8 @@
 
 package com.authzee.kotlinguice
 
+import com.authzee.kotlinguice.binder.annotatedWith
+import com.authzee.kotlinguice.binder.to
 import com.google.inject.CreationException
 import com.google.inject.Guice
 import com.google.inject.spi.ElementSource
@@ -29,6 +31,7 @@ import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
 import java.util.concurrent.Callable
+import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
@@ -279,25 +282,24 @@ class KotlinPrivateModuleSpec : Spek({
             }
         }
 
-        // TODO: Consider removing the to<T>() method for bindConstant()
-//        describe("#bindConstant") {
-//            it("should bind to a target using a type parameter and annotation") {
-//                class ClassWithConstant @Inject constructor(@Annotated val constant: Class<Nothing>)
-//
-//                val injector = Guice.createInjector(object : KotlinPrivateModule() {
-//                    override fun configure() {
-//                        bindConstant()
-//                                .annotatedWith<Annotated>()
-//                                .to<Iterator<*>>()
-//
-//                        expose(annotatedKey<Class<*>, Annotated>())
-//                    }
-//                })
-//
-//                val classWithConstant = injector.getInstance(ClassWithConstant::class.java)
-//                classWithConstant.constant shouldEqual Iterator::class.java
-//            }
-//        }
+        describe("#bindConstant") {
+            it("should bind to a target using a type parameter and annotation") {
+                class ClassWithConstant @Inject constructor(@Annotated val constant: Class<Nothing>)
+
+                val injector = Guice.createInjector(object : KotlinPrivateModule() {
+                    override fun configure() {
+                        bindConstant()
+                                .annotatedWith<Annotated>()
+                                .to<Iterator<*>>()
+
+                        expose(annotatedKey<Class<Nothing>, Annotated>())
+                    }
+                })
+
+                val classWithConstant = injector.getInstance(ClassWithConstant::class.java)
+                classWithConstant.constant shouldEqual Iterator::class.java
+            }
+        }
 
         describe("#requestStaticInjection") {
             it("should inject static fields") {
