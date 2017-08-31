@@ -42,7 +42,7 @@ object KotlinBinderSpec : Spek({
 
     describe("KotlinBinder") {
         describe("#bindScope") {
-            it("should bind a custom scope using a scope annotation type parameter") {
+            it("binds a custom scope using a scope annotation type parameter") {
                 val scope = TestScope()
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
@@ -61,7 +61,7 @@ object KotlinBinderSpec : Spek({
         }
 
         describe("#bind") {
-            it("should bind source using a type parameter") {
+            it("binds source using a type parameter") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.bind<A>().to(AImpl::class.java)
@@ -73,7 +73,7 @@ object KotlinBinderSpec : Spek({
                 a.get() shouldEqual "Impl of A"
             }
 
-            it("should bind a complex source using a type parameter") {
+            it("binds a complex source using a type parameter") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.bind<Callable<A>>().to(ACallable::class.java)
@@ -84,7 +84,7 @@ object KotlinBinderSpec : Spek({
                 a.call().get() shouldEqual "Impl of A"
             }
 
-            it("should bind to a target using a type parameter") {
+            it("binds to a target using a type parameter") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.bind<A>().to<AImpl>()
@@ -96,7 +96,7 @@ object KotlinBinderSpec : Spek({
                 a.get() shouldEqual "Impl of A"
             }
 
-            it("should bind to a complex target using a type parameter") {
+            it("binds to a complex target using a type parameter") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.bind<Callable<A>>().to<TCallable<A>>()
@@ -107,7 +107,7 @@ object KotlinBinderSpec : Spek({
                 callable.call() shouldEqual null
             }
 
-            it("should bind with an annotation using a type parameter") {
+            it("binds with an annotation using a type parameter") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.bind<A>().to<B>()
@@ -120,7 +120,7 @@ object KotlinBinderSpec : Spek({
                 a.get() shouldEqual "Impl of A"
             }
 
-            it("should bind to a provider using a type parameter") {
+            it("binds to a provider using a type parameter") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.bind<A>().toProvider<BProvider>()
@@ -132,7 +132,7 @@ object KotlinBinderSpec : Spek({
                 a shouldBeInstanceOf B::class.java
             }
 
-            it("should bind to a complex provider using a type parameter") {
+            it("binds to a complex provider using a type parameter") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.bind<Iterable<A>>().toProvider<TProvider<List<A>>>()
@@ -143,7 +143,7 @@ object KotlinBinderSpec : Spek({
                 iterable shouldEqual null
             }
 
-            it("should bind in a scope") {
+            it("binds in a scope") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.bind<A>().to<AImpl>().`in`<Singleton>()
@@ -156,7 +156,7 @@ object KotlinBinderSpec : Spek({
         }
 
         describe("#bindConstant") {
-            it("should bind to a target using a type parameter and annotation") {
+            it("binds to a target using a type parameter and annotation") {
                 class ClassWithConstant @Inject constructor(@Annotated val constant: Class<Nothing>)
 
                 val injector = Guice.createInjector(object : KotlinModule() {
@@ -171,7 +171,7 @@ object KotlinBinderSpec : Spek({
         }
 
         describe("#requestStaticInjection") {
-            it("should inject static fields") {
+            it("injects static fields") {
                 Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.bind<String>().toInstance("Statically Injected")
@@ -185,7 +185,7 @@ object KotlinBinderSpec : Spek({
         }
 
         describe("#getProvider") {
-            it("should get a provider for a simple type") {
+            it("get a provider for a simple type") {
                 Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.bind<A>().to<AImpl>()
@@ -196,7 +196,7 @@ object KotlinBinderSpec : Spek({
                 })
             }
 
-            it("should get a provider for an annotated key") {
+            it("get a provider for an annotated key") {
                 Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.bind<Callable<A>>().to<TCallable<A>>()
@@ -210,7 +210,7 @@ object KotlinBinderSpec : Spek({
         }
 
         describe("#getMembersInjector") {
-            it("should inject member fields") {
+            it("injects member fields") {
                 Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         val membersInjector = kotlinBinder.getMembersInjector<AImpl>()

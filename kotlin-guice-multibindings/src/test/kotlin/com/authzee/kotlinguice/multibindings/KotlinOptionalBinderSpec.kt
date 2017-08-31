@@ -38,7 +38,7 @@ import java.util.concurrent.Callable
  */
 object KotlinOptionalBinderSpec : Spek({
     describe("KotlinOptionalBinder") {
-        it("should skip the optional binder classes in the source trace") {
+        it("skips the optional binder classes in the source trace") {
             val outerModule = object : KotlinModule() {
                 override fun configure() {
                     val aBinder = KotlinOptionalBinder.newOptionalBinder<A>(kotlinBinder)

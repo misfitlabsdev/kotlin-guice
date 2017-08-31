@@ -36,7 +36,7 @@ import java.util.concurrent.Callable
  */
 object KotlinMultibinderSpec : Spek({
     describe("KotlinMultibinder") {
-        it("should skip the multibinder classes in the source trace") {
+        it("skips the multibinder classes in the source trace") {
             val outerModule = object : KotlinModule() {
                 override fun configure() {
                     val aBinder = KotlinMultibinder.newSetBinder<A>(kotlinBinder)
@@ -54,7 +54,7 @@ object KotlinMultibinderSpec : Spek({
         }
 
         describe("#newSetBinder") {
-            it("should bind simple types into a set") {
+            it("binds simple types into a set") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         val aBinder = KotlinMultibinder.newSetBinder<A>(kotlinBinder)
@@ -72,7 +72,7 @@ object KotlinMultibinderSpec : Spek({
                 setContainer.set.size shouldEqual 2
             }
 
-            it("should bind complex types into a set") {
+            it("binds complex types into a set") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         val callableBinder = KotlinMultibinder.newSetBinder<Callable<A>>(kotlinBinder)
@@ -137,7 +137,7 @@ object KotlinMultibinderSpec : Spek({
         }
 
         describe("#newAnnotatedSetBinder") {
-            it("should bind simple types into an annotated set") {
+            it("binds simple types into an annotated set") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         val aBinder = KotlinMultibinder
@@ -156,7 +156,7 @@ object KotlinMultibinderSpec : Spek({
                 set.size shouldEqual 2
             }
 
-            it("should bind complex types into an annotated set") {
+            it("binds complex types into an annotated set") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         val callableBinder = KotlinMultibinder
@@ -179,7 +179,7 @@ object KotlinMultibinderSpec : Spek({
         }
 
         describe("@ProvidesIntoSet") {
-            it("should bind simple types into a set") {
+            it("binds simple types into a set") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         install(KotlinMultibindingsScanner.asModule())
@@ -207,7 +207,7 @@ object KotlinMultibinderSpec : Spek({
                 setContainer.set.size shouldEqual 2
             }
 
-            it("should bind complex types into a set") {
+            it("binds complex types into a set") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         install(KotlinMultibindingsScanner.asModule())
@@ -235,7 +235,7 @@ object KotlinMultibinderSpec : Spek({
                 setContainer.set.size shouldEqual 2
             }
 
-            it("should bind simple types into an annotated set") {
+            it("binds simple types into an annotated set") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         install(KotlinMultibindingsScanner.asModule())
@@ -266,7 +266,7 @@ object KotlinMultibinderSpec : Spek({
                 set.size shouldEqual 2
             }
 
-            it("should bind complex types into an annotated set") {
+            it("binds complex types into an annotated set") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         install(KotlinMultibindingsScanner.asModule())

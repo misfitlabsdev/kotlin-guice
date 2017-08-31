@@ -45,7 +45,7 @@ object InjectorExtensionsSpec : Spek({
 
     describe("InjectorExtensions") {
         describe("#getMembersInjector") {
-            it("should return a members injector that injects member fields") {
+            it("returns a members injector that injects member fields") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         bind<String>().toInstance("Hello World")
@@ -65,7 +65,7 @@ object InjectorExtensionsSpec : Spek({
         }
 
         describe("#getBinding") {
-            it("should return a binding for a simple type") {
+            it("returns a binding for a simple type") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.requireExplicitBindings()
@@ -78,7 +78,7 @@ object InjectorExtensionsSpec : Spek({
                 getBinding().shouldNotBeNull()
             }
 
-            it("should return a binding for a complex type") {
+            it("returns a binding for a complex type") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.requireExplicitBindings()
@@ -93,7 +93,7 @@ object InjectorExtensionsSpec : Spek({
                 binding.key shouldEqual key<Callable<A>>()
             }
 
-            it("should return a binding for an implicit binding") {
+            it("returns a binding for an implicit binding") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {}
                 })
@@ -103,7 +103,7 @@ object InjectorExtensionsSpec : Spek({
                 getBinding().shouldNotBeNull()
             }
 
-            it("should throw a ConfigurationException for a binding that cannot be found") {
+            it("throws a ConfigurationException for a binding that cannot be found") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.requireExplicitBindings()
@@ -118,7 +118,7 @@ object InjectorExtensionsSpec : Spek({
         }
 
         describe("#findBindingsByType") {
-            it("should return all bindings for the given type across containers types") {
+            it("returns all bindings for the given type across containers types") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         Multibinder.newSetBinder(binder(), String::class.java)
@@ -146,7 +146,7 @@ object InjectorExtensionsSpec : Spek({
         }
 
         describe("#getProvider") {
-            it("should return a provider for a simple type") {
+            it("returns a provider for a simple type") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.requireExplicitBindings()
@@ -160,7 +160,7 @@ object InjectorExtensionsSpec : Spek({
                 provider.get().get() shouldEqual "Impl of A"
             }
 
-            it("should return a provider for a complex type") {
+            it("returns a provider for a complex type") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.requireExplicitBindings()
@@ -174,7 +174,7 @@ object InjectorExtensionsSpec : Spek({
                 provider.get().call().get() shouldEqual "Impl of A"
             }
 
-            it("should return a provider for an implicit binding") {
+            it("returns a provider for an implicit binding") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {}
                 })
@@ -185,7 +185,7 @@ object InjectorExtensionsSpec : Spek({
                 provider.get().get() shouldEqual "Impl of A"
             }
 
-            it("should throw a ConfigurationException for a provider that cannot be found") {
+            it("throws a ConfigurationException for a provider that cannot be found") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.requireExplicitBindings()
@@ -200,7 +200,7 @@ object InjectorExtensionsSpec : Spek({
         }
 
         describe("#getInstance") {
-            it("should return an instance for a simple type") {
+            it("returns an instance for a simple type") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.requireExplicitBindings()
@@ -212,7 +212,7 @@ object InjectorExtensionsSpec : Spek({
                 instance.get() shouldEqual "Impl of A"
             }
 
-            it("should return an instance for a complex type") {
+            it("returns an instance for a complex type") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.requireExplicitBindings()
@@ -224,7 +224,7 @@ object InjectorExtensionsSpec : Spek({
                 instance.call().get() shouldEqual "Impl of A"
             }
 
-            it("should return an instance for an implicit binding") {
+            it("returns an instance for an implicit binding") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {}
                 })
@@ -233,7 +233,7 @@ object InjectorExtensionsSpec : Spek({
                 instance.get() shouldEqual "Impl of A"
             }
 
-            it("should throw a ConfigurationException for an instance that cannot be found") {
+            it("throws a ConfigurationException for an instance that cannot be found") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
                         kotlinBinder.requireExplicitBindings()
