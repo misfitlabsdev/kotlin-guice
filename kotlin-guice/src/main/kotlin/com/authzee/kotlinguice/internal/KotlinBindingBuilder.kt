@@ -30,5 +30,4 @@ import com.google.inject.binder.AnnotatedBindingBuilder
  */
 @Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
 class KotlinBindingBuilder<T>(private val self: AnnotatedBindingBuilder<T>)
-    : KotlinAnnotatedBindingBuilder<T>(self), AnnotatedBindingBuilder<T> by self {
-}
+    : KotlinAnnotatedBindingBuilder<T>(self), AnnotatedBindingBuilder<T> by self

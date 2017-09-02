@@ -9,3 +9,5 @@ dependencies {
   testCompile 'org.jetbrains.spek:spek-junit-platform-engine'
   testCompile 'org.junit.platform:junit-platform-runner'
 }
+
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

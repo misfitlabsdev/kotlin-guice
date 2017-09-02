@@ -1,6 +1,6 @@
 buildscript {
   ext.guice_version = '4.1.0'
-  ext.kotlin_version = '1.1.4-2'
+  ext.kotlin_version = '1.1.4-3'
 
   repositories {
     jcenter()
@@ -15,12 +15,12 @@ buildscript {
 
   dependencies {
     classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
-    classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:2.0.1"
-    classpath "io.spring.gradle:dependency-management-plugin:1.0.0.RELEASE"
+    classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:2.1.1"
+    classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
     classpath "me.champeau.gradle:jmh-gradle-plugin:0.3.1"
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.14"
-    classpath "org.junit.platform:junit-platform-gradle-plugin:1.0.0-M5"
+    classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.15"
+    classpath "org.junit.platform:junit-platform-gradle-plugin:1.0.0-RC3"
   }
 }
 
@@ -36,8 +36,8 @@ subprojects {
 
   sourceCompatibility = 1.8
 
-  group 'com.authzee'
-  version '1.0-SNAPSHOT'
+  group = GROUP
+  version = VERSION_NAME
 
   repositories {
     jcenter()
@@ -46,6 +46,9 @@ subprojects {
       url "https://dl.bintray.com/kotlin/kotlin-eap-1.1"
     }
   }
+
+  // Use Dokka instead
+  tasks.withType(Javadoc) { enabled = false }
 
   dokka {
     outputFormat = 'html'
@@ -74,7 +77,7 @@ subprojects {
   }
 
   ktlint {
-    version = "0.8.3"
+    version = "0.9.2"
   }
 
   sourceSets {
@@ -89,10 +92,10 @@ subprojects {
       dependency "com.google.inject.extensions:guice-multibindings:$guice_version"
 
       // Test Dependencies
-      dependency 'org.amshove.kluent:kluent:1.24'
-      dependency 'org.jetbrains.spek:spek-api:1.1.2'
-      dependency 'org.jetbrains.spek:spek-junit-platform-engine:1.1.2'
-      dependency 'org.junit.platform:junit-platform-runner:1.0.0-M4'
+      dependency 'org.amshove.kluent:kluent:1.28'
+      dependency 'org.jetbrains.spek:spek-api:1.1.4'
+      dependency 'org.jetbrains.spek:spek-junit-platform-engine:1.1.4'
+      dependency 'org.junit.platform:junit-platform-runner:1.0.0-RC3'
     }
   }
 
@@ -101,5 +104,6 @@ subprojects {
     jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.19'
   }
 
-  build.dependsOn ktlintCheck
+  build.dependsOn check
+  build.finalizedBy dokka
 }
