@@ -9,16 +9,16 @@ Download the latest JAR via Maven:
 
 ```xml
 <dependency>
-  <groupId>com.authzee</groupId>
+  <groupId>com.authzee.kotlinguice4</groupId>
   <artifactId>kotlin-guice</artifactId>
-  <version>4.1.0-1.0.0</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
 or Gradle:
 
 ```
-compile 'com.authzee:kotlin-guice:4.1.0-1.0.0'
+compile 'com.authzee.kotlinguice4:kotlin-guice:1.0.0'
 ```
 
 ## Getting Started
@@ -28,7 +28,7 @@ compile 'com.authzee:kotlin-guice:4.1.0-1.0.0'
 Use `KotlinModule` for Guice modules instead of `AbstractModule` to take advantage of the enhanced Kotlin Guice DSL. 
 
 ```kotlin
-import com.authzee.kotlinguice.KotlinModule
+import com.authzee.kotlinguice4.KotlinModule
 
 class MyModule : KotlinModule() {
     override fun configure() {
@@ -42,7 +42,7 @@ class MyModule : KotlinModule() {
 The `KotlinPrivateModule` can also be used if only some bindings need to be exposed.
 
 ```kotlin
-import com.authzee.kotlinguice.KotlinPrivateModule
+import com.authzee.kotlinguice4.KotlinPrivateModule
 
 class MyPrivateModule : KotlinPrivateModule() {
     override fun configure() {
@@ -60,8 +60,8 @@ class MyPrivateModule : KotlinPrivateModule() {
 The Guice injector has been enhanced with extension methods to make direct use of the injector better from Kotlin.
 
 ```kotlin
-import com.authzee.kotlinguice.annotatedKey
-import com.authzee.kotlinguice.getInstance
+import com.authzee.kotlinguice4.annotatedKey
+import com.authzee.kotlinguice4.getInstance
 
 fun main(args: Array<String>) {
   val injector = Guice.createInjector(new MyModule(), new MyPrivateModule())
@@ -78,6 +78,10 @@ fun main(args: Array<String>) {
 Package level functions are included to enhance creating `Key` and `TypeLiteral` instances from kotlin.
 
 ```kotlin
+import com.authzee.kotlinguice4.annotatedKey
+import com.authzee.kotlinguice4.key
+import com.authzee.kotlinguice4.typeLiteral
+
 val key = key<String>()
 val annotatedKey = annotatedKey<String, SomeAnnotation>()
 val sameAnnotatedDifferentKey = annotatedKey.getType<Long>()
@@ -93,16 +97,16 @@ Download the latest JAR via Maven:
 
 ```xml
 <dependency>
-  <groupId>com.authzee</groupId>
+  <groupId>com.authzee.kotlinguice4</groupId>
   <artifactId>kotlin-guice-multibindings</artifactId>
-  <version>4.1.0-1.0.0</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
 or Gradle:
 
 ```
-compile 'com.authzee:kotlin-guice-multibindings:4.1.0-1.0.0'
+compile 'com.authzee.kotlinguice4:kotlin-guice-multibindings:1.0.0'
 ```
 
 #### Usage
