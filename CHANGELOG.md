@@ -3,6 +3,6 @@ Change Log
 
 ## Version 1.0.0
 
-_In Development_
+_2017-09-05_
 
 * Initial release.
