@@ -22,7 +22,6 @@ import com.google.inject.Binder
 import com.google.inject.Key
 import com.google.inject.Module
 import com.google.inject.multibindings.MapKey
-import com.google.inject.multibindings.MultibindingsScanner
 import com.google.inject.multibindings.ProvidesIntoMap
 import com.google.inject.multibindings.ProvidesIntoOptional
 import com.google.inject.multibindings.ProvidesIntoSet
@@ -41,13 +40,12 @@ object KotlinMultibindingsScanner {
     /**
      * Returns the scanner as a module.
      *
-     * When installed it will scall modules for methods annotated for multibindings, mapbindings,
+     * When installed it will call modules for methods annotated for multibindings, mapbindings,
      * and optional bindings.
      */
     fun asModule(): Module {
         return object : AbstractModule() {
             override fun configure() {
-                binder().scanModulesForAnnotatedMethods(MultibindingsScanner.scanner())
                 binder().scanModulesForAnnotatedMethods(scanner)
             }
         }
@@ -73,8 +71,7 @@ object KotlinMultibindingsScanner {
             val mapKeyAnnotation = findMapKeyAnnotation(method)
 
             return when (annotation) {
-                is ProvidesIntoSet -> KotlinMultibinder
-                        .newRealSetBinder(binder, key)
+                is ProvidesIntoSet -> KotlinMultibinder.newRealSetBinder(binder, key)
                         .getKeyForNewItem()
                 is ProvidesIntoMap -> {
                     if (mapKeyAnnotation == null) {
@@ -87,10 +84,8 @@ object KotlinMultibindingsScanner {
                 }
                 is ProvidesIntoOptional -> {
                     return when (annotation.value) {
-                        ProvidesIntoOptional.Type.DEFAULT -> KotlinOptionalBinder
-                                .newRealOptionalBinder(binder, key).getKeyForDefaultBinding()
-                        ProvidesIntoOptional.Type.ACTUAL -> KotlinOptionalBinder
-                                .newRealOptionalBinder(binder, key).getKeyForActualBinding()
+                        ProvidesIntoOptional.Type.DEFAULT -> KotlinOptionalBinder.newRealOptionalBinder(binder, key).getKeyForDefaultBinding()
+                        ProvidesIntoOptional.Type.ACTUAL -> KotlinOptionalBinder.newRealOptionalBinder(binder, key).getKeyForActualBinding()
                     }
                 }
                 else -> throw IllegalStateException("Invalid annotation: $annotation")

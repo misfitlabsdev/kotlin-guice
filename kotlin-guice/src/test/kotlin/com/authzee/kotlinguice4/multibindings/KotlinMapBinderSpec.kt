@@ -191,8 +191,7 @@ object KotlinMapBinderSpec : Spek({
                         aBinder.addBinding("AImpl").to<AImpl>()
                         aBinder.addBinding("B").to<B>()
 
-                        val callableBinder = KotlinMapBinder
-                                .newMapBinder<String, Callable<A>>(kotlinBinder)
+                        val callableBinder = KotlinMapBinder.newMapBinder<String, Callable<A>>(kotlinBinder)
                         callableBinder.addBinding("ACallable").to<ACallable>()
                     }
                 })
@@ -206,8 +205,7 @@ object KotlinMapBinderSpec : Spek({
             it("binds complex types into a map") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
-                        val callableBinder = KotlinMapBinder
-                                .newMapBinder<String, Callable<A>>(kotlinBinder)
+                        val callableBinder = KotlinMapBinder.newMapBinder<String, Callable<A>>(kotlinBinder)
                         callableBinder.addBinding("ACallable").to<ACallable>()
                         callableBinder.addBinding("TCallable").to<TCallable<A>>()
 
@@ -225,15 +223,13 @@ object KotlinMapBinderSpec : Spek({
             it("forbids duplicate elements") {
                 val module1 = object : KotlinModule() {
                     override fun configure() {
-                        val stringBinder = KotlinMapBinder
-                                .newMapBinder<String, String>(kotlinBinder)
+                        val stringBinder = KotlinMapBinder.newMapBinder<String, String>(kotlinBinder)
                         stringBinder.addBinding("Hello").toProvider(Providers.of("World"))
                     }
                 }
                 val module2 = object : KotlinModule() {
                     override fun configure() {
-                        val stringBinder = KotlinMapBinder
-                                .newMapBinder<String, String>(kotlinBinder)
+                        val stringBinder = KotlinMapBinder.newMapBinder<String, String>(kotlinBinder)
                         stringBinder.addBinding("Hello").toInstance("Another World")
                     }
                 }
@@ -247,8 +243,7 @@ object KotlinMapBinderSpec : Spek({
             it("binds duplicates into a multimap when using permitDuplicates") {
                 val module1 = object : KotlinModule() {
                     override fun configure() {
-                        val stringBinder = KotlinMapBinder
-                                .newMapBinder<String, String>(kotlinBinder)
+                        val stringBinder = KotlinMapBinder.newMapBinder<String, String>(kotlinBinder)
                         stringBinder.addBinding("A").toProvider(Providers.of("a"))
                         stringBinder.addBinding("B").toInstance("b")
                         stringBinder.permitDuplicates()
@@ -256,8 +251,7 @@ object KotlinMapBinderSpec : Spek({
                 }
                 val module2 = object : KotlinModule() {
                     override fun configure() {
-                        val stringBinder = KotlinMapBinder
-                                .newMapBinder<String, String>(kotlinBinder)
+                        val stringBinder = KotlinMapBinder.newMapBinder<String, String>(kotlinBinder)
                         stringBinder.addBinding("A").toInstance("A")
                         stringBinder.addBinding("C").toInstance("C")
                         stringBinder.permitDuplicates()
@@ -278,13 +272,11 @@ object KotlinMapBinderSpec : Spek({
             it("binds simple types into a map") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinMapBinder
-                                .newAnnotatedMapBinder<String, A, Annotated>(kotlinBinder)
+                        val aBinder = KotlinMapBinder.newAnnotatedMapBinder<String, A, Annotated>(kotlinBinder)
                         aBinder.addBinding("AImpl").to<AImpl>()
                         aBinder.addBinding("B").to<B>()
 
-                        val callableBinder = KotlinMapBinder
-                                .newMapBinder<String, Callable<A>>(kotlinBinder)
+                        val callableBinder = KotlinMapBinder.newMapBinder<String, Callable<A>>(kotlinBinder)
                         callableBinder.addBinding("ACallable").to<ACallable>()
                     }
                 })
@@ -298,8 +290,7 @@ object KotlinMapBinderSpec : Spek({
             it("binds complex types into a map") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
-                        val callableBinder = KotlinMapBinder
-                                .newAnnotatedMapBinder<String, Callable<A>, Annotated>(kotlinBinder)
+                        val callableBinder = KotlinMapBinder.newAnnotatedMapBinder<String, Callable<A>, Annotated>(kotlinBinder)
                         callableBinder.addBinding("ACallable").to<ACallable>()
                         callableBinder.addBinding("TCallable").to<TCallable<A>>()
 
@@ -317,16 +308,14 @@ object KotlinMapBinderSpec : Spek({
             it("forbids duplicate elements") {
                 val module1 = object : KotlinModule() {
                     override fun configure() {
-                        val stringBinder = KotlinMapBinder
-                                .newAnnotatedMapBinder<String, String, Annotated>(kotlinBinder)
+                        val stringBinder = KotlinMapBinder.newAnnotatedMapBinder<String, String, Annotated>(kotlinBinder)
                         stringBinder.addBinding("Hello")
                                 .toProvider(Providers.of("World"))
                     }
                 }
                 val module2 = object : KotlinModule() {
                     override fun configure() {
-                        val stringBinder = KotlinMapBinder
-                                .newAnnotatedMapBinder<String, String, Annotated>(kotlinBinder)
+                        val stringBinder = KotlinMapBinder.newAnnotatedMapBinder<String, String, Annotated>(kotlinBinder)
                         stringBinder.addBinding("Hello").toInstance("Another World")
                     }
                 }
@@ -340,8 +329,7 @@ object KotlinMapBinderSpec : Spek({
             it("binds duplicates into a multimap when using permitDuplicates") {
                 val module1 = object : KotlinModule() {
                     override fun configure() {
-                        val stringBinder = KotlinMapBinder
-                                .newAnnotatedMapBinder<String, String, Annotated>(kotlinBinder)
+                        val stringBinder = KotlinMapBinder.newAnnotatedMapBinder<String, String, Annotated>(kotlinBinder)
                         stringBinder.addBinding("A").toProvider(Providers.of("a"))
                         stringBinder.addBinding("B").toInstance("b")
                         stringBinder.permitDuplicates()
@@ -349,8 +337,7 @@ object KotlinMapBinderSpec : Spek({
                 }
                 val module2 = object : KotlinModule() {
                     override fun configure() {
-                        val stringBinder = KotlinMapBinder
-                                .newAnnotatedMapBinder<String, String, Annotated>(kotlinBinder)
+                        val stringBinder = KotlinMapBinder.newAnnotatedMapBinder<String, String, Annotated>(kotlinBinder)
                         stringBinder.addBinding("A").toInstance("A")
                         stringBinder.addBinding("C").toInstance("C")
                         stringBinder.permitDuplicates()

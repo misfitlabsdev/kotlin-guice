@@ -140,8 +140,7 @@ object KotlinMultibinderSpec : Spek({
             it("binds simple types into an annotated set") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinMultibinder
-                                .newAnnotatedSetBinder<A, Annotated>(kotlinBinder)
+                        val aBinder = KotlinMultibinder.newAnnotatedSetBinder<A, Annotated>(kotlinBinder)
                         aBinder.addBinding().to<AImpl>()
                         aBinder.addBinding().to<B>()
 
@@ -159,13 +158,11 @@ object KotlinMultibinderSpec : Spek({
             it("binds complex types into an annotated set") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
-                        val callableBinder = KotlinMultibinder
-                                .newAnnotatedSetBinder<Callable<A>, Annotated>(kotlinBinder)
+                        val callableBinder = KotlinMultibinder.newAnnotatedSetBinder<Callable<A>, Annotated>(kotlinBinder)
                         callableBinder.addBinding().to<ACallable>()
                         callableBinder.addBinding().to<TCallable<A>>()
 
-                        val unannotatedCallableBinder = KotlinMultibinder
-                                .newSetBinder<Callable<A>>(kotlinBinder)
+                        val unannotatedCallableBinder = KotlinMultibinder.newSetBinder<Callable<A>>(kotlinBinder)
                         unannotatedCallableBinder.addBinding().to<ACallable>()
                     }
                 })

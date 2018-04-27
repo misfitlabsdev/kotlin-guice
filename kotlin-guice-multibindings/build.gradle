@@ -1,14 +1,15 @@
 dependencies {
-  compile project(":kotlin-guice")
-  compile "com.google.inject:guice"
-  compile "com.google.inject.extensions:guice-multibindings"
-  compile "org.jetbrains.kotlin:kotlin-stdlib-jre8"
-  compile "org.jetbrains.kotlin:kotlin-reflect"
+  compile project(':kotlin-guice')
+  compile 'com.google.inject:guice'
+  compile 'org.jetbrains.kotlin:kotlin-stdlib'
+  compile 'org.jetbrains.kotlin:kotlin-reflect'
 
   testCompile 'org.amshove.kluent:kluent'
   testCompile 'org.jetbrains.spek:spek-api'
-  testCompile 'org.jetbrains.spek:spek-junit-platform-engine'
-  testCompile 'org.junit.platform:junit-platform-runner'
+  testCompile 'org.junit.jupiter:junit-jupiter-api'
+
+  testRuntime 'org.jetbrains.spek:spek-junit-platform-engine'
+  testRuntime 'org.junit.jupiter:junit-jupiter-engine'
 }
 
 apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

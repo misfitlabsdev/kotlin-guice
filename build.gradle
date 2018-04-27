@@ -1,6 +1,6 @@
 buildscript {
-  ext.guice_version = '4.1.0'
-  ext.kotlin_version = '1.1.4-3'
+  ext.guice_version = '4.2.0'
+  ext.kotlin_version = '1.2.40'
 
   repositories {
     jcenter()
@@ -8,19 +8,15 @@ buildscript {
     maven {
       url "https://plugins.gradle.org/m2/"
     }
-    maven {
-      url "https://dl.bintray.com/kotlin/kotlin-eap-1.1"
-    }
   }
 
   dependencies {
-    classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
-    classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:2.1.1"
-    classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
-    classpath "me.champeau.gradle:jmh-gradle-plugin:0.3.1"
+    classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
+    classpath 'gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:3.3.0'
+    classpath 'io.spring.gradle:dependency-management-plugin:1.0.5.RELEASE'
+    classpath 'me.champeau.gradle:jmh-gradle-plugin:0.4.5'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.15"
-    classpath "org.junit.platform:junit-platform-gradle-plugin:1.0.0-RC3"
+    classpath 'org.jetbrains.dokka:dokka-gradle-plugin:0.9.16'
   }
 }
 
@@ -28,11 +24,10 @@ subprojects {
   apply plugin: 'java'
   apply plugin: 'kotlin'
   apply plugin: 'io.spring.dependency-management'
-  apply plugin: 'org.junit.platform.gradle.plugin'
   apply plugin: 'org.jetbrains.dokka'
-  apply plugin: "org.jlleitschuh.gradle.ktlint"
-  apply plugin: "me.champeau.gradle.jmh"
-  apply plugin: "com.github.ben-manes.versions"
+  apply plugin: 'org.jlleitschuh.gradle.ktlint'
+  apply plugin: 'me.champeau.gradle.jmh'
+  apply plugin: 'com.github.ben-manes.versions'
 
   sourceCompatibility = 1.8
 
@@ -42,9 +37,6 @@ subprojects {
   repositories {
     jcenter()
     mavenCentral()
-    maven {
-      url "https://dl.bintray.com/kotlin/kotlin-eap-1.1"
-    }
   }
 
   // Use Dokka instead
@@ -55,15 +47,13 @@ subprojects {
     outputDirectory = "$buildDir/javadoc"
 
     externalDocumentationLink {
-      url = new URL("http://google.github.io/guice/api-docs/4.1/javadoc/")
+      url = new URL("http://google.github.io/guice/api-docs/4.2/javadoc/")
     }
   }
 
-  junitPlatform {
-    filters {
-      engines {
-        include 'spek'
-      }
+  test {
+    useJUnitPlatform {
+      includeEngines 'spek'
     }
   }
 
@@ -86,24 +76,28 @@ subprojects {
 
   dependencyManagement {
     dependencies {
-      dependency "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+      dependency "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
       dependency "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version" // managing version up
       dependency "com.google.inject:guice:$guice_version"
-      dependency "com.google.inject.extensions:guice-multibindings:$guice_version"
 
       // Test Dependencies
-      dependency 'org.amshove.kluent:kluent:1.28'
-      dependency 'org.jetbrains.spek:spek-api:1.1.4'
-      dependency 'org.jetbrains.spek:spek-junit-platform-engine:1.1.4'
-      dependency 'org.junit.platform:junit-platform-runner:1.0.0-RC3'
+      dependency 'org.amshove.kluent:kluent:1.36'
+      dependency 'org.jetbrains.spek:spek-api:1.1.5'
+      dependency 'org.jetbrains.spek:spek-junit-platform-engine:1.1.5'
+      dependency 'org.junit.jupiter:junit-jupiter-api:5.1.1'
+      dependency 'org.junit.jupiter:junit-jupiter-engine:5.1.1'
     }
   }
 
   dependencies {
-    jmh 'org.openjdk.jmh:jmh-core:1.19'
-    jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.19'
+    jmh 'org.openjdk.jmh:jmh-core:1.20'
+    jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.20'
   }
 
   build.dependsOn check
   build.finalizedBy dokka
+}
+
+wrapper {
+  gradleVersion '4.7'
 }

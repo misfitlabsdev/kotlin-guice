@@ -24,6 +24,7 @@ import com.google.inject.Guice
 import com.google.inject.spi.ElementSource
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeInstanceOf
+import org.amshove.kluent.shouldBeNull
 import org.amshove.kluent.shouldEqual
 import org.amshove.kluent.shouldNotBe
 import org.amshove.kluent.shouldThrow
@@ -252,7 +253,7 @@ class KotlinPrivateModuleSpec : Spek({
                 })
 
                 val iterable = injector.getInstance(key<Iterable<A>>())
-                iterable shouldEqual null
+                iterable?.shouldBeNull()
             }
 
             it("binds in a scope") {

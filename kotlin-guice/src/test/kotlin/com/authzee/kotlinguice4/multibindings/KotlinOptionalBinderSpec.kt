@@ -92,8 +92,7 @@ object KotlinOptionalBinderSpec : Spek({
             it("binds a complex type as default optional") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinOptionalBinder
-                                .newOptionalBinder<Callable<A>>(kotlinBinder)
+                        val aBinder = KotlinOptionalBinder.newOptionalBinder<Callable<A>>(kotlinBinder)
                         aBinder.setDefault().to<ACallable>()
                     }
                 })
@@ -106,16 +105,14 @@ object KotlinOptionalBinderSpec : Spek({
             it("binds a complex type as optional overriding the default") {
                 val defaultModule = object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinOptionalBinder
-                                .newOptionalBinder<Callable<A>>(kotlinBinder)
+                        val aBinder = KotlinOptionalBinder.newOptionalBinder<Callable<A>>(kotlinBinder)
                         aBinder.setDefault().to<ACallable>()
                     }
                 }
 
                 val bindingModule = object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinOptionalBinder
-                                .newOptionalBinder<Callable<A>>(kotlinBinder)
+                        val aBinder = KotlinOptionalBinder.newOptionalBinder<Callable<A>>(kotlinBinder)
                         aBinder.setBinding().to<BCallable>()
                     }
                 }
@@ -174,8 +171,7 @@ object KotlinOptionalBinderSpec : Spek({
             it("binds an annotated simple type as default optional") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinOptionalBinder
-                                .newAnnotatedOptionalBinder<A, Annotated>(kotlinBinder)
+                        val aBinder = KotlinOptionalBinder.newAnnotatedOptionalBinder<A, Annotated>(kotlinBinder)
                         aBinder.setDefault().to<AImpl>()
                     }
                 })
@@ -187,16 +183,14 @@ object KotlinOptionalBinderSpec : Spek({
             it("binds an annotated simple type as optional overriding the default") {
                 val defaultModule = object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinOptionalBinder
-                                .newAnnotatedOptionalBinder<A, Annotated>(kotlinBinder)
+                        val aBinder = KotlinOptionalBinder.newAnnotatedOptionalBinder<A, Annotated>(kotlinBinder)
                         aBinder.setDefault().to<AImpl>()
                     }
                 }
 
                 val bindingModule = object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinOptionalBinder
-                                .newAnnotatedOptionalBinder<A, Annotated>(kotlinBinder)
+                        val aBinder = KotlinOptionalBinder.newAnnotatedOptionalBinder<A, Annotated>(kotlinBinder)
                         aBinder.setBinding().to<B>()
                     }
                 }
@@ -210,8 +204,7 @@ object KotlinOptionalBinderSpec : Spek({
             it("binds an annotated complex type as default optional") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinOptionalBinder
-                                .newAnnotatedOptionalBinder<Callable<A>, Annotated>(kotlinBinder)
+                        val aBinder = KotlinOptionalBinder.newAnnotatedOptionalBinder<Callable<A>, Annotated>(kotlinBinder)
                         aBinder.setDefault().to<ACallable>()
                     }
                 })
@@ -224,16 +217,14 @@ object KotlinOptionalBinderSpec : Spek({
             it("binds an annotated complex type as optional overriding the default") {
                 val defaultModule = object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinOptionalBinder
-                                .newAnnotatedOptionalBinder<Callable<A>, Annotated>(kotlinBinder)
+                        val aBinder = KotlinOptionalBinder.newAnnotatedOptionalBinder<Callable<A>, Annotated>(kotlinBinder)
                         aBinder.setDefault().to<ACallable>()
                     }
                 }
 
                 val bindingModule = object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinOptionalBinder
-                                .newAnnotatedOptionalBinder<Callable<A>, Annotated>(kotlinBinder)
+                        val aBinder = KotlinOptionalBinder.newAnnotatedOptionalBinder<Callable<A>, Annotated>(kotlinBinder)
                         aBinder.setBinding().to<BCallable>()
                     }
                 }
@@ -248,16 +239,14 @@ object KotlinOptionalBinderSpec : Spek({
             it("forbids duplicate defaults for an annotated optional type") {
                 val module1 = object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinOptionalBinder
-                                .newAnnotatedOptionalBinder<A, Annotated>(kotlinBinder)
+                        val aBinder = KotlinOptionalBinder.newAnnotatedOptionalBinder<A, Annotated>(kotlinBinder)
                         aBinder.setBinding().to<AImpl>()
                     }
                 }
 
                 val module2 = object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinOptionalBinder
-                                .newAnnotatedOptionalBinder<A, Annotated>(kotlinBinder)
+                        val aBinder = KotlinOptionalBinder.newAnnotatedOptionalBinder<A, Annotated>(kotlinBinder)
                         aBinder.setBinding().to<B>()
                     }
                 }
@@ -271,16 +260,14 @@ object KotlinOptionalBinderSpec : Spek({
             it("forbids duplicate bindings for an annotated optional type") {
                 val module1 = object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinOptionalBinder
-                                .newAnnotatedOptionalBinder<A, Annotated>(kotlinBinder)
+                        val aBinder = KotlinOptionalBinder.newAnnotatedOptionalBinder<A, Annotated>(kotlinBinder)
                         aBinder.setBinding().to<AImpl>()
                     }
                 }
 
                 val module2 = object : KotlinModule() {
                     override fun configure() {
-                        val aBinder = KotlinOptionalBinder
-                                .newAnnotatedOptionalBinder<A, Annotated>(kotlinBinder)
+                        val aBinder = KotlinOptionalBinder.newAnnotatedOptionalBinder<A, Annotated>(kotlinBinder)
                         aBinder.setBinding().to<B>()
                     }
                 }

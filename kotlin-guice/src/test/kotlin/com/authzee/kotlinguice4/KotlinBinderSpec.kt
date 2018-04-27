@@ -23,6 +23,7 @@ import com.google.inject.Guice
 import com.google.inject.Key
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeInstanceOf
+import org.amshove.kluent.shouldBeNull
 import org.amshove.kluent.shouldEqual
 import org.amshove.kluent.shouldNotBe
 import org.jetbrains.spek.api.Spek
@@ -140,7 +141,7 @@ object KotlinBinderSpec : Spek({
                 })
 
                 val iterable = injector.getInstance(key<Iterable<A>>())
-                iterable shouldEqual null
+                iterable?.shouldBeNull()
             }
 
             it("binds in a scope") {
