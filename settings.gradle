@@ -1,5 +1,3 @@
 rootProject.name = 'kotlin-guice-parent'
 
 include 'kotlin-guice'
-include 'kotlin-guice-multibindings'
-
