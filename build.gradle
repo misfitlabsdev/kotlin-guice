@@ -86,7 +86,7 @@ subprojects {
 
   dependencyManagement {
     dependencies {
-      dependency "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+      dependency "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
       dependency "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version" // managing version up
       dependency "com.google.inject:guice:$guice_version"
       dependency "com.google.inject.extensions:guice-multibindings:$guice_version"
