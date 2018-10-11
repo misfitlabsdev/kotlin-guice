@@ -17,7 +17,7 @@ Download the latest JAR via Maven:
 
 or Gradle:
 
-```
+```gradle
 compile 'com.authzee.kotlinguice4:kotlin-guice:1.0.0'
 ```
 
@@ -105,7 +105,7 @@ Download the latest JAR via Maven:
 
 or Gradle:
 
-```
+```gradle
 compile 'com.authzee.kotlinguice4:kotlin-guice-multibindings:1.0.0'
 ```
 
