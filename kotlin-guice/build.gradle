@@ -1,6 +1,6 @@
 dependencies {
   compile "com.google.inject:guice"
-  compile "org.jetbrains.kotlin:kotlin-stdlib-jre8"
+  compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
   compile "org.jetbrains.kotlin:kotlin-reflect"
 
   testCompile "com.google.inject.extensions:guice-multibindings"
