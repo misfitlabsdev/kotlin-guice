@@ -11,7 +11,7 @@ Download the latest JAR via Maven:
 <dependency>
   <groupId>com.authzee.kotlinguice4</groupId>
   <artifactId>kotlin-guice</artifactId>
-  <version>1.0.0</version>
+  <version>1.2.0</version>
 </dependency>
 ```
 

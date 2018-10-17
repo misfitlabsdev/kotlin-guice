@@ -3,7 +3,7 @@ Change Log
 
 ## Version 1.2.0
 
-_In Development_
+_2018-10-17_
 
 * Actually replace dependency on JRE8 with JDK8.
 
