@@ -64,7 +64,7 @@ import com.authzee.kotlinguice4.annotatedKey
 import com.authzee.kotlinguice4.getInstance
 
 fun main(args: Array<String>) {
-  val injector = Guice.createInjector(new MyModule(), new MyPrivateModule())
+  val injector = Guice.createInjector(MyModule(), MyPrivateModule())
   
   val paymentService = injector.getInstance<PaymentService<CreditCard>>()
   
