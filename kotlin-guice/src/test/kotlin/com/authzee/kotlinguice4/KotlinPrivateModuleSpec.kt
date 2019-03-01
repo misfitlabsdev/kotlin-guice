@@ -21,6 +21,8 @@ import com.authzee.kotlinguice4.binder.annotatedWith
 import com.authzee.kotlinguice4.binder.to
 import com.google.inject.CreationException
 import com.google.inject.Guice
+import com.google.inject.Key
+import com.google.inject.name.Names
 import com.google.inject.spi.ElementSource
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeInstanceOf
@@ -224,6 +226,23 @@ class KotlinPrivateModuleSpec : Spek({
                 })
 
                 val a = injector.getInstance(annotatedKey<A, Annotated>())
+
+                a.get() shouldEqual "Impl of A"
+            }
+
+            it("binds with an annotation using an annotation instance") {
+                val named = Names.named("Some Name")
+
+                val injector = Guice.createInjector(object : KotlinPrivateModule() {
+                    override fun configure() {
+                        bind<A>().to<B>()
+                        bind<A>().annotatedWith(named).to<AImpl>()
+
+                        expose<A>().annotatedWith(named)
+                    }
+                })
+
+                val a = injector.getInstance(Key.get(A::class.java, named))
 
                 a.get() shouldEqual "Impl of A"
             }

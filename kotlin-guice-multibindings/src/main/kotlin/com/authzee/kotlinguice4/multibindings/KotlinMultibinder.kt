@@ -71,6 +71,14 @@ interface KotlinMultibinder<T> {
         }
 
         /**
+         * Returns a new multibinder that collects entries of [T] in a {@link set} that is bound
+         * with [annotation].
+         */
+        inline fun <reified T> newAnnotatedSetBinder(binder: Binder, annotation: Annotation): KotlinMultibinder<T> {
+            return newRealSetBinder(binder, annotatedKey(annotation))
+        }
+
+        /**
          * Returns a new multibinder that collects entries of [T] in a {@link Set} that is bound
          * with [TAnn].
          */

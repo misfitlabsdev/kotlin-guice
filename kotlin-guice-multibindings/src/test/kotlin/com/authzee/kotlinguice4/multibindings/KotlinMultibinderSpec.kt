@@ -22,6 +22,7 @@ import com.google.inject.Key
 import com.google.inject.ProvisionException
 import com.google.inject.TypeLiteral
 import com.google.inject.multibindings.ProvidesIntoSet
+import com.google.inject.name.Names
 import com.google.inject.spi.ElementSource
 import com.google.inject.util.Providers
 import org.amshove.kluent.shouldEqual
@@ -152,6 +153,26 @@ object KotlinMultibinderSpec : Spek({
 
                 val set = injector.getInstance(Key
                         .get(object : TypeLiteral<Set<A>>() {}, Annotated::class.java))
+
+                set.size shouldEqual 2
+            }
+
+            it("binds simple types into a named set") {
+                val named = Names.named("A Name")
+
+                val injector = Guice.createInjector(object : KotlinModule() {
+                    override fun configure() {
+                        val aBinder = KotlinMultibinder
+                            .newAnnotatedSetBinder<A>(kotlinBinder, named)
+                        aBinder.addBinding().to<AImpl>()
+                        aBinder.addBinding().to<B>()
+
+                        val unannotatedABinder = KotlinMultibinder.newSetBinder<A>(kotlinBinder)
+                        unannotatedABinder.addBinding().to<AImpl>()
+                    }
+                })
+
+                val set = injector.getInstance(Key.get(object : TypeLiteral<Set<A>>() {}, named))
 
                 set.size shouldEqual 2
             }

@@ -39,4 +39,10 @@ abstract class KotlinAnnotatedBindingBuilder<T>(private val self: AnnotatedBindi
         delegate.annotatedWith(TAnn::class.java)
         return this
     }
+
+    /** Binds with the specified annotation. */
+    override fun annotatedWith(annotation: Annotation): KotlinLinkedBindingBuilder<T> {
+        delegate.annotatedWith(annotation)
+        return this
+    }
 }

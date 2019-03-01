@@ -18,6 +18,7 @@
 package com.authzee.kotlinguice4.internal
 
 import com.authzee.kotlinguice4.binder.KotlinAnnotatedBindingBuilder
+import com.authzee.kotlinguice4.binder.KotlinLinkedBindingBuilder
 import com.google.inject.binder.AnnotatedBindingBuilder
 
 /**
@@ -30,4 +31,8 @@ import com.google.inject.binder.AnnotatedBindingBuilder
  */
 @Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
 class KotlinBindingBuilder<T>(private val self: AnnotatedBindingBuilder<T>) :
-    KotlinAnnotatedBindingBuilder<T>(self), AnnotatedBindingBuilder<T> by self
+    KotlinAnnotatedBindingBuilder<T>(self), AnnotatedBindingBuilder<T> by self {
+    override fun annotatedWith(annotation: Annotation): KotlinLinkedBindingBuilder<T> {
+        return super.annotatedWith(annotation)
+    }
+}
