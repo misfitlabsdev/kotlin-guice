@@ -66,9 +66,11 @@ object KotlinMultibindingsScanner {
         }
 
         override fun <T> prepareMethod(
-                binder: Binder,
-                annotation: Annotation, key: Key<T>,
-                injectionPoint: InjectionPoint): Key<T> {
+            binder: Binder,
+            annotation: Annotation,
+            key: Key<T>,
+            injectionPoint: InjectionPoint
+        ): Key<T> {
             val method = injectionPoint.member as Method
             val mapKeyAnnotation = findMapKeyAnnotation(method)
 
@@ -115,7 +117,6 @@ object KotlinMultibindingsScanner {
                     } catch (invalid: NoSuchMethodException) {
                         return null
                     }
-
                 }
                 foundAnnotation = annotation
             }

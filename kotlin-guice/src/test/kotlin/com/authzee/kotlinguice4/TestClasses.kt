@@ -41,7 +41,6 @@ class TCallable<T> : Callable<T> {
     override fun call(): T? {
         return null
     }
-
 }
 
 open class AImpl : A {

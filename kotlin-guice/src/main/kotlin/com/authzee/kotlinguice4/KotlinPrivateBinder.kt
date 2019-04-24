@@ -45,8 +45,8 @@ import com.google.inject.PrivateBinder
  * @since 1.0
  */
 @Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
-class KotlinPrivateBinder(override val delegate: PrivateBinder)
-    : KotlinBinder(delegate), PrivateBinder by delegate {
+class KotlinPrivateBinder(override val delegate: PrivateBinder) :
+    KotlinBinder(delegate), PrivateBinder by delegate {
     /**
      * Makes a binding for [T] available to the enclosing environment. Use
      * [KotlinAnnotatedElementBuilder.annotatedWith] to expose [T] with a binding annotation.

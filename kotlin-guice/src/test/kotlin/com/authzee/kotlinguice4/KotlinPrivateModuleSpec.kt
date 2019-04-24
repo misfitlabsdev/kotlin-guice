@@ -113,7 +113,6 @@ class KotlinPrivateModuleSpec : Spek({
                             expose<AContainer>() // Only expose the container
                         }
                     })
-
                 }
             })
 
@@ -321,7 +320,6 @@ class KotlinPrivateModuleSpec : Spek({
                         override fun configure() {
                             requireBinding<A>()
                         }
-
                     })
                 }
 
@@ -336,7 +334,6 @@ class KotlinPrivateModuleSpec : Spek({
                             // Bind something that matches Callable::class but not the reified type
                             bind(Callable::class.java).to(ACallable::class.java)
                         }
-
                     })
                 }
 
@@ -352,7 +349,6 @@ class KotlinPrivateModuleSpec : Spek({
                         val provider = kotlinBinder.getProvider<A>()
                         provider.toString() shouldEqual "Provider<com.authzee.kotlinguice4.A>"
                     }
-
                 })
             }
 
@@ -364,7 +360,6 @@ class KotlinPrivateModuleSpec : Spek({
                         provider.toString() shouldEqual
                                 "Provider<java.util.concurrent.Callable<com.authzee.kotlinguice4.A>>"
                     }
-
                 })
             }
         }

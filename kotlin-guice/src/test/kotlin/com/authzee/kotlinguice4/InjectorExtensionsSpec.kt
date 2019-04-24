@@ -247,4 +247,3 @@ object InjectorExtensionsSpec : Spek({
         }
     }
 })
-

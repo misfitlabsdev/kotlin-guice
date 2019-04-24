@@ -74,13 +74,13 @@ interface KotlinMultibinder<T> {
          * Returns a new multibinder that collects entries of [T] in a {@link Set} that is bound
          * with [TAnn].
          */
-        inline fun <reified T, reified TAnn : Annotation> newAnnotatedSetBinder(binder: Binder)
-                : KotlinMultibinder<T> {
+        inline fun <reified T, reified TAnn : Annotation> newAnnotatedSetBinder(binder: Binder):
+                KotlinMultibinder<T> {
             return newRealSetBinder(binder, annotatedKey<T, TAnn>())
         }
 
-        @PublishedApi internal fun <T> newRealSetBinder(binder: Binder, key: Key<T>)
-                : RealKotlinMultibinder<T> {
+        @PublishedApi internal fun <T> newRealSetBinder(binder: Binder, key: Key<T>):
+                RealKotlinMultibinder<T> {
             val skippingBinder = binder.skipSources(RealKotlinMultibinder::class.java,
                     KotlinMultibinder::class.java,
                     Companion::class.java)
@@ -92,8 +92,8 @@ interface KotlinMultibinder<T> {
     }
 }
 
-internal class RealKotlinMultibinder<T>(private val delegate: Multibinder<T>, key: Key<T>)
-    : KotlinMultibinder<T>, KotlinModule() {
+internal class RealKotlinMultibinder<T>(private val delegate: Multibinder<T>, key: Key<T>) :
+    KotlinMultibinder<T>, KotlinModule() {
     private val elementType = key.typeLiteral
     private val setKey = setKeyFor(key)
     private val collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType))
@@ -175,15 +175,15 @@ internal fun <T> providerOf(elementType: TypeLiteral<T>): TypeLiteral<Provider<T
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <T> collectionOfProvidersOf(elementType: TypeLiteral<T>)
-        : TypeLiteral<Collection<Provider<T>>> {
+internal fun <T> collectionOfProvidersOf(elementType: TypeLiteral<T>):
+        TypeLiteral<Collection<Provider<T>>> {
     return TypeLiteral.get(KotlinTypes.collectionOf(Types.providerOf(elementType.type)))
             as TypeLiteral<Collection<Provider<T>>>
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <T> collectionOfJavaxProvidersOf(elementType: TypeLiteral<T>)
-        : TypeLiteral<Collection<javax.inject.Provider<T>>> {
+internal fun <T> collectionOfJavaxProvidersOf(elementType: TypeLiteral<T>):
+        TypeLiteral<Collection<javax.inject.Provider<T>>> {
     return TypeLiteral.get(KotlinTypes.collectionOf(Types.javaxProviderOf(elementType.type)))
             as TypeLiteral<Collection<javax.inject.Provider<T>>>
 }
@@ -207,15 +207,15 @@ internal fun <T> javaxProviderOf(elementType: TypeLiteral<T>): TypeLiteral<javax
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <T> mutableCollectionOfProvidersOf(elementType: TypeLiteral<T>)
-        : TypeLiteral<MutableCollection<Provider<T>>> {
+internal fun <T> mutableCollectionOfProvidersOf(elementType: TypeLiteral<T>):
+        TypeLiteral<MutableCollection<Provider<T>>> {
     return TypeLiteral.get(KotlinTypes.mutableCollectionOf(Types.providerOf(elementType.type)))
             as TypeLiteral<MutableCollection<Provider<T>>>
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <T> mutableCollectionOfJavaxProvidersOf(elementType: TypeLiteral<T>)
-        : TypeLiteral<MutableCollection<javax.inject.Provider<T>>> {
+internal fun <T> mutableCollectionOfJavaxProvidersOf(elementType: TypeLiteral<T>):
+        TypeLiteral<MutableCollection<javax.inject.Provider<T>>> {
     return TypeLiteral.get(KotlinTypes.mutableCollectionOf(Types.javaxProviderOf(elementType.type)))
             as TypeLiteral<MutableCollection<javax.inject.Provider<T>>>
 }

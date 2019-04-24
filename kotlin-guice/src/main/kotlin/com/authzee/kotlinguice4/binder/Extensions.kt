@@ -38,7 +38,7 @@ inline fun <reified T> ConstantBindingBuilder.to() {
  * @author John Leacox
  * @since 1.0
  */
-inline fun <reified TAnn : Annotation> AnnotatedConstantBindingBuilder.annotatedWith()
-        : ConstantBindingBuilder {
+inline fun <reified TAnn : Annotation> AnnotatedConstantBindingBuilder.annotatedWith():
+        ConstantBindingBuilder {
     return this.annotatedWith(TAnn::class.java)
 }

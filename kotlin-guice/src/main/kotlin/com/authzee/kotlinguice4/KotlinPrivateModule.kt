@@ -64,7 +64,7 @@ abstract class KotlinPrivateModule : PrivateModule() {
     }
 
     /** Makes the binding for [T] available to enclosing modules and the injector. */
-    protected inline fun <reified T> expose() : KotlinAnnotatedElementBuilder {
+    protected inline fun <reified T> expose(): KotlinAnnotatedElementBuilder {
         return kotlinBinder.expose<T>()
     }
 

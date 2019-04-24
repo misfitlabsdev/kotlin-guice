@@ -28,8 +28,8 @@ import com.google.inject.binder.AnnotatedElementBuilder
  * @author John Leacox
  * @since 1.0
  */
-class KotlinAnnotatedElementBuilder(val delegate: AnnotatedElementBuilder)
-    : AnnotatedElementBuilder by delegate {
+class KotlinAnnotatedElementBuilder(val delegate: AnnotatedElementBuilder) :
+    AnnotatedElementBuilder by delegate {
     /** Binds with the annotation specified by the type parameter. */
     inline fun <reified TAnn : Annotation> annotatedWith() {
         delegate.annotatedWith(TAnn::class.java)

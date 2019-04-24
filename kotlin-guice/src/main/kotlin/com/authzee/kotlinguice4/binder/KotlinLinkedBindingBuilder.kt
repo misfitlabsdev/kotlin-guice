@@ -31,8 +31,8 @@ import javax.inject.Provider
  * @since 1.0
  */
 @Suppress("DELEGATED_MEMBER_HIDES_SUPERTYPE_OVERRIDE")
-abstract class KotlinLinkedBindingBuilder<T>(private val self: LinkedBindingBuilder<T>)
-    : KotlinScopedBindingBuilder(self), LinkedBindingBuilder<T> by self {
+abstract class KotlinLinkedBindingBuilder<T>(private val self: LinkedBindingBuilder<T>) :
+    KotlinScopedBindingBuilder(self), LinkedBindingBuilder<T> by self {
     /** The underlying Guice builder that is being extended. */
     override val delegate = self
 

@@ -28,8 +28,8 @@ import com.google.inject.binder.ScopedBindingBuilder
  * @author John Leacox
  * @since 1.0
  */
-abstract class KotlinScopedBindingBuilder(private val self: ScopedBindingBuilder)
-    : ScopedBindingBuilder by self {
+abstract class KotlinScopedBindingBuilder(private val self: ScopedBindingBuilder) :
+    ScopedBindingBuilder by self {
     /** The underlying Guice builder that is being extended. */
     open val delegate = self
 

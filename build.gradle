@@ -1,6 +1,6 @@
 buildscript {
   ext.guice_version = '4.1.0'
-  ext.kotlin_version = '1.2.0'
+  ext.kotlin_version = '1.2.71'
 
   repositories {
     jcenter()
@@ -11,13 +11,13 @@ buildscript {
   }
 
   dependencies {
-    classpath "com.github.ben-manes:gradle-versions-plugin:0.15.0"
-    classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:2.1.1"
-    classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
-    classpath "me.champeau.gradle:jmh-gradle-plugin:0.3.1"
+    classpath "com.github.ben-manes:gradle-versions-plugin:0.21.0"
+    classpath "org.jlleitschuh.gradle:ktlint-gradle:7.4.0"
+    classpath "io.spring.gradle:dependency-management-plugin:1.0.7.RELEASE"
+    classpath "me.champeau.gradle:jmh-gradle-plugin:0.4.8"
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.15"
-    classpath "org.junit.platform:junit-platform-gradle-plugin:1.0.0-RC3"
+    classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.18"
+    classpath "org.junit.platform:junit-platform-gradle-plugin:1.2.0"
   }
 }
 
@@ -39,9 +39,6 @@ subprojects {
   repositories {
     jcenter()
     mavenCentral()
-    maven {
-      url "https://dl.bintray.com/kotlin/kotlin-eap-1.1"
-    }
   }
 
   // Use Dokka instead
@@ -74,7 +71,7 @@ subprojects {
   }
 
   ktlint {
-    version = "0.9.2"
+    version = "0.32.0"
   }
 
   sourceSets {
@@ -90,15 +87,15 @@ subprojects {
 
       // Test Dependencies
       dependency 'org.amshove.kluent:kluent:1.28'
-      dependency 'org.jetbrains.spek:spek-api:1.1.4'
-      dependency 'org.jetbrains.spek:spek-junit-platform-engine:1.1.4'
-      dependency 'org.junit.platform:junit-platform-runner:1.0.0-RC3'
+      dependency 'org.jetbrains.spek:spek-api:1.1.5'
+      dependency 'org.jetbrains.spek:spek-junit-platform-engine:1.1.5'
+      dependency 'org.junit.platform:junit-platform-runner:1.2.0'
     }
   }
 
   dependencies {
-    jmh 'org.openjdk.jmh:jmh-core:1.19'
-    jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.19'
+    jmh 'org.openjdk.jmh:jmh-core:1.21'
+    jmh 'org.openjdk.jmh:jmh-generator-annprocess:1.21'
   }
 
   build.dependsOn check
