@@ -19,6 +19,9 @@ package com.authzee.kotlinguice4
 
 import com.authzee.kotlinguice4.binder.KotlinAnnotatedBindingBuilder
 import com.authzee.kotlinguice4.binder.KotlinAnnotatedElementBuilder
+import com.authzee.kotlinguice4.binder.KotlinLinkedBindingBuilder
+import com.authzee.kotlinguice4.binder.KotlinScopedBindingBuilder
+import com.authzee.kotlinguice4.internal.KotlinBindingBuilder
 import com.google.inject.MembersInjector
 import com.google.inject.PrivateModule
 import com.google.inject.Provider
@@ -60,7 +63,14 @@ import com.google.inject.Scope
 abstract class KotlinPrivateModule : PrivateModule() {
     /** Gets direct access to the underlying [KotlinPrivateBinder]. */
     protected val kotlinBinder: KotlinPrivateBinder by lazy {
-        KotlinPrivateBinder(binder().skipSources(KotlinPrivateModule::class.java))
+        KotlinPrivateBinder(binder().skipSources(
+            KotlinAnnotatedBindingBuilder::class.java,
+            KotlinAnnotatedElementBuilder::class.java,
+            KotlinBinder::class.java,
+            KotlinBindingBuilder::class.java,
+            KotlinLinkedBindingBuilder::class.java,
+            KotlinScopedBindingBuilder::class.java
+        ))
     }
 
     /** Makes the binding for [T] available to enclosing modules and the injector. */
