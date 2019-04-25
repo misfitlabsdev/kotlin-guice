@@ -11,14 +11,14 @@ Download the latest JAR via Maven:
 <dependency>
   <groupId>com.authzee.kotlinguice4</groupId>
   <artifactId>kotlin-guice</artifactId>
-  <version>1.2.0</version>
+  <version>1.3.0</version>
 </dependency>
 ```
 
 or Gradle:
 
 ```gradle
-compile 'com.authzee.kotlinguice4:kotlin-guice:1.2.0'
+compile 'com.authzee.kotlinguice4:kotlin-guice:1.3.0'
 ```
 
 ## Getting Started
@@ -106,7 +106,7 @@ Download the latest JAR via Maven:
 or Gradle:
 
 ```gradle
-compile 'com.authzee.kotlinguice4:kotlin-guice-multibindings:1.2.0'
+compile 'com.authzee.kotlinguice4:kotlin-guice-multibindings:1.3.0'
 ```
 
 #### Usage
