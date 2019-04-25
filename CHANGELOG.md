@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+## Version 1.4.0
+
+_In Development_
+
 ## Version 1.3.0
 
 _2019-04-25_
