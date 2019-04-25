@@ -75,8 +75,9 @@ interface KotlinOptionalBinder<T> {
         }
 
         @PublishedApi internal fun <T> newRealOptionalBinder(
-                binder: Binder,
-                optionalKey: Key<T>): RealKotlinOptionalBinder<T> {
+            binder: Binder,
+            optionalKey: Key<T>
+        ): RealKotlinOptionalBinder<T> {
             val skippingBinder = binder.skipSources(RealKotlinOptionalBinder::class.java,
                     KotlinOptionalBinder::class.java,
                     Companion::class.java)
@@ -86,9 +87,10 @@ interface KotlinOptionalBinder<T> {
     }
 }
 
-internal class RealKotlinOptionalBinder<T>(private val delegate: OptionalBinder<T>,
-                                           private val optionalKey: Key<T>)
-    : KotlinOptionalBinder<T> {
+internal class RealKotlinOptionalBinder<T>(
+    private val delegate: OptionalBinder<T>,
+    private val optionalKey: Key<T>
+) : KotlinOptionalBinder<T> {
     private val elementType = optionalKey.typeLiteral
     private val name = RealElement.nameOf(optionalKey)
 

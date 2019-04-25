@@ -26,9 +26,11 @@ import com.google.inject.TypeLiteral
  * @since 1.0
  */
 @Suppress("HasPlatformType")
-internal class MapBindingSelection<K, V>(private val keyType: TypeLiteral<K>,
-                                         private val valueType: TypeLiteral<V>,
-                                         val mapKey: Key<Map<K, V>>) {
+internal class MapBindingSelection<K, V>(
+    private val keyType: TypeLiteral<K>,
+    private val valueType: TypeLiteral<V>,
+    val mapKey: Key<Map<K, V>>
+) {
     val mutableMapKey by lazy { mapKey.ofType(mutableMapOf(keyType, valueType)) }
 
     val providerMapKey by lazy {

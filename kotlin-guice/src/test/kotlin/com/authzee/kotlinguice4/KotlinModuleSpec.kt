@@ -210,7 +210,6 @@ object KotlinModuleSpec : Spek({
 
                 StaticInjectionObj.staticInjectionSite shouldEqual "Statically Injected"
             }
-
         }
 
         describe("#requireBinding") {
@@ -220,7 +219,6 @@ object KotlinModuleSpec : Spek({
                         override fun configure() {
                             requireBinding<A>()
                         }
-
                     })
                 }
 
@@ -235,7 +233,6 @@ object KotlinModuleSpec : Spek({
                             // Bind something that matches Callable::class but not the reified type
                             bind(Callable::class.java).to(ACallable::class.java)
                         }
-
                     })
                 }
 
@@ -251,7 +248,6 @@ object KotlinModuleSpec : Spek({
                         val provider = getProvider<A>()
                         provider.toString() shouldEqual "Provider<com.authzee.kotlinguice4.A>"
                     }
-
                 })
             }
 
@@ -263,7 +259,6 @@ object KotlinModuleSpec : Spek({
                         provider.toString() shouldEqual
                                 "Provider<java.util.concurrent.Callable<com.authzee.kotlinguice4.A>>"
                     }
-
                 })
             }
         }
@@ -281,4 +276,3 @@ object KotlinModuleSpec : Spek({
         }
     }
 })
-

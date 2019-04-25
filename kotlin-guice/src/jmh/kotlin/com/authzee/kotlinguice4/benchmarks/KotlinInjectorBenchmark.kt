@@ -78,5 +78,4 @@ open class KotlinInjectorBenchmark {
         val instance = injector.getInstance<Complex<String>>()
         instance.value()
     }
-
 }

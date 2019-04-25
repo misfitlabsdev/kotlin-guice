@@ -24,8 +24,8 @@ import com.authzee.kotlinguice4.KotlinModule
  * @author John Leacox
  * @since 1.0
  */
-internal class KotlinMultimapModule<K, V>(private val bindingSelection: MapBindingSelection<K, V>)
-    : KotlinModule() {
+internal class KotlinMultimapModule<K, V>(private val bindingSelection: MapBindingSelection<K, V>) :
+    KotlinModule() {
     override fun configure() {
         bind(bindingSelection.multimapKey).to(bindingSelection.mutableMultimapKey)
         bind(bindingSelection.providerSetMultimapKey)

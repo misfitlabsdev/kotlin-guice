@@ -59,7 +59,7 @@ open class KotlinBinder(open val delegate: Binder) : Binder by delegate {
      *
      * @see Binder
      */
-    inline fun <reified T> bind() : KotlinAnnotatedBindingBuilder<T> {
+    inline fun <reified T> bind(): KotlinAnnotatedBindingBuilder<T> {
         return KotlinBindingBuilder<T>(bind(typeLiteral<T>()))
     }
 
@@ -77,7 +77,7 @@ open class KotlinBinder(open val delegate: Binder) : Binder by delegate {
      *
      * @see Binder
      */
-    inline fun <reified T> getProvider() : Provider<T> {
+    inline fun <reified T> getProvider(): Provider<T> {
         return getProvider(key<T>())
     }
 
@@ -86,7 +86,7 @@ open class KotlinBinder(open val delegate: Binder) : Binder by delegate {
      *
      * @see Binder
      */
-    inline fun <reified T> getMembersInjector() : MembersInjector<T> {
+    inline fun <reified T> getMembersInjector(): MembersInjector<T> {
         return getMembersInjector(typeLiteral<T>())
     }
 }

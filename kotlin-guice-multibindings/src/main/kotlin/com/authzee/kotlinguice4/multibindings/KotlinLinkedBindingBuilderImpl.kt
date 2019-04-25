@@ -26,5 +26,5 @@ import com.google.inject.binder.LinkedBindingBuilder
  * @author John Leacox
  * @since 1.0
  */
-internal class KotlinLinkedBindingBuilderImpl<T>(delegate: LinkedBindingBuilder<T>)
-    : KotlinLinkedBindingBuilder<T>(delegate)
+internal class KotlinLinkedBindingBuilderImpl<T>(delegate: LinkedBindingBuilder<T>) :
+    KotlinLinkedBindingBuilder<T>(delegate)

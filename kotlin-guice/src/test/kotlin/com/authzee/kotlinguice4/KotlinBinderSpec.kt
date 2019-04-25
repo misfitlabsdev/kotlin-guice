@@ -181,7 +181,6 @@ object KotlinBinderSpec : Spek({
 
                 StaticInjectionObj.staticInjectionSite shouldEqual "Statically Injected"
             }
-
         }
 
         describe("#getProvider") {
@@ -192,7 +191,6 @@ object KotlinBinderSpec : Spek({
                         val provider = kotlinBinder.getProvider<A>()
                         provider.toString() shouldEqual "Provider<com.authzee.kotlinguice4.A>"
                     }
-
                 })
             }
 
@@ -204,7 +202,6 @@ object KotlinBinderSpec : Spek({
                         provider.toString() shouldEqual
                                 "Provider<java.util.concurrent.Callable<com.authzee.kotlinguice4.A>>"
                     }
-
                 })
             }
         }
@@ -222,4 +219,3 @@ object KotlinBinderSpec : Spek({
         }
     }
 })
-

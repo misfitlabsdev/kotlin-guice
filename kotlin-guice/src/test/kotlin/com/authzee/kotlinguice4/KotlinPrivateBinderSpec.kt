@@ -114,7 +114,6 @@ object KotlinPrivateBinderSpec : Spek({
                             kotlinBinder.expose<AContainer>() // Only expose the container
                         }
                     })
-
                 }
             })
 
@@ -313,7 +312,6 @@ object KotlinPrivateBinderSpec : Spek({
 
                 StaticInjectionObj.staticInjectionSite shouldEqual "Statically Injected"
             }
-
         }
 
         describe("#getProvider") {
@@ -324,7 +322,6 @@ object KotlinPrivateBinderSpec : Spek({
                         val provider = kotlinBinder.getProvider<A>()
                         provider.toString() shouldEqual "Provider<com.authzee.kotlinguice4.A>"
                     }
-
                 })
             }
 
@@ -336,7 +333,6 @@ object KotlinPrivateBinderSpec : Spek({
                         provider.toString() shouldEqual
                                 "Provider<java.util.concurrent.Callable<com.authzee.kotlinguice4.A>>"
                     }
-
                 })
             }
         }

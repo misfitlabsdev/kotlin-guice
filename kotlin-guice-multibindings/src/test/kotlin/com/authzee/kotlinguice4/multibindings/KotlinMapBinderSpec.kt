@@ -172,9 +172,9 @@ object KotlinMapBinderSpec : Spek({
                                     Types.providerOf(String::class.java))))),
                     // @Named(...) Boolean
                     Key.get(Boolean::class.java,
-                            Names.named("Multibinder<java.util.Map\$Entry<java.lang.String, "
-                                    + "com.google.inject.Provider<java.lang.String>>> "
-                                    + "permits duplicates")),
+                            Names.named("Multibinder<java.util.Map\$Entry<java.lang.String, " +
+                                    "com.google.inject.Provider<java.lang.String>>> " +
+                                    "permits duplicates")),
                     Key.get(java.util.logging.Logger::class.java),
                     Key.get(Stage::class.java),
                     Key.get(Injector::class.java)
