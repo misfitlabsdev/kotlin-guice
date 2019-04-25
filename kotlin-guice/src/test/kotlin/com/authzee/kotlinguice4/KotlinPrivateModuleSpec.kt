@@ -24,6 +24,7 @@ import com.google.inject.Guice
 import com.google.inject.spi.ElementSource
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeInstanceOf
+import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldEqual
 import org.amshove.kluent.shouldNotBe
 import org.amshove.kluent.shouldThrow
@@ -278,6 +279,23 @@ class KotlinPrivateModuleSpec : Spek({
 
                 val callable: Callable<*> = injector.getInstance(key<Callable<*>>())
                 callable shouldBeInstanceOf ACallable::class.java
+            }
+
+            describe("when binding to a null instance") {
+                it("throws a CreationException with message that skips internal sources") {
+                    val outerModule = object : KotlinPrivateModule() {
+                        override fun configure() {
+                            bind<String>().toInstance(null)
+                        }
+                    }
+
+                    val createInjector = {
+                        Guice.createInjector(outerModule)
+                    }
+
+                    val exception = (createInjector shouldThrow CreationException::class).exception
+                    exception.message!! shouldContain outerModule::class.java.name
+                }
             }
         }
 

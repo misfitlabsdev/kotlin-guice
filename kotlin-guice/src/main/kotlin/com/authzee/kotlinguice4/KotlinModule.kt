@@ -18,6 +18,10 @@
 package com.authzee.kotlinguice4
 
 import com.authzee.kotlinguice4.binder.KotlinAnnotatedBindingBuilder
+import com.authzee.kotlinguice4.binder.KotlinAnnotatedElementBuilder
+import com.authzee.kotlinguice4.binder.KotlinLinkedBindingBuilder
+import com.authzee.kotlinguice4.binder.KotlinScopedBindingBuilder
+import com.authzee.kotlinguice4.internal.KotlinBindingBuilder
 import com.google.inject.AbstractModule
 import com.google.inject.MembersInjector
 import com.google.inject.Provider
@@ -55,7 +59,14 @@ import com.google.inject.Scope
 abstract class KotlinModule : AbstractModule() {
     /** Gets direct access to the underlying [KotlinBinder]. */
     protected val kotlinBinder: KotlinBinder by lazy {
-        KotlinBinder(binder().skipSources(KotlinBinder::class.java))
+        KotlinBinder(binder().skipSources(
+            KotlinAnnotatedBindingBuilder::class.java,
+            KotlinAnnotatedElementBuilder::class.java,
+            KotlinBinder::class.java,
+            KotlinBindingBuilder::class.java,
+            KotlinLinkedBindingBuilder::class.java,
+            KotlinScopedBindingBuilder::class.java
+        ))
     }
 
     /** @see KotlinBinder.bindScope */
