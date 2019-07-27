@@ -1,5 +1,5 @@
 kotlin-guice
-=====
+============
 
 Guice extensions for Kotlin. This provides extension wrappers and extension methods for providing a better Guice DSL experience from Kotlin. It takes advantage of reified types to reduce class references like `bind(MyResource::class.java)` to `bind<MyResource>()`.
 
@@ -9,7 +9,7 @@ Download the latest JAR via Maven:
 
 ```xml
 <dependency>
-  <groupId>com.authzee.kotlinguice4</groupId>
+  <groupId>dev.misfitlabs.kotlinguice4</groupId>
   <artifactId>kotlin-guice</artifactId>
   <version>1.3.0</version>
 </dependency>
@@ -18,7 +18,7 @@ Download the latest JAR via Maven:
 or Gradle:
 
 ```gradle
-compile 'com.authzee.kotlinguice4:kotlin-guice:1.3.0'
+compile 'dev.misfitlabs.kotlinguice4:kotlin-guice:1.3.0'
 ```
 
 ## Getting Started
@@ -28,7 +28,7 @@ compile 'com.authzee.kotlinguice4:kotlin-guice:1.3.0'
 Use `KotlinModule` for Guice modules instead of `AbstractModule` to take advantage of the enhanced Kotlin Guice DSL. 
 
 ```kotlin
-import com.authzee.kotlinguice4.KotlinModule
+import dev.misfitlabs.kotlinguice4.KotlinModule
 
 class MyModule : KotlinModule() {
     override fun configure() {
@@ -42,7 +42,7 @@ class MyModule : KotlinModule() {
 The `KotlinPrivateModule` can also be used if only some bindings need to be exposed.
 
 ```kotlin
-import com.authzee.kotlinguice4.KotlinPrivateModule
+import dev.misfitlabs.kotlinguice4.KotlinPrivateModule
 
 class MyPrivateModule : KotlinPrivateModule() {
     override fun configure() {
@@ -60,8 +60,8 @@ class MyPrivateModule : KotlinPrivateModule() {
 The Guice injector has been enhanced with extension methods to make direct use of the injector better from Kotlin.
 
 ```kotlin
-import com.authzee.kotlinguice4.annotatedKey
-import com.authzee.kotlinguice4.getInstance
+import dev.misfitlabs.kotlinguice4.annotatedKey
+import dev.misfitlabs.kotlinguice4.getInstance
 
 fun main(args: Array<String>) {
   val injector = Guice.createInjector(MyModule(), MyPrivateModule())
@@ -78,9 +78,9 @@ fun main(args: Array<String>) {
 Package level functions are included to enhance creating `Key` and `TypeLiteral` instances from kotlin.
 
 ```kotlin
-import com.authzee.kotlinguice4.annotatedKey
-import com.authzee.kotlinguice4.key
-import com.authzee.kotlinguice4.typeLiteral
+import dev.misfitlabs.kotlinguice4.annotatedKey
+import dev.misfitlabs.kotlinguice4.key
+import dev.misfitlabs.kotlinguice4.typeLiteral
 
 val key = key<String>()
 val annotatedKey = annotatedKey<String, SomeAnnotation>()
