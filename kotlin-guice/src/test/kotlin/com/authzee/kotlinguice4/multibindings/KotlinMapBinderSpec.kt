@@ -136,40 +136,40 @@ object KotlinMapBinderSpec : Spek({
                                     Types.javaxProviderOf(String::class.java)))),
                     // MutableSet<Map.Entry<K, Provider<V>>>
                     Key.get(KotlinTypes.mutableSetOf(mutableMapEntryOf(
-                            String::class.java,
-                            Types.providerOf(String::class.java)))),
+                        String::class.java,
+                        Types.providerOf(String::class.java)))),
                     // Set<Map.Entry<K, Provider<V>>>
                     Key.get(KotlinTypes.setOf(mapEntryOf(
-                            String::class.java,
-                            Types.providerOf(String::class.java)))),
+                        String::class.java,
+                        Types.providerOf(String::class.java)))),
                     // MutableSet<Map.Entry<K, javax.inject.Provider<V>>>
                     Key.get(KotlinTypes.mutableSetOf(mutableMapEntryOf(
-                            String::class.java,
-                            Types.javaxProviderOf(String::class.java)))),
+                        String::class.java,
+                        Types.javaxProviderOf(String::class.java)))),
                     // Set<Map.Entry<K, javax.inject.Provider<V>>>
                     Key.get(KotlinTypes.setOf(mapEntryOf(
-                            String::class.java,
-                            Types.javaxProviderOf(String::class.java)))),
+                        String::class.java,
+                        Types.javaxProviderOf(String::class.java)))),
                     // MutableCollection<Provider<Map.Entry<K, Provider<V>>>>
                     Key.get(KotlinTypes.mutableCollectionOf(Types.providerOf(
-                            mutableMapEntryOf(
-                                    String::class.java,
-                                    Types.providerOf(String::class.java))))),
+                        mutableMapEntryOf(
+                            String::class.java,
+                            Types.providerOf(String::class.java))))),
                     // Collection<Provider<Map.Entry<K, Provider<V>>>>
                     Key.get(KotlinTypes.collectionOf(Types.providerOf(
-                            mapEntryOf(
-                                    String::class.java,
-                                    Types.providerOf(String::class.java))))),
+                        mapEntryOf(
+                            String::class.java,
+                            Types.providerOf(String::class.java))))),
                     // MutableCollection<javax.inject.Provider<Map.Entry<K, Provider<V>>>>
                     Key.get(KotlinTypes.mutableCollectionOf(Types.javaxProviderOf(
-                            mutableMapEntryOf(
-                                    String::class.java,
-                                    Types.providerOf(String::class.java))))),
+                        mutableMapEntryOf(
+                            String::class.java,
+                            Types.providerOf(String::class.java))))),
                     // Collection<javax.inject.Provider<Map.Entry<K, Provider<V>>>>
                     Key.get(KotlinTypes.collectionOf(Types.javaxProviderOf(
-                            mapEntryOf(
-                                    String::class.java,
-                                    Types.providerOf(String::class.java))))),
+                        mapEntryOf(
+                            String::class.java,
+                            Types.providerOf(String::class.java))))),
                     // @Named(...) Boolean
                     Key.get(Boolean::class.java,
                             Names.named("Multibinder<java.util.Map\$Entry<java.lang.String, " +

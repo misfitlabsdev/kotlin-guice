@@ -71,10 +71,10 @@ interface KotlinMapBinder<K, V> {
             val valueType = typeLiteral<V>()
             val mapBinder = MapBinder.newMapBinder(binder, keyType, valueType)
             return newRealMapBinder(binder,
-                    mapBinder,
-                    keyType,
-                    valueType,
-                    Key.get(mapOf(keyType, valueType)))
+                mapBinder,
+                keyType,
+                valueType,
+                Key.get(mapOf(keyType, valueType)))
         }
 
         /**
@@ -87,10 +87,10 @@ interface KotlinMapBinder<K, V> {
             val valueType = typeLiteral<V>()
             val mapBinder = MapBinder.newMapBinder(binder, keyType, valueType, TAnn::class.java)
             return newRealMapBinder(binder,
-                    mapBinder,
-                    keyType,
-                    valueType,
-                    Key.get(mapOf(keyType, valueType), TAnn::class.java))
+                mapBinder,
+                keyType,
+                valueType,
+                Key.get(mapOf(keyType, valueType), TAnn::class.java))
         }
 
         internal fun <K, V> newRealMapBinder(
@@ -125,10 +125,10 @@ interface KotlinMapBinder<K, V> {
                     KotlinMapBinder::class.java,
                     Companion::class.java)
             val kotlinMapBinder = RealKotlinMapBinder(mapBinder,
-                    skippingBinder,
-                    keyType,
-                    valueType,
-                    mapKey)
+                skippingBinder,
+                keyType,
+                valueType,
+                mapKey)
             skippingBinder.install(kotlinMapBinder)
             return kotlinMapBinder
         }
@@ -227,7 +227,7 @@ internal fun <K, V> mapOfJavaxProviderOf(keyType: TypeLiteral<K>, valueType: Typ
 internal fun <K, V> mapOfSetOfProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
         TypeLiteral<Map<K, Set<Provider<V>>>> {
     return TypeLiteral.get(KotlinTypes.mapOf(keyType.type,
-            KotlinTypes.setOf(Types.providerOf(valueType.type))))
+        KotlinTypes.setOf(Types.providerOf(valueType.type))))
             as TypeLiteral<Map<K, Set<Provider<V>>>>
 }
 
@@ -235,7 +235,7 @@ internal fun <K, V> mapOfSetOfProviderOf(keyType: TypeLiteral<K>, valueType: Typ
 internal fun <K, V> mapOfSetOfJavaxProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
         TypeLiteral<Map<K, Set<javax.inject.Provider<V>>>> {
     return TypeLiteral.get(KotlinTypes.mapOf(keyType.type,
-            KotlinTypes.setOf(Types.javaxProviderOf(valueType.type))))
+        KotlinTypes.setOf(Types.javaxProviderOf(valueType.type))))
             as TypeLiteral<Map<K, Set<javax.inject.Provider<V>>>>
 }
 
@@ -243,7 +243,7 @@ internal fun <K, V> mapOfSetOfJavaxProviderOf(keyType: TypeLiteral<K>, valueType
 internal fun <K, V> mapOfCollectionOfProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
         TypeLiteral<Map<K, Collection<Provider<V>>>> {
     return TypeLiteral.get(KotlinTypes.mapOf(keyType.type,
-            KotlinTypes.collectionOf(Types.providerOf(valueType.type))))
+        KotlinTypes.collectionOf(Types.providerOf(valueType.type))))
             as TypeLiteral<Map<K, Collection<Provider<V>>>>
 }
 
@@ -253,7 +253,7 @@ internal fun <K, V> mapOfCollectionOfJavaxProviderOf(
     valueType: TypeLiteral<V>
 ): TypeLiteral<Map<K, Collection<javax.inject.Provider<V>>>> {
     return TypeLiteral.get(KotlinTypes.mapOf(keyType.type,
-            KotlinTypes.collectionOf(Types.javaxProviderOf(valueType.type))))
+        KotlinTypes.collectionOf(Types.javaxProviderOf(valueType.type))))
             as TypeLiteral<Map<K, Collection<javax.inject.Provider<V>>>>
 }
 
@@ -293,14 +293,14 @@ internal fun <K, V> mutableMapOf(keyType: TypeLiteral<K>, valueType: TypeLiteral
 internal fun <K, V> mutableMapOfProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
         TypeLiteral<MutableMap<K, Provider<V>>> {
     return TypeLiteral.get(KotlinTypes.mutableMapOf(keyType.type,
-            Types.providerOf(valueType.type))) as TypeLiteral<MutableMap<K, Provider<V>>>
+        Types.providerOf(valueType.type))) as TypeLiteral<MutableMap<K, Provider<V>>>
 }
 
 @Suppress("UNCHECKED_CAST")
 internal fun <K, V> mutableMapOfJavaxProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
         TypeLiteral<MutableMap<K, javax.inject.Provider<V>>> {
     return TypeLiteral.get(KotlinTypes.mutableMapOf(keyType.type,
-            Types.javaxProviderOf(valueType.type)))
+        Types.javaxProviderOf(valueType.type)))
             as TypeLiteral<MutableMap<K, javax.inject.Provider<V>>>
 }
 
@@ -310,7 +310,7 @@ internal fun <K, V> mutableMapOfMutableSetOfProviderOf(
     valueType: TypeLiteral<V>
 ): TypeLiteral<MutableMap<K, MutableSet<Provider<V>>>> {
     return TypeLiteral.get(KotlinTypes.mutableMapOf(keyType.type,
-            KotlinTypes.mutableSetOf(Types.providerOf(valueType.type))))
+        KotlinTypes.mutableSetOf(Types.providerOf(valueType.type))))
             as TypeLiteral<MutableMap<K, MutableSet<Provider<V>>>>
 }
 
@@ -320,7 +320,7 @@ internal fun <K, V> mutableMapOfMutableSetOfJavaxProviderOf(
     valueType: TypeLiteral<V>
 ): TypeLiteral<MutableMap<K, MutableSet<javax.inject.Provider<V>>>> {
     return TypeLiteral.get(KotlinTypes.mutableMapOf(keyType.type,
-            KotlinTypes.mutableSetOf(Types.javaxProviderOf(valueType.type))))
+        KotlinTypes.mutableSetOf(Types.javaxProviderOf(valueType.type))))
             as TypeLiteral<MutableMap<K, MutableSet<javax.inject.Provider<V>>>>
 }
 
@@ -330,7 +330,7 @@ internal fun <K, V> mutableMapOfMutableCollectionOfProviderOf(
     valueType: TypeLiteral<V>
 ): TypeLiteral<MutableMap<K, MutableCollection<Provider<V>>>> {
     return TypeLiteral.get(KotlinTypes.mutableMapOf(keyType.type,
-            KotlinTypes.mutableCollectionOf(Types.providerOf(valueType.type))))
+        KotlinTypes.mutableCollectionOf(Types.providerOf(valueType.type))))
             as TypeLiteral<MutableMap<K, MutableCollection<Provider<V>>>>
 }
 
@@ -340,6 +340,6 @@ internal fun <K, V> mutableMapOfMutableCollectionOfJavaxProviderOf(
     valueType: TypeLiteral<V>
 ): TypeLiteral<MutableMap<K, MutableCollection<javax.inject.Provider<V>>>> {
     return TypeLiteral.get(KotlinTypes.mutableMapOf(keyType.type,
-            KotlinTypes.mutableCollectionOf(Types.javaxProviderOf(valueType.type))))
+        KotlinTypes.mutableCollectionOf(Types.javaxProviderOf(valueType.type))))
             as TypeLiteral<MutableMap<K, MutableCollection<javax.inject.Provider<V>>>>
 }

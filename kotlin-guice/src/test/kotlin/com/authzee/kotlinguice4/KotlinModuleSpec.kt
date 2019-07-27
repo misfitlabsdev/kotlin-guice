@@ -22,6 +22,7 @@ import com.authzee.kotlinguice4.binder.to
 import com.google.inject.CreationException
 import com.google.inject.Guice
 import com.google.inject.Key
+import com.google.inject.Provides
 import com.google.inject.name.Names
 import com.google.inject.spi.ElementSource
 import org.amshove.kluent.shouldBe
@@ -174,8 +175,7 @@ object KotlinModuleSpec : Spek({
                     }
                 })
 
-                val iterable = injector.getInstance(key<Iterable<A>>())
-                iterable shouldEqual null
+                injector.getInstance(key<Iterable<A>>())
             }
 
             it("binds in a scope") {
@@ -306,6 +306,23 @@ object KotlinModuleSpec : Spek({
                                 "MembersInjector<com.authzee.kotlinguice4.AImpl>"
                     }
                 })
+            }
+        }
+
+        describe("methods with @Provides annotation") {
+            it("binds from return type") {
+                val injector = Guice.createInjector(object : KotlinModule() {
+                    override fun configure() {}
+
+                    @Provides
+                    fun provideA(): A {
+                        return AImpl()
+                    }
+                })
+
+                val a = injector.getInstance(A::class.java)
+
+                a.get() shouldEqual "Impl of A"
             }
         }
     }

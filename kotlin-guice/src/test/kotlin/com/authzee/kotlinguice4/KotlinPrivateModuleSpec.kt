@@ -270,8 +270,7 @@ class KotlinPrivateModuleSpec : Spek({
                     }
                 })
 
-                val iterable = injector.getInstance(key<Iterable<A>>())
-                iterable shouldEqual null
+                injector.getInstance(key<Iterable<A>>())
             }
 
             it("binds in a scope") {

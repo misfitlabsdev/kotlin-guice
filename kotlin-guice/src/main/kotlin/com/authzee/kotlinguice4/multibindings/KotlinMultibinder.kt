@@ -83,12 +83,12 @@ interface KotlinMultibinder<T> {
          * with [TAnn].
          */
         inline fun <reified T, reified TAnn : Annotation> newAnnotatedSetBinder(binder: Binder):
-                KotlinMultibinder<T> {
+            KotlinMultibinder<T> {
             return newRealSetBinder(binder, annotatedKey<T, TAnn>())
         }
 
         @PublishedApi internal fun <T> newRealSetBinder(binder: Binder, key: Key<T>):
-                RealKotlinMultibinder<T> {
+            RealKotlinMultibinder<T> {
             val skippingBinder = binder.skipSources(RealKotlinMultibinder::class.java,
                     KotlinMultibinder::class.java,
                     Companion::class.java)
