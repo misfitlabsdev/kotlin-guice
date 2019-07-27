@@ -50,7 +50,7 @@ open class KotlinStandardInjectorBenchmark {
     @Benchmark fun getSimpleInstance() {
         val injector = Guice.createInjector(object : AbstractModule() {
             override fun configure() {
-                bind(Simple::class.java).to(dev.misfitlabs.kotlinguice4.benchmarks.SimpleImpl::class.java)
+                bind(Simple::class.java).to(SimpleImpl::class.java)
             }
         })
 
@@ -74,7 +74,7 @@ open class KotlinStandardInjectorBenchmark {
     @Benchmark fun getComplexStringInstance() {
         val injector = Guice.createInjector(object : AbstractModule() {
             override fun configure() {
-                bind(object : TypeLiteral<Complex<String>>() {}).to(dev.misfitlabs.kotlinguice4.benchmarks.StringComplexImpl::class.java)
+                bind(object : TypeLiteral<Complex<String>>() {}).to(StringComplexImpl::class.java)
             }
         })
 
