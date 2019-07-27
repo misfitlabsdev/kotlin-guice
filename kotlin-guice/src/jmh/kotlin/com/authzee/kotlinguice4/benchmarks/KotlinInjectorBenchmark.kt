@@ -20,6 +20,7 @@ package com.authzee.kotlinguice4.benchmarks
 import com.authzee.kotlinguice4.KotlinModule
 import com.authzee.kotlinguice4.getInstance
 import com.google.inject.Guice
+import java.util.concurrent.TimeUnit
 import org.openjdk.jmh.annotations.Benchmark
 import org.openjdk.jmh.annotations.BenchmarkMode
 import org.openjdk.jmh.annotations.CompilerControl
@@ -30,7 +31,6 @@ import org.openjdk.jmh.annotations.OutputTimeUnit
 import org.openjdk.jmh.annotations.Scope
 import org.openjdk.jmh.annotations.State
 import org.openjdk.jmh.annotations.Warmup
-import java.util.concurrent.TimeUnit
 
 /**
  * Benchmarks showing the performance of Guice bindings from Kotlin when using the kotlin-guice

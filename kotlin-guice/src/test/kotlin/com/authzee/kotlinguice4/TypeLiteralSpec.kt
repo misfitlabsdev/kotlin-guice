@@ -18,11 +18,11 @@
 package com.authzee.kotlinguice4
 
 import com.google.inject.TypeLiteral
+import java.util.concurrent.Callable
 import org.amshove.kluent.shouldEqual
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
-import java.util.concurrent.Callable
 
 /**
  * @author John Leacox

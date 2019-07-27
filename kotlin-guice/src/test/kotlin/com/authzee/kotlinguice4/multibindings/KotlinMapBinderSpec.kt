@@ -30,14 +30,14 @@ import com.google.inject.name.Names
 import com.google.inject.spi.ElementSource
 import com.google.inject.util.Providers
 import com.google.inject.util.Types
+import java.lang.reflect.Type
+import java.util.concurrent.Callable
 import org.amshove.kluent.shouldBeEmpty
 import org.amshove.kluent.shouldEqual
 import org.amshove.kluent.shouldThrow
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
-import java.lang.reflect.Type
-import java.util.concurrent.Callable
 
 /**
  * @author John Leacox

@@ -22,6 +22,9 @@ import com.authzee.kotlinguice4.binder.to
 import com.google.inject.CreationException
 import com.google.inject.Guice
 import com.google.inject.spi.ElementSource
+import java.util.concurrent.Callable
+import javax.inject.Inject
+import javax.inject.Singleton
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldEqual
@@ -30,9 +33,6 @@ import org.amshove.kluent.shouldThrow
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
-import java.util.concurrent.Callable
-import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * @author Brian van de Boogaard.
