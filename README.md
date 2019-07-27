@@ -91,23 +91,7 @@ val listType = typeLiteral<PaymentService<CreditCrd>>()
 
 ### Multibindings
 
-#### Download
-
-Download the latest JAR via Maven:
-
-```xml
-<dependency>
-  <groupId>com.authzee.kotlinguice4</groupId>
-  <artifactId>kotlin-guice-multibindings</artifactId>
-  <version>1.2.0</version>
-</dependency>
-```
-
-or Gradle:
-
-```gradle
-compile 'com.authzee.kotlinguice4:kotlin-guice-multibindings:1.3.0'
-```
+As of version 1.4.0 the kotlin-guice-multibindings module is gone and the functionality has been merged into kotlin-guice.
 
 #### Usage
 
@@ -117,6 +101,12 @@ multibinder.addBinding().to<Twix>()
 
 val mapbinder = KotlinMapBinder.newMapBinder<String, Snack>(kotlinBinder)
 mapbinder.addBinding("twix").to<Twix>()
+```
+
+With Guice 4.2+, scanning for methods with the multibinding annotations `ProvidesIntoSet`, `ProvidesIntoMap`, and `ProvidesIntoOptional` is enabled by default. However, the default scanner only provides bindings for Java collection types. In order to get bindings for Kotlin collection types, install the `KotlinMultibindingsScanner`.
+
+```kotlin
+install(KotlinMultibindingsScanner.asModule())
 ```
 
 ## License

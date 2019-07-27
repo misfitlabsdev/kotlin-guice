@@ -25,12 +25,12 @@ import com.google.inject.multibindings.ProvidesIntoSet
 import com.google.inject.name.Names
 import com.google.inject.spi.ElementSource
 import com.google.inject.util.Providers
+import java.util.concurrent.Callable
 import org.amshove.kluent.shouldEqual
 import org.amshove.kluent.shouldThrow
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
-import java.util.concurrent.Callable
 
 /**
  * @author John Leacox

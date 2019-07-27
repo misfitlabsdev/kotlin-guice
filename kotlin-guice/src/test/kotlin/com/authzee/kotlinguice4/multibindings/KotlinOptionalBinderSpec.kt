@@ -25,13 +25,13 @@ import com.google.inject.TypeLiteral
 import com.google.inject.multibindings.ProvidesIntoOptional
 import com.google.inject.multibindings.ProvidesIntoOptional.Type
 import com.google.inject.spi.ElementSource
+import java.util.Optional
+import java.util.concurrent.Callable
 import org.amshove.kluent.shouldEqual
 import org.amshove.kluent.shouldThrow
 import org.jetbrains.spek.api.Spek
 import org.jetbrains.spek.api.dsl.describe
 import org.jetbrains.spek.api.dsl.it
-import java.util.Optional
-import java.util.concurrent.Callable
 
 /**
  * @author John Leacox

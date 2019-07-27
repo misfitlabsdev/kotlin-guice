@@ -3,7 +3,6 @@ dependencies {
   compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
   compile "org.jetbrains.kotlin:kotlin-reflect"
 
-  testCompile "com.google.inject.extensions:guice-multibindings"
   testCompile 'org.amshove.kluent:kluent'
   testCompile 'org.jetbrains.spek:spek-api'
   testCompile 'org.jetbrains.spek:spek-junit-platform-engine'

@@ -21,6 +21,7 @@ import com.google.inject.AbstractModule
 import com.google.inject.Guice
 import com.google.inject.Key
 import com.google.inject.TypeLiteral
+import java.util.concurrent.TimeUnit
 import org.openjdk.jmh.annotations.Benchmark
 import org.openjdk.jmh.annotations.BenchmarkMode
 import org.openjdk.jmh.annotations.CompilerControl
@@ -31,7 +32,6 @@ import org.openjdk.jmh.annotations.OutputTimeUnit
 import org.openjdk.jmh.annotations.Scope
 import org.openjdk.jmh.annotations.State
 import org.openjdk.jmh.annotations.Warmup
-import java.util.concurrent.TimeUnit
 
 /**
  * Benchmarks showing the performance of Guice bindings from Kotlin without using the kotlin-guice
