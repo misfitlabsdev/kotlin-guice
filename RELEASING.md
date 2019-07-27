@@ -20,8 +20,8 @@ Prerequisites
 
 In `~/.gradle/gradle.properties`, set the following:
 
- * `SONATYPE_NEXUS_USERNAME` - Sonatype username for releasing to `com.authzee`.
- * `SONATYPE_NEXUS_PASSWORD` - Sonatype password for releasing to `com.authzee`.
+ * `SONATYPE_NEXUS_USERNAME` - Sonatype username for releasing to `dev.misfitlabs`.
+ * `SONATYPE_NEXUS_PASSWORD` - Sonatype password for releasing to `dev.misfitlabs`.
  * `signing.keyId` - GPG Key ID to use for signing.
  * `signing.password` - GPG Key password.
  * `signing.secretKeyRingFile` = GPG secret key file.

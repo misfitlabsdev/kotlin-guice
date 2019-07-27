@@ -7,6 +7,7 @@ Change Log
 * Upgrade to Guice 4.2.2.
 * Move multibinding files into the main kotlin-guice module.
 * Switch to Keep a Changelog style for Changelog moving forward - https://keepachangelog.com/en/1.0.0/
+* Rename groupId and packages to `dev.misfitlabs`.
 
 ### Removed
 * Remove kotlin-guice-multibindings module to match the removal of guice-multibindings in Guice 4.2.
@@ -36,4 +37,4 @@ _2017-09-05_
 
 * Initial release.
 
-[Unreleased]: https://github.com/authzee/kotlin-guice/compare/1.3.0...HEAD
+[Unreleased]: https://github.com/misfitlabsdev/kotlin-guice/compare/1.3.0...HEAD
