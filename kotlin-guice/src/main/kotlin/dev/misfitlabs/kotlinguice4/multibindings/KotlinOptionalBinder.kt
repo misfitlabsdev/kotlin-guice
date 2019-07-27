@@ -92,7 +92,7 @@ internal class RealKotlinOptionalBinder<T>(
     private val optionalKey: Key<T>
 ) : KotlinOptionalBinder<T> {
     private val elementType = optionalKey.typeLiteral
-    private val name = dev.misfitlabs.kotlinguice4.multibindings.RealElement.nameOf(optionalKey)
+    private val name = RealElement.nameOf(optionalKey)
 
     override fun setDefault(): KotlinLinkedBindingBuilder<T> {
         return KotlinLinkedBindingBuilderImpl<T>(delegate.setDefault())
@@ -104,21 +104,21 @@ internal class RealKotlinOptionalBinder<T>(
 
     fun getKeyForDefaultBinding(): Key<T> {
         return Key.get<T>(optionalKey.typeLiteral,
-            dev.misfitlabs.kotlinguice4.multibindings.RealElement(defaultNameOf(optionalKey), dev.misfitlabs.kotlinguice4.multibindings.Element.Type.OPTIONALBINDER, ""))
+            RealElement(defaultNameOf(optionalKey), Element.Type.OPTIONALBINDER, ""))
     }
 
     fun getKeyForActualBinding(): Key<T> {
         return Key.get<T>(optionalKey.typeLiteral,
-            dev.misfitlabs.kotlinguice4.multibindings.RealElement(actualNameOf(optionalKey), dev.misfitlabs.kotlinguice4.multibindings.Element.Type.OPTIONALBINDER, ""))
+            RealElement(actualNameOf(optionalKey), Element.Type.OPTIONALBINDER, ""))
     }
 
     private fun defaultNameOf(key: Key<*>): String {
-        val value = dev.misfitlabs.kotlinguice4.multibindings.RealElement.nameOf(key)
+        val value = RealElement.nameOf(key)
         return "@Default" + if (value.isEmpty()) "" else "(value=$value)"
     }
 
     private fun actualNameOf(key: Key<*>): String {
-        val value = dev.misfitlabs.kotlinguice4.multibindings.RealElement.nameOf(key)
+        val value = RealElement.nameOf(key)
         return "@Actual" + if (value.isEmpty()) "" else "(value=$value)"
     }
 

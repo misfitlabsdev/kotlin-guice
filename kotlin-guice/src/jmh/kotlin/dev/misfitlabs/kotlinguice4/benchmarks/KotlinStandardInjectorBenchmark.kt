@@ -50,35 +50,35 @@ open class KotlinStandardInjectorBenchmark {
     @Benchmark fun getSimpleInstance() {
         val injector = Guice.createInjector(object : AbstractModule() {
             override fun configure() {
-                bind(dev.misfitlabs.kotlinguice4.benchmarks.Simple::class.java).to(dev.misfitlabs.kotlinguice4.benchmarks.SimpleImpl::class.java)
+                bind(Simple::class.java).to(dev.misfitlabs.kotlinguice4.benchmarks.SimpleImpl::class.java)
             }
         })
 
-        val instance = injector.getInstance(dev.misfitlabs.kotlinguice4.benchmarks.Simple::class.java)
+        val instance = injector.getInstance(Simple::class.java)
         instance.value()
     }
 
     @Benchmark fun getComplexIterableInstance() {
         val injector = Guice.createInjector(object : AbstractModule() {
             override fun configure() {
-                bind(object : TypeLiteral<dev.misfitlabs.kotlinguice4.benchmarks.Complex<Iterable<String>>>() {})
-                        .to(object : TypeLiteral<dev.misfitlabs.kotlinguice4.benchmarks.ComplexImpl<Iterable<String>>>() {})
+                bind(object : TypeLiteral<Complex<Iterable<String>>>() {})
+                        .to(object : TypeLiteral<ComplexImpl<Iterable<String>>>() {})
             }
         })
 
         val instance = injector
-                .getInstance(Key.get(object : TypeLiteral<dev.misfitlabs.kotlinguice4.benchmarks.Complex<Iterable<String>>>() {}))
+                .getInstance(Key.get(object : TypeLiteral<Complex<Iterable<String>>>() {}))
         instance.value()
     }
 
     @Benchmark fun getComplexStringInstance() {
         val injector = Guice.createInjector(object : AbstractModule() {
             override fun configure() {
-                bind(object : TypeLiteral<dev.misfitlabs.kotlinguice4.benchmarks.Complex<String>>() {}).to(dev.misfitlabs.kotlinguice4.benchmarks.StringComplexImpl::class.java)
+                bind(object : TypeLiteral<Complex<String>>() {}).to(dev.misfitlabs.kotlinguice4.benchmarks.StringComplexImpl::class.java)
             }
         })
 
-        val instance = injector.getInstance(Key.get(object : TypeLiteral<dev.misfitlabs.kotlinguice4.benchmarks.Complex<String>>() {}))
+        val instance = injector.getInstance(Key.get(object : TypeLiteral<Complex<String>>() {}))
         instance.value()
     }
 }

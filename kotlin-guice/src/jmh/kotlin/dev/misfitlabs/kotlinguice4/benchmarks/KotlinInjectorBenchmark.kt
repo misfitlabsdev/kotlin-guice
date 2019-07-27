@@ -49,33 +49,33 @@ open class KotlinInjectorBenchmark {
     @Benchmark fun getSimpleInstance() {
         val injector = Guice.createInjector(object : KotlinModule() {
             override fun configure() {
-                bind<dev.misfitlabs.kotlinguice4.benchmarks.Simple>().to<dev.misfitlabs.kotlinguice4.benchmarks.SimpleImpl>()
+                bind<Simple>().to<SimpleImpl>()
             }
         })
 
-        val instance = injector.getInstance<dev.misfitlabs.kotlinguice4.benchmarks.Simple>()
+        val instance = injector.getInstance<Simple>()
         instance.value()
     }
 
     @Benchmark fun getComplexIterableInstance() {
         val injector = Guice.createInjector(object : KotlinModule() {
             override fun configure() {
-                bind<dev.misfitlabs.kotlinguice4.benchmarks.Complex<Iterable<String>>>().to<dev.misfitlabs.kotlinguice4.benchmarks.ComplexImpl<Iterable<String>>>()
+                bind<Complex<Iterable<String>>>().to<ComplexImpl<Iterable<String>>>()
             }
         })
 
-        val instance = injector.getInstance<dev.misfitlabs.kotlinguice4.benchmarks.Complex<Iterable<String>>>()
+        val instance = injector.getInstance<Complex<Iterable<String>>>()
         instance.value()
     }
 
     @Benchmark fun getComplexStringInstance() {
         val injector = Guice.createInjector(object : KotlinModule() {
             override fun configure() {
-                bind<dev.misfitlabs.kotlinguice4.benchmarks.Complex<String>>().to<dev.misfitlabs.kotlinguice4.benchmarks.StringComplexImpl>()
+                bind<Complex<String>>().to<StringComplexImpl>()
             }
         })
 
-        val instance = injector.getInstance<dev.misfitlabs.kotlinguice4.benchmarks.Complex<String>>()
+        val instance = injector.getInstance<Complex<String>>()
         instance.value()
     }
 }

@@ -112,7 +112,7 @@ internal class RealKotlinMultibinder<T>(private val delegate: Multibinder<T>, ke
             .ofType(mutableCollectionOfProvidersOf(elementType))
     private val mutableCollectionOfJavaxProvidersKey = setKey
             .ofType(mutableCollectionOfJavaxProvidersOf(elementType))
-    private val setName = dev.misfitlabs.kotlinguice4.multibindings.RealElement.nameOf(key)
+    private val setName = RealElement.nameOf(key)
 
     private fun setKeyFor(key: Key<T>): Key<Set<T>> {
         return if (key.annotation == null && key.annotationType == null) {
@@ -140,7 +140,7 @@ internal class RealKotlinMultibinder<T>(private val delegate: Multibinder<T>, ke
     }
 
     fun getKeyForNewItem(): Key<T> {
-        return Key.get<T>(elementType, dev.misfitlabs.kotlinguice4.multibindings.RealElement(setName, MULTIBINDER, ""))
+        return Key.get<T>(elementType, RealElement(setName, MULTIBINDER, ""))
     }
 
     // Prevents the module from being installed multiple times.

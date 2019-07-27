@@ -143,7 +143,7 @@ internal class RealKotlinMapBinder<K, V>(
     mapKey: Key<Map<K, V>>
 ) : KotlinMapBinder<K, V>, KotlinModule() {
     private val bindingSelection = MapBindingSelection(keyType, valueType, mapKey)
-    private val setName = dev.misfitlabs.kotlinguice4.multibindings.RealElement.nameOf(mapKey)
+    private val setName = RealElement.nameOf(mapKey)
 
     override fun configure() {
         bind(bindingSelection.mapKey).to(bindingSelection.mutableMapKey)
@@ -173,7 +173,7 @@ internal class RealKotlinMapBinder<K, V>(
 
     @Suppress("UNUSED_PARAMETER")
     fun getKeyForNewValue(key: K): Key<V> {
-        return Key.get<V>(valueType, dev.misfitlabs.kotlinguice4.multibindings.RealElement(setName, MAPBINDER, keyType.toString()))
+        return Key.get<V>(valueType, RealElement(setName, MAPBINDER, keyType.toString()))
     }
 
     // Prevents the module from being installed multiple times.

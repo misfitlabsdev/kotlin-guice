@@ -87,7 +87,7 @@ private class KotlinMultibindingsMethodScanner : ModuleAnnotatedMethodScanner() 
                 if (mapKeyAnnotation == null) {
                     return key
                 }
-                val typeAndValue: TypeAndValue<Any?> = dev.misfitlabs.kotlinguice4.multibindings.MapKeys
+                val typeAndValue: TypeAndValue<Any?> = MapKeys
                     .typeAndValueOfMapKey(mapKeyAnnotation)
                 val keyType = typeAndValue.type
                 return KotlinMapBinder.newRealMapBinder(binder, keyType, key)
