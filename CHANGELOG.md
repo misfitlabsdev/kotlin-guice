@@ -6,6 +6,7 @@ Change Log
 ### Changed
 * Upgrade to Guice 4.2.2.
 * Move multibinding files into the main kotlin-guice module.
+* Switch to Keep a Changelog style for Changelog moving forward - https://keepachangelog.com/en/1.0.0/
 
 ### Removed
 * Remove kotlin-guice-multibindings module to match the removal of guice-multibindings in Guice 4.2.
