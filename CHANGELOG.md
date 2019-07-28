@@ -8,6 +8,7 @@ Change Log
 * Move multibinding files into the main kotlin-guice module.
 * Switch to Keep a Changelog style for Changelog moving forward - https://keepachangelog.com/en/1.0.0/
 * Rename groupId and packages to `dev.misfitlabs`.
+* Upgrade tests from Spek to Spek2.
 
 ### Removed
 * Remove kotlin-guice-multibindings module to match the removal of guice-multibindings in Guice 4.2.

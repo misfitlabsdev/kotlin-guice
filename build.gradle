@@ -56,7 +56,7 @@ subprojects {
   junitPlatform {
     filters {
       engines {
-        include 'spek'
+        include 'spek2'
       }
     }
   }
@@ -87,8 +87,8 @@ subprojects {
 
       // Test Dependencies
       dependency 'org.amshove.kluent:kluent:1.53'
-      dependency 'org.jetbrains.spek:spek-api:1.2.1'
-      dependency 'org.jetbrains.spek:spek-junit-platform-engine:1.2.1'
+      dependency 'org.spekframework.spek2:spek-dsl-jvm:2.0.6'
+      dependency 'org.spekframework.spek2:spek-runner-junit5:2.0.6'
       dependency 'org.junit.platform:junit-platform-runner:1.5.1'
     }
   }

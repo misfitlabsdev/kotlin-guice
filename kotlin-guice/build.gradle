@@ -4,8 +4,8 @@ dependencies {
   compile "org.jetbrains.kotlin:kotlin-reflect"
 
   testCompile 'org.amshove.kluent:kluent'
-  testCompile 'org.jetbrains.spek:spek-api'
-  testCompile 'org.jetbrains.spek:spek-junit-platform-engine'
+  testCompile 'org.spekframework.spek2:spek-dsl-jvm'
+  testCompile 'org.spekframework.spek2:spek-runner-junit5'
   testCompile 'org.junit.platform:junit-platform-runner'
 }
 
