@@ -1,6 +1,8 @@
 Change Log
 ==========
 
+## [Unreleased] - _In Development_
+
 ## [1.4.0] - _2019-07-27_
 
 ### Changed
@@ -38,4 +40,5 @@ _2017-09-05_
 
 * Initial release.
 
+[Unreleased]: https://github.com/misfitlabsdev/kotlin-guice/compare/1.4.0...HEAD
 [1.4.0]: https://github.com/misfitlabsdev/kotlin-guice/compare/1.3.0...1.4.0
