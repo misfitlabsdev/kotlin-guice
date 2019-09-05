@@ -57,17 +57,16 @@ import dev.misfitlabs.kotlinguice4.internal.KotlinBindingBuilder
  * @since 1.0
  */
 abstract class KotlinModule : AbstractModule() {
-    /** Gets direct access to the underlying [KotlinBinder]. */
-    protected val kotlinBinder: KotlinBinder by lazy {
-        KotlinBinder(binder().skipSources(
-            KotlinAnnotatedBindingBuilder::class.java,
+    private val classesToSkip = arrayOf(KotlinAnnotatedBindingBuilder::class.java,
             KotlinAnnotatedElementBuilder::class.java,
             KotlinBinder::class.java,
             KotlinBindingBuilder::class.java,
             KotlinLinkedBindingBuilder::class.java,
-            KotlinScopedBindingBuilder::class.java
-        ))
-    }
+            KotlinScopedBindingBuilder::class.java)
+
+    /** Gets direct access to the underlying [KotlinBinder]. */
+    protected val kotlinBinder: KotlinBinder
+        get() = KotlinBinder(binder().skipSources(*classesToSkip))
 
     /** @see KotlinBinder.bindScope */
     protected inline fun <reified TAnn : Annotation> bindScope(scope: Scope) {
