@@ -18,6 +18,7 @@
 package dev.misfitlabs.kotlinguice4
 
 import com.google.inject.AbstractModule
+import com.google.inject.Binder
 import com.google.inject.MembersInjector
 import com.google.inject.Provider
 import com.google.inject.Scope
@@ -26,6 +27,7 @@ import dev.misfitlabs.kotlinguice4.binder.KotlinAnnotatedElementBuilder
 import dev.misfitlabs.kotlinguice4.binder.KotlinLinkedBindingBuilder
 import dev.misfitlabs.kotlinguice4.binder.KotlinScopedBindingBuilder
 import dev.misfitlabs.kotlinguice4.internal.KotlinBindingBuilder
+import kotlin.reflect.KProperty
 
 /**
  * An extension of [AbstractModule] that enhances the binding DSL to allow binding using reified
@@ -57,16 +59,32 @@ import dev.misfitlabs.kotlinguice4.internal.KotlinBindingBuilder
  * @since 1.0
  */
 abstract class KotlinModule : AbstractModule() {
-    private val classesToSkip = arrayOf(KotlinAnnotatedBindingBuilder::class.java,
-            KotlinAnnotatedElementBuilder::class.java,
-            KotlinBinder::class.java,
-            KotlinBindingBuilder::class.java,
-            KotlinLinkedBindingBuilder::class.java,
-            KotlinScopedBindingBuilder::class.java)
+    private class KotlinLazyBinder(private val binderSource: Provider<Binder>) {
+        private val classesToSkip = arrayOf(
+                KotlinAnnotatedBindingBuilder::class.java,
+                KotlinAnnotatedElementBuilder::class.java,
+                KotlinBinder::class.java,
+                KotlinBindingBuilder::class.java,
+                KotlinLinkedBindingBuilder::class.java,
+                KotlinScopedBindingBuilder::class.java
+        )
+
+        var lazyBinder = lazyInit()
+        var currentBinder: Binder? = null
+
+        operator fun getValue(thisRef: Any?, property: KProperty<*>): KotlinBinder {
+            if (currentBinder != binderSource.get()) {
+                currentBinder = binderSource.get()
+                lazyBinder = lazyInit()
+            }
+            return lazyBinder.value
+        }
+
+        private fun lazyInit() = lazy { KotlinBinder(binderSource.get().skipSources(*classesToSkip)) }
+    }
 
     /** Gets direct access to the underlying [KotlinBinder]. */
-    protected val kotlinBinder: KotlinBinder
-        get() = KotlinBinder(binder().skipSources(*classesToSkip))
+    protected val kotlinBinder: KotlinBinder by KotlinLazyBinder(Provider { this.binder() })
 
     /** @see KotlinBinder.bindScope */
     protected inline fun <reified TAnn : Annotation> bindScope(scope: Scope) {
