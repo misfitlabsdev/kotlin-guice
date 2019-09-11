@@ -59,7 +59,7 @@ import kotlin.reflect.KProperty
  * @since 1.0
  */
 abstract class KotlinModule : AbstractModule() {
-    private class KotlinLazyBinder(private val binderSource: Provider<Binder>) {
+    private class KotlinLazyBinder(private val delegateBinder: () -> Binder) {
         private val classesToSkip = arrayOf(
                 KotlinAnnotatedBindingBuilder::class.java,
                 KotlinAnnotatedElementBuilder::class.java,
@@ -73,18 +73,18 @@ abstract class KotlinModule : AbstractModule() {
         var currentBinder: Binder? = null
 
         operator fun getValue(thisRef: Any?, property: KProperty<*>): KotlinBinder {
-            if (currentBinder != binderSource.get()) {
-                currentBinder = binderSource.get()
+            if (currentBinder != delegateBinder()) {
+                currentBinder = delegateBinder()
                 lazyBinder = lazyInit()
             }
             return lazyBinder.value
         }
 
-        private fun lazyInit() = lazy { KotlinBinder(binderSource.get().skipSources(*classesToSkip)) }
+        private fun lazyInit() = lazy { KotlinBinder(delegateBinder().skipSources(*classesToSkip)) }
     }
 
     /** Gets direct access to the underlying [KotlinBinder]. */
-    protected val kotlinBinder: KotlinBinder by KotlinLazyBinder(Provider { this.binder() })
+    protected val kotlinBinder: KotlinBinder by KotlinLazyBinder { this.binder() }
 
     /** @see KotlinBinder.bindScope */
     protected inline fun <reified TAnn : Annotation> bindScope(scope: Scope) {
