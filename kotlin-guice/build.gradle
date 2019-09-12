@@ -3,6 +3,7 @@ dependencies {
   compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
   compile "org.jetbrains.kotlin:kotlin-reflect"
 
+  testCompile 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0'
   testCompile 'org.amshove.kluent:kluent'
   testCompile 'org.spekframework.spek2:spek-dsl-jvm'
   testCompile 'org.spekframework.spek2:spek-runner-junit5'
