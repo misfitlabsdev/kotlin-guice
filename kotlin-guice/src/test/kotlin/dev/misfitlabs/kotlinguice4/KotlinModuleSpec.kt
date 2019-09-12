@@ -24,7 +24,9 @@ import com.google.inject.Key
 import com.google.inject.Provides
 import com.google.inject.name.Names
 import com.google.inject.spi.ElementSource
-import com.google.inject.spi.Elements
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
 import dev.misfitlabs.kotlinguice4.binder.annotatedWith
 import dev.misfitlabs.kotlinguice4.binder.to
 import java.util.concurrent.Callable
@@ -328,28 +330,19 @@ object KotlinModuleSpec : Spek({
             }
         }
 
-        describe("kotlin binder caching") {
-            it("should cache kotlin binder after first configure call") {
-                val binder = givenBinder()
+        it("should cache kotlin binder") {
+            val testModule = object : KotlinModule() {
+                override fun configure() {
+                    val cachedBinder = kotlinBinder
 
-                var cachedBinder: Binder? = null
-                val testModule = object : KotlinModule() {
-                    override fun configure() {
-                        cachedBinder = kotlinBinder
-                    }
+                    kotlinBinder shouldBe cachedBinder
                 }
-
-                testModule.configure(binder)
-                val firstKotlinBinder = cachedBinder
-                testModule.configure(binder)
-                val secondKotlinBinder = cachedBinder
-
-                firstKotlinBinder.shouldNotBeNull() shouldBe (secondKotlinBinder)
             }
+
+            testModule.configure(newMockBinder())
         }
 
-        it("should invalidate cached kotlin binder") {
-
+        it("should invalidate cached kotlin binder when #configure is called") {
             var cachedBinder: Binder? = null
             val testModule = object : KotlinModule() {
                 override fun configure() {
@@ -357,9 +350,10 @@ object KotlinModuleSpec : Spek({
                 }
             }
 
-            testModule.configure(givenBinder())
+            testModule.configure(newMockBinder())
             val firstKotlinBinder = cachedBinder
-            testModule.configure(givenBinder())
+
+            testModule.configure(newMockBinder())
             val secondKotlinBinder = cachedBinder
 
             firstKotlinBinder.shouldNotBeNull() shouldNotBe (secondKotlinBinder)
@@ -367,13 +361,8 @@ object KotlinModuleSpec : Spek({
     }
 })
 
-//the only legal way to get binder instance thanks to private static class RecordingBinder
-private fun givenBinder(): Binder {
-    var binder: Binder? = null
-    Elements.getElements(object : KotlinModule() {
-        override fun configure() {
-            binder = binder()
-        }
-    })
-    return binder!!
+private fun newMockBinder(): Binder {
+    return mock {
+        on { skipSources(any()) } doReturn it
+    }
 }
