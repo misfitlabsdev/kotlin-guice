@@ -330,19 +330,22 @@ object KotlinModuleSpec : Spek({
             }
         }
 
-        it("should cache kotlin binder") {
+        it("caches kotlin binder") {
+            var firstKotlinBinder: KotlinBinder? = null
+            var secondKotlinBinder: KotlinBinder? = null
             val testModule = object : KotlinModule() {
                 override fun configure() {
-                    val cachedBinder = kotlinBinder
-
-                    kotlinBinder shouldBe cachedBinder
+                    firstKotlinBinder = kotlinBinder
+                    secondKotlinBinder = kotlinBinder
                 }
             }
 
             testModule.configure(newMockBinder())
+
+            firstKotlinBinder shouldBe secondKotlinBinder
         }
 
-        it("should invalidate cached kotlin binder when #configure is called") {
+        it("invalidates cached kotlin binder when #configure is called with a new binder") {
             var cachedBinder: Binder? = null
             val testModule = object : KotlinModule() {
                 override fun configure() {
@@ -357,6 +360,25 @@ object KotlinModuleSpec : Spek({
             val secondKotlinBinder = cachedBinder
 
             firstKotlinBinder.shouldNotBeNull() shouldNotBe (secondKotlinBinder)
+        }
+
+        it("does not invalidate cached kotlin binder when #configure is called with the same binder") {
+            var cachedBinder: Binder? = null
+            val testModule = object : KotlinModule() {
+                override fun configure() {
+                    cachedBinder = kotlinBinder
+                }
+            }
+
+            val mockBinder = newMockBinder()
+
+            testModule.configure(mockBinder)
+            val firstKotlinBinder = cachedBinder
+
+            testModule.configure(mockBinder)
+            val secondKotlinBinder = cachedBinder
+
+            firstKotlinBinder.shouldNotBeNull() shouldBe secondKotlinBinder
         }
     }
 })
