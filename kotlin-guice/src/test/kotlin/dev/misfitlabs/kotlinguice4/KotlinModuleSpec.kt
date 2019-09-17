@@ -17,12 +17,14 @@
 
 package dev.misfitlabs.kotlinguice4
 
+import com.google.inject.Binder
 import com.google.inject.CreationException
 import com.google.inject.Guice
 import com.google.inject.Key
 import com.google.inject.Provides
 import com.google.inject.name.Names
 import com.google.inject.spi.ElementSource
+import com.google.inject.spi.Elements
 import dev.misfitlabs.kotlinguice4.binder.annotatedWith
 import dev.misfitlabs.kotlinguice4.binder.to
 import java.util.concurrent.Callable
@@ -33,6 +35,7 @@ import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldContain
 import org.amshove.kluent.shouldEqual
 import org.amshove.kluent.shouldNotBe
+import org.amshove.kluent.shouldNotBeNull
 import org.amshove.kluent.shouldThrow
 import org.spekframework.spek2.Spek
 import org.spekframework.spek2.style.specification.describe
@@ -324,5 +327,53 @@ object KotlinModuleSpec : Spek({
                 a.get() shouldEqual "Impl of A"
             }
         }
+
+        describe("kotlin binder caching") {
+            it("should cache kotlin binder after first configure call") {
+                val binder = givenBinder()
+
+                var cachedBinder: Binder? = null
+                val testModule = object : KotlinModule() {
+                    override fun configure() {
+                        cachedBinder = kotlinBinder
+                    }
+                }
+
+                testModule.configure(binder)
+                val firstKotlinBinder = cachedBinder
+                testModule.configure(binder)
+                val secondKotlinBinder = cachedBinder
+
+                firstKotlinBinder.shouldNotBeNull() shouldBe (secondKotlinBinder)
+            }
+        }
+
+        it("should invalidate cached kotlin binder") {
+
+            var cachedBinder: Binder? = null
+            val testModule = object : KotlinModule() {
+                override fun configure() {
+                    cachedBinder = kotlinBinder
+                }
+            }
+
+            testModule.configure(givenBinder())
+            val firstKotlinBinder = cachedBinder
+            testModule.configure(givenBinder())
+            val secondKotlinBinder = cachedBinder
+
+            firstKotlinBinder.shouldNotBeNull() shouldNotBe (secondKotlinBinder)
+        }
     }
 })
+
+//the only legal way to get binder instance thanks to private static class RecordingBinder
+private fun givenBinder(): Binder {
+    var binder: Binder? = null
+    Elements.getElements(object : KotlinModule() {
+        override fun configure() {
+            binder = binder()
+        }
+    })
+    return binder!!
+}
