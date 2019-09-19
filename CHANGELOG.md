@@ -3,6 +3,9 @@ Change Log
 
 ## [Unreleased] - _In Development_
 
+### Fixed
+* Fix `kotlinBinder` holding a cached reference to old `Binder` instances in `KotlinModule`.
+
 ## [1.4.0] - _2019-07-27_
 
 ### Changed
