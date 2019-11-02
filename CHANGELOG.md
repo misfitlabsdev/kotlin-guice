@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## [Unreleased] - _In Development_
+## [1.4.1] - _2019-11-02_
 
 ### Fixed
 * Fix `kotlinBinder` holding a cached reference to old `Binder` instances in `KotlinModule`.
@@ -45,3 +45,4 @@ _2017-09-05_
 
 [Unreleased]: https://github.com/misfitlabsdev/kotlin-guice/compare/1.4.0...HEAD
 [1.4.0]: https://github.com/misfitlabsdev/kotlin-guice/compare/1.3.0...1.4.0
+[1.4.1]: https://github.com/misfitlabsdev/kotlin-guice/compare/1.4.0...1.4.1
