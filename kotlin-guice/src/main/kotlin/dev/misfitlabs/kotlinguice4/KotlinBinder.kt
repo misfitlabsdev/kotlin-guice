@@ -59,9 +59,14 @@ open class KotlinBinder(open val delegate: Binder) : Binder by delegate {
      *
      * @see Binder
      */
+    @ExperimentalStdlibApi
     inline fun <reified T> bind(): KotlinAnnotatedBindingBuilder<T> {
-        return KotlinBindingBuilder<T>(bind(typeLiteral<T>()))
+        return KotlinBindingBuilder<T>(bind(kotlinTypeLiteral()))
     }
+
+//    inline fun <reified T> bind(kType: KType): KotlinAnnotatedBindingBuilder<T> {
+//        return KotlinBindingBuilder<T>(bind())
+//    }
 
     /**
      * Requests static injection using a type parameter.

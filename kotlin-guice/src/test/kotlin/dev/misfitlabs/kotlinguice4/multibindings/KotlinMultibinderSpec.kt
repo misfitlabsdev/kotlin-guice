@@ -34,6 +34,7 @@ import org.spekframework.spek2.style.specification.describe
 /**
  * @author John Leacox
  */
+@ExperimentalStdlibApi
 object KotlinMultibinderSpec : Spek({
     describe("KotlinMultibinder") {
         it("skips the multibinder classes in the source trace") {

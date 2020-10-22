@@ -62,6 +62,7 @@ interface KotlinMapBinder<K, V> {
      */
     fun addBinding(key: K): KotlinLinkedBindingBuilder<V>
 
+    @ExperimentalStdlibApi
     companion object {
         /**
          * Returns a new mapbinder that collects entries of [K]/[V] in a {@link Map}.
@@ -135,6 +136,7 @@ interface KotlinMapBinder<K, V> {
     }
 }
 
+@ExperimentalStdlibApi
 internal class RealKotlinMapBinder<K, V>(
     private val delegate: MapBinder<K, V>,
     private val binder: Binder,

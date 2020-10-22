@@ -41,6 +41,7 @@ import kotlin.reflect.full.findAnnotation
  * @author John Leacox
  * @since 1.0
  */
+@ExperimentalStdlibApi
 object KotlinMultibindingsScanner {
     /**
      * Returns the scanner as a module.
@@ -57,6 +58,7 @@ object KotlinMultibindingsScanner {
     }
 }
 
+@ExperimentalStdlibApi
 private class KotlinMultibindingsMethodScanner : ModuleAnnotatedMethodScanner() {
     companion object {
         val INSTANCE: KotlinMultibindingsMethodScanner by lazy {

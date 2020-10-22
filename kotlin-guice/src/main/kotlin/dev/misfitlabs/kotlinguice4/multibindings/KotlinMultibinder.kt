@@ -62,6 +62,7 @@ interface KotlinMultibinder<T> {
      */
     fun addBinding(): KotlinLinkedBindingBuilder<T>
 
+    @ExperimentalStdlibApi
     companion object {
         /**
          * Returns a new multibinder that collects entries of [T] in a {@link Set}.
@@ -100,6 +101,7 @@ interface KotlinMultibinder<T> {
     }
 }
 
+@ExperimentalStdlibApi
 internal class RealKotlinMultibinder<T>(private val delegate: Multibinder<T>, key: Key<T>) :
     KotlinMultibinder<T>, KotlinModule() {
     private val elementType = key.typeLiteral

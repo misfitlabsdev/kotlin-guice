@@ -37,6 +37,7 @@ import org.spekframework.spek2.style.specification.describe
 /**
  * @author John Leacox
  */
+@ExperimentalStdlibApi
 object InjectorExtensionsSpec : Spek({
     beforeEachTest {
         StaticInjectionObj.reset()

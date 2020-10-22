@@ -18,6 +18,8 @@
 package dev.misfitlabs.kotlinguice4
 
 import com.google.inject.TypeLiteral
+import kotlin.reflect.jvm.javaType
+import kotlin.reflect.typeOf
 
 /**
  * Creates a new [TypeLiteral] for the specified generic type [T].
@@ -27,3 +29,12 @@ import com.google.inject.TypeLiteral
  * @since 1.0
  */
 inline fun <reified T> typeLiteral() = object : TypeLiteral<T>() {}
+
+@ExperimentalStdlibApi
+inline fun <reified T> kotlinTypeLiteral(): TypeLiteral<T> {
+    val ktype = typeOf<T>()
+    val baseType = ktype.javaType
+
+    @Suppress("UNCHECKED_CAST")
+    return TypeLiteral.get(baseType) as TypeLiteral<T>
+}

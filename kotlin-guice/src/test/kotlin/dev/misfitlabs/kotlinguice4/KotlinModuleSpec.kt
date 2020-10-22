@@ -45,6 +45,7 @@ import org.spekframework.spek2.style.specification.describe
 /**
  * @author John Leacox
  */
+@ExperimentalStdlibApi
 object KotlinModuleSpec : Spek({
     beforeEachTest {
         StaticInjectionObj.reset()

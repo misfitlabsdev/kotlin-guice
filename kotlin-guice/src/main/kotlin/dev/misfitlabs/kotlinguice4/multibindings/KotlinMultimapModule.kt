@@ -24,6 +24,7 @@ import dev.misfitlabs.kotlinguice4.KotlinModule
  * @author John Leacox
  * @since 1.0
  */
+@ExperimentalStdlibApi
 internal class KotlinMultimapModule<K, V>(private val bindingSelection: MapBindingSelection<K, V>) :
     KotlinModule() {
     override fun configure() {

@@ -41,6 +41,7 @@ import org.spekframework.spek2.style.specification.describe
 /**
  * @author John Leacox
  */
+@ExperimentalStdlibApi
 object KotlinMapBinderSpec : Spek({
     describe("KotlinMapBinder") {
         it("skips the MapBinder classes in the source trace") {

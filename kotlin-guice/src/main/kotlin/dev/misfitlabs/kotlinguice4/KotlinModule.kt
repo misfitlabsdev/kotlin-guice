@@ -58,6 +58,7 @@ import kotlin.reflect.KProperty
  * @author John Leacox
  * @since 1.0
  */
+@ExperimentalStdlibApi
 abstract class KotlinModule : AbstractModule() {
     private class KotlinLazyBinder(private val delegateBinder: () -> Binder) {
         private val classesToSkip = arrayOf(

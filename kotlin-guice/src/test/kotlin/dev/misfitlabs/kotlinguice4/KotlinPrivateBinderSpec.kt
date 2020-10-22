@@ -36,6 +36,7 @@ import org.spekframework.spek2.style.specification.describe
 /**
  * @author Brian van de Boogaard.
  */
+@ExperimentalStdlibApi
 object KotlinPrivateBinderSpec : Spek({
 
     describe("KotlinPrivateModule") {

@@ -35,6 +35,7 @@ import org.spekframework.spek2.style.specification.describe
 /**
  * @author John Leacox
  */
+@ExperimentalStdlibApi
 object KotlinOptionalBinderSpec : Spek({
     describe("KotlinOptionalBinder") {
         it("skips the optional binder classes in the source trace") {

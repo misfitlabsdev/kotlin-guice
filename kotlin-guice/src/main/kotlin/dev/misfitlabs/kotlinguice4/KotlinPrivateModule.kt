@@ -60,6 +60,7 @@ import dev.misfitlabs.kotlinguice4.internal.KotlinBindingBuilder
  * @author Brian van de Boogaard
  * @since 1.0
  */
+@ExperimentalStdlibApi
 abstract class KotlinPrivateModule : PrivateModule() {
     /** Gets direct access to the underlying [KotlinPrivateBinder]. */
     protected val kotlinBinder: KotlinPrivateBinder by lazy {

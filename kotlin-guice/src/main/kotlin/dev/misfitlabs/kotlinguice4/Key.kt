@@ -19,6 +19,9 @@ package dev.misfitlabs.kotlinguice4
 
 import com.google.inject.Key
 import java.lang.reflect.Type
+import kotlin.reflect.KClass
+import kotlin.reflect.jvm.javaType
+import kotlin.reflect.typeOf
 
 /**
  * Gets a key for an injection of type [T].
@@ -35,6 +38,27 @@ inline fun <reified T> key(): Key<T> = Key.get(typeLiteral<T>())
  * @since 1.0
  */
 inline fun <reified T, reified TAnn : Annotation> annotatedKey(): Key<T> = Key.get(typeLiteral<T>(), TAnn::class.java)
+
+@ExperimentalStdlibApi
+inline fun <reified T> kotlinTypeKey(
+    annotation: Annotation? = null,
+    annotationType: KClass<out Annotation>? = null
+): Key<T> {
+    if (annotation != null) require(annotationType == null)
+    if (annotationType != null) require(annotation == null)
+
+    val ktype = typeOf<T>()
+    val baseType = ktype.javaType
+
+    val result = when {
+        annotation != null -> Key.get(baseType, annotation)
+        annotationType != null -> Key.get(baseType, annotationType.java)
+        else -> Key.get(baseType)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    return result as Key<T>
+}
 
 /**
  * Gets a key for an injection of type [T] and the specified annotation.
