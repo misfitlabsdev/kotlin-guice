@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## [1.5.0] - _In Development_
+## [1.5.0] - _2021-05-08_
 
 ### Changed
 * Upgrade to Guice 5.0.1
@@ -51,3 +51,4 @@ _2017-09-05_
 [Unreleased]: https://github.com/misfitlabsdev/kotlin-guice/compare/1.4.0...HEAD
 [1.4.0]: https://github.com/misfitlabsdev/kotlin-guice/compare/1.3.0...1.4.0
 [1.4.1]: https://github.com/misfitlabsdev/kotlin-guice/compare/1.4.0...1.4.1
+[1.5.0]: https://gibhub.com/misfitlabsdev/kotlin-guice/compare/1.4.1...1.5.0

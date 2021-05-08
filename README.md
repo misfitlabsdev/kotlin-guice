@@ -11,14 +11,14 @@ Download the latest JAR via Maven:
 <dependency>
   <groupId>dev.misfitlabs.kotlinguice4</groupId>
   <artifactId>kotlin-guice</artifactId>
-  <version>1.4.1</version>
+  <version>1.5.0</version>
 </dependency>
 ```
 
 or Gradle:
 
 ```gradle
-compile 'dev.misfitlabs.kotlinguice4:kotlin-guice:1.4.1'
+compile 'dev.misfitlabs.kotlinguice4:kotlin-guice:1.5.0'
 ```
 
 ## Getting Started
