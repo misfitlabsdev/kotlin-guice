@@ -18,6 +18,7 @@
 package dev.misfitlabs.kotlinguice4.binder
 
 import com.google.inject.binder.AnnotatedBindingBuilder
+import kotlin.reflect.KClass
 
 /**
  * An extension of [AnnotatedBindingBuilder] that enhances the binding DSL to allow binding using
@@ -37,6 +38,12 @@ abstract class KotlinAnnotatedBindingBuilder<T>(private val self: AnnotatedBindi
     /** Binds with the annotation specified by the type parameter. */
     inline fun <reified TAnn : Annotation> annotatedWith(): KotlinLinkedBindingBuilder<T> {
         delegate.annotatedWith(TAnn::class.java)
+        return this
+    }
+
+    /** Binds with the annotation specified by the class. */
+    fun annotatedWith(annotationClass: KClass<out Annotation>): KotlinLinkedBindingBuilder<T> {
+        delegate.annotatedWith(annotationClass.java)
         return this
     }
 

@@ -119,6 +119,19 @@ object KotlinBinderSpec : Spek({
                 a.get() shouldEqual "Impl of A"
             }
 
+            it("binds with an annotation using a type argument") {
+                val injector = Guice.createInjector(object : KotlinModule() {
+                    override fun configure() {
+                        kotlinBinder.bind<A>().to<B>()
+                        kotlinBinder.bind<A>().annotatedWith(Annotated::class).to<AImpl>()
+                    }
+                })
+
+                val a = injector.getInstance(Key.get(A::class.java, Annotated::class.java))
+
+                a.get() shouldEqual "Impl of A"
+            }
+
             it("binds to a provider using a type parameter") {
                 val injector = Guice.createInjector(object : KotlinModule() {
                     override fun configure() {
