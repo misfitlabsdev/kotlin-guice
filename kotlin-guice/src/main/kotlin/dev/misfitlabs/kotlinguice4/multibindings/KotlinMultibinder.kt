@@ -107,7 +107,6 @@ internal class RealKotlinMultibinder<T>(private val delegate: Multibinder<T>, ke
     private val collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType))
     private val collectionOfJavaxProvidersKey = setKey
             .ofType(collectionOfJavaxProvidersOf(elementType))
-    private val mutableSetKey = setKey.ofType(mutableSetOf(elementType))
     private val mutableCollectionOfProvidersKey = setKey
             .ofType(mutableCollectionOfProvidersOf(elementType))
     private val mutableCollectionOfJavaxProvidersKey = setKey
@@ -125,7 +124,6 @@ internal class RealKotlinMultibinder<T>(private val delegate: Multibinder<T>, ke
     }
 
     override fun configure() {
-        bind(setKey).to(mutableSetKey)
         bind(collectionOfProvidersKey).to(mutableCollectionOfProvidersKey)
         bind(collectionOfJavaxProvidersKey).to(mutableCollectionOfJavaxProvidersKey)
     }

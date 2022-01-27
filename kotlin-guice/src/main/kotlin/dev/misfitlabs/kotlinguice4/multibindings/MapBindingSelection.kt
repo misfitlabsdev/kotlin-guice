@@ -31,8 +31,6 @@ internal class MapBindingSelection<K, V>(
     private val valueType: TypeLiteral<V>,
     val mapKey: Key<Map<K, V>>
 ) {
-    val mutableMapKey by lazy { mapKey.ofType(mutableMapOf(keyType, valueType)) }
-
     val providerMapKey by lazy {
         mapKey.ofType(mapOfProviderOf(keyType, valueType))
     }
@@ -43,13 +41,6 @@ internal class MapBindingSelection<K, V>(
     }
     val mutableJavaxProviderMapKey by lazy {
         mapKey.ofType(mutableMapOfJavaxProviderOf(keyType, valueType))
-    }
-
-    val setOfEntryOfProviderKey by lazy {
-        mapKey.ofType(setOf(entryOfProviderOf(keyType, valueType)))
-    }
-    val mutableSetOfEntryOfProviderKey by lazy {
-        mapKey.ofType(mutableSetOf(entryOfProviderOf(keyType, valueType)))
     }
 
     val setOfEntryOfJavaxProviderKey by lazy {
