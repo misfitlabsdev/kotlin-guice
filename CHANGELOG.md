@@ -3,6 +3,9 @@ Change Log
 
 ## [1.6.0] - _In Development_
 
+### Changed
+* Upgrade to Guice 5.1.0
+
 ## [1.5.0] - _2021-05-08_
 
 ### Changed
