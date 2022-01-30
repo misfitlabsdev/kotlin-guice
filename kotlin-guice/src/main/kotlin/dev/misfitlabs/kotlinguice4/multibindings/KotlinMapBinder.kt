@@ -146,12 +146,9 @@ internal class RealKotlinMapBinder<K, V>(
     private val setName = RealElement.nameOf(mapKey)
 
     override fun configure() {
-        bind(bindingSelection.mapKey).to(bindingSelection.mutableMapKey)
         bind(bindingSelection.providerMapKey).to(bindingSelection.mutableProviderMapKey)
         bind(bindingSelection.javaxProviderMapKey).to(bindingSelection.mutableJavaxProviderMapKey)
 
-        bind(bindingSelection.setOfEntryOfProviderKey)
-                .to(bindingSelection.mutableSetOfEntryOfProviderKey)
         bind(bindingSelection.setOfEntryOfJavaxProviderKey)
                 .to(bindingSelection.mutableSetOfEntryOfJavaxProviderKey)
 
