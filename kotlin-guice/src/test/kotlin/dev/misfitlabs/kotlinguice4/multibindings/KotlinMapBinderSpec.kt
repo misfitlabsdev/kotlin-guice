@@ -30,6 +30,7 @@ import com.google.inject.util.Types
 import dev.misfitlabs.kotlinguice4.KotlinModule
 import dev.misfitlabs.kotlinguice4.annotatedKey
 import dev.misfitlabs.kotlinguice4.key
+import dev.misfitlabs.kotlinguice4.typeLiteral
 import java.lang.reflect.Type
 import java.util.concurrent.Callable
 import org.amshove.kluent.shouldBeEmpty
@@ -289,6 +290,22 @@ object KotlinMapBinderSpec : Spek({
                 })
 
                 val map = injector.getInstance(annotatedKey<Map<String, A>, Annotated>())
+                map.size shouldEqual 2
+                map["AImpl"]?.get() shouldEqual "Impl of A"
+                map["B"]?.get() shouldEqual "This is B"
+            }
+
+            it("binds simple types into a named map") {
+                val named = Names.named("A Name")
+                val injector = Guice.createInjector(object : KotlinModule() {
+                    override fun configure() {
+                        val aBinder = KotlinMapBinder
+                            .newAnnotatedMapBinder<String, A>(kotlinBinder, named)
+                        aBinder.addBinding("AImpl").to<AImpl>()
+                        aBinder.addBinding("B").to<B>()
+                    }
+                })
+                val map = injector.getInstance(Key.get(typeLiteral<Map<String, A>>(), named))
                 map.size shouldEqual 2
                 map["AImpl"]?.get() shouldEqual "Impl of A"
                 map["B"]?.get() shouldEqual "This is B"

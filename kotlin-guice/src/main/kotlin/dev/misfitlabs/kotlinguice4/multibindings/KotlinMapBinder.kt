@@ -76,6 +76,20 @@ interface KotlinMapBinder<K, V> {
                 valueType,
                 Key.get(mapOf(keyType, valueType)))
         }
+        /**
+         * Returns a new mapbinder that collects entries of [K]/[V] in a {@link Map} that is bound
+         * with [annotation].
+         */
+        inline fun <reified K, reified V> newAnnotatedMapBinder(binder: Binder, annotation: Annotation): KotlinMapBinder<K,V> {
+            val keyType = typeLiteral<K>()
+            val valueType = typeLiteral<V>()
+            val mapBinder = MapBinder.newMapBinder(binder, keyType, valueType, annotation)
+            return newRealMapBinder(binder,
+                mapBinder,
+                keyType,
+                valueType,
+                Key.get(mapOf(keyType, valueType), annotation))
+        }
 
         /**
          * Returns a new mapbinder that collects entries of [K]/[V] in a {@link Map} that is bound
