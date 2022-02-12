@@ -1,6 +1,8 @@
 Change Log
 ==========
 
+## [1.7.0] - _In Development_
+
 ## [1.6.0] - _2022-02-12_
 
 ### Added
