@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## [1.6.0] - _In Development_
+## [1.6.0] - _2022-02-12_
 
 ### Added
 * Add annotation instance support for `KotlinMapBinder`.
@@ -57,6 +57,7 @@ _2017-09-05_
 * Initial release.
 
 [Unreleased]: https://github.com/misfitlabsdev/kotlin-guice/compare/1.4.0...HEAD
-[1.4.0]: https://github.com/misfitlabsdev/kotlin-guice/compare/1.3.0...1.4.0
-[1.4.1]: https://github.com/misfitlabsdev/kotlin-guice/compare/1.4.0...1.4.1
+[1.6.0]: https://gibhub.com/misfitlabsdev/kotlin-guice/compare/1.5.0...1.6.0
 [1.5.0]: https://gibhub.com/misfitlabsdev/kotlin-guice/compare/1.4.1...1.5.0
+[1.4.1]: https://github.com/misfitlabsdev/kotlin-guice/compare/1.4.0...1.4.1
+[1.4.0]: https://github.com/misfitlabsdev/kotlin-guice/compare/1.3.0...1.4.0
