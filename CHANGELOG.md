@@ -3,6 +3,9 @@ Change Log
 
 ## [1.6.0] - _In Development_
 
+### Added
+* Add annotation instance support for `KotlinMapBinder`.
+
 ### Changed
 * Upgrade to Guice 5.1.0
 
