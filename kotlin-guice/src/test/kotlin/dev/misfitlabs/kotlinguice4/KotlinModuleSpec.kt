@@ -29,9 +29,9 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import dev.misfitlabs.kotlinguice4.binder.annotatedWith
 import dev.misfitlabs.kotlinguice4.binder.to
+import jakarta.inject.Inject
+import jakarta.inject.Singleton
 import java.util.concurrent.Callable
-import javax.inject.Inject
-import javax.inject.Singleton
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldContain

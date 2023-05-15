@@ -23,8 +23,8 @@ import com.google.inject.multibindings.MapBinder
 import com.google.inject.multibindings.Multibinder
 import com.google.inject.multibindings.OptionalBinder
 import com.google.inject.spi.InstanceBinding
+import jakarta.inject.Provider
 import java.util.concurrent.Callable
-import javax.inject.Provider
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldEqual

@@ -19,7 +19,7 @@ package dev.misfitlabs.kotlinguice4.binder
 
 import com.google.inject.binder.LinkedBindingBuilder
 import dev.misfitlabs.kotlinguice4.typeLiteral
-import javax.inject.Provider
+import jakarta.inject.Provider
 
 /**
  * An extension of [LinkedBindingBuilder] that enhances the binding DSL to allow binding using reified

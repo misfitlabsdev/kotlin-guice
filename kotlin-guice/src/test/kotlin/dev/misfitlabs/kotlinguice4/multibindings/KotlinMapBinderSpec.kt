@@ -85,14 +85,14 @@ object KotlinMapBinderSpec : Spek({
                     Key.get(KotlinTypes.mapOf(
                             String::class.java,
                             Types.providerOf(String::class.java))),
-                    // MutableMap<K, javax.inject.Provider<V>>
+                    // MutableMap<K, jakarta.inject.Provider<V>>
                     Key.get(Types.mapOf(
                             String::class.java,
-                            Types.javaxProviderOf(String::class.java))),
-                    // Map<K, javax.inject.Provider<V>>
+                            Types.jakartaProviderOf(String::class.java))),
+                    // Map<K, jakarta.inject.Provider<V>>
                     Key.get(KotlinTypes.mapOf(
                             String::class.java,
-                            Types.javaxProviderOf(String::class.java))),
+                            Types.jakartaProviderOf(String::class.java))),
                     // MutableMap<K, Set<V>>
                     Key.get(Types.mapOf(String::class.java, Types.setOf(String::class.java))),
                     // Map<K, MutableSet<V>>
@@ -107,14 +107,14 @@ object KotlinMapBinderSpec : Spek({
                     Key.get(KotlinTypes.mapOf(
                             String::class.java,
                             KotlinTypes.setOf(Types.providerOf(String::class.java)))),
-                    // MutableMap<K, Set<javax.inject.Provider<V>>
+                    // MutableMap<K, Set<jakarta.inject.Provider<V>>
                     Key.get(Types.mapOf(
                             String::class.java,
-                            Types.setOf(Types.javaxProviderOf(String::class.java)))),
-                    // Map<K, MutableSet<javax.inject.Provider<V>>
+                            Types.setOf(Types.jakartaProviderOf(String::class.java)))),
+                    // Map<K, MutableSet<jakarta.inject.Provider<V>>
                     Key.get(KotlinTypes.mapOf(
                             String::class.java,
-                            KotlinTypes.setOf(Types.javaxProviderOf(String::class.java)))),
+                            KotlinTypes.setOf(Types.jakartaProviderOf(String::class.java)))),
                     // MutableMap<K, Collection<Provider<V>>
                     Key.get(KotlinTypes.mutableMapOf(
                             String::class.java,
@@ -124,16 +124,16 @@ object KotlinMapBinderSpec : Spek({
                     Key.get(KotlinTypes.mapOf(
                             String::class.java,
                             KotlinTypes.collectionOf(Types.providerOf(String::class.java)))),
-                    // MutableMap<K, Collection<javax.inject.Provider<V>>
+                    // MutableMap<K, Collection<jakarta.inject.Provider<V>>
                     Key.get(KotlinTypes.mutableMapOf(
                             String::class.java,
                             KotlinTypes.mutableCollectionOf(
-                                    Types.javaxProviderOf(String::class.java)))),
-                    // Map<K, Collection<javax.inject.Provider<V>>
+                                    Types.jakartaProviderOf(String::class.java)))),
+                    // Map<K, Collection<jakarta.inject.Provider<V>>
                     Key.get(KotlinTypes.mapOf(
                             String::class.java,
                             KotlinTypes.collectionOf(
-                                    Types.javaxProviderOf(String::class.java)))),
+                                    Types.jakartaProviderOf(String::class.java)))),
                     // MutableSet<Map.Entry<K, Provider<V>>>
                     Key.get(KotlinTypes.mutableSetOf(mutableMapEntryOf(
                         String::class.java,
@@ -142,14 +142,14 @@ object KotlinMapBinderSpec : Spek({
                     Key.get(KotlinTypes.setOf(mapEntryOf(
                         String::class.java,
                         Types.providerOf(String::class.java)))),
-                    // MutableSet<Map.Entry<K, javax.inject.Provider<V>>>
+                    // MutableSet<Map.Entry<K, jakarta.inject.Provider<V>>>
                     Key.get(KotlinTypes.mutableSetOf(mutableMapEntryOf(
                         String::class.java,
-                        Types.javaxProviderOf(String::class.java)))),
-                    // Set<Map.Entry<K, javax.inject.Provider<V>>>
+                        Types.jakartaProviderOf(String::class.java)))),
+                    // Set<Map.Entry<K, jakarta.inject.Provider<V>>>
                     Key.get(KotlinTypes.setOf(mapEntryOf(
                         String::class.java,
-                        Types.javaxProviderOf(String::class.java)))),
+                        Types.jakartaProviderOf(String::class.java)))),
                     // MutableCollection<Provider<Map.Entry<K, Provider<V>>>>
                     Key.get(KotlinTypes.mutableCollectionOf(Types.providerOf(
                         mutableMapEntryOf(
@@ -160,13 +160,13 @@ object KotlinMapBinderSpec : Spek({
                         mapEntryOf(
                             String::class.java,
                             Types.providerOf(String::class.java))))),
-                    // MutableCollection<javax.inject.Provider<Map.Entry<K, Provider<V>>>>
-                    Key.get(KotlinTypes.mutableCollectionOf(Types.javaxProviderOf(
+                    // MutableCollection<jakarta.inject.Provider<Map.Entry<K, Provider<V>>>>
+                    Key.get(KotlinTypes.mutableCollectionOf(Types.jakartaProviderOf(
                         mutableMapEntryOf(
                             String::class.java,
                             Types.providerOf(String::class.java))))),
-                    // Collection<javax.inject.Provider<Map.Entry<K, Provider<V>>>>
-                    Key.get(KotlinTypes.collectionOf(Types.javaxProviderOf(
+                    // Collection<jakarta.inject.Provider<Map.Entry<K, Provider<V>>>>
+                    Key.get(KotlinTypes.collectionOf(Types.jakartaProviderOf(
                         mapEntryOf(
                             String::class.java,
                             Types.providerOf(String::class.java))))),
