@@ -189,9 +189,9 @@ internal fun <T> collectionOfProvidersOf(elementType: TypeLiteral<T>):
 
 @Suppress("UNCHECKED_CAST")
 internal fun <T> collectionOfJavaxProvidersOf(elementType: TypeLiteral<T>):
-        TypeLiteral<Collection<javax.inject.Provider<T>>> {
-    return TypeLiteral.get(KotlinTypes.collectionOf(Types.javaxProviderOf(elementType.type)))
-            as TypeLiteral<Collection<javax.inject.Provider<T>>>
+        TypeLiteral<Collection<jakarta.inject.Provider<T>>> {
+    return TypeLiteral.get(KotlinTypes.collectionOf(Types.jakartaProviderOf(elementType.type)))
+            as TypeLiteral<Collection<jakarta.inject.Provider<T>>>
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -207,9 +207,9 @@ internal fun <T> mutableCollectionOf(elementType: TypeLiteral<T>): TypeLiteral<M
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <T> javaxProviderOf(elementType: TypeLiteral<T>): TypeLiteral<javax.inject.Provider<T>> {
-    return TypeLiteral.get(Types.javaxProviderOf(elementType.type))
-            as TypeLiteral<javax.inject.Provider<T>>
+internal fun <T> javaxProviderOf(elementType: TypeLiteral<T>): TypeLiteral<jakarta.inject.Provider<T>> {
+    return TypeLiteral.get(Types.jakartaProviderOf(elementType.type))
+            as TypeLiteral<jakarta.inject.Provider<T>>
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -221,7 +221,7 @@ internal fun <T> mutableCollectionOfProvidersOf(elementType: TypeLiteral<T>):
 
 @Suppress("UNCHECKED_CAST")
 internal fun <T> mutableCollectionOfJavaxProvidersOf(elementType: TypeLiteral<T>):
-        TypeLiteral<MutableCollection<javax.inject.Provider<T>>> {
-    return TypeLiteral.get(KotlinTypes.mutableCollectionOf(Types.javaxProviderOf(elementType.type)))
-            as TypeLiteral<MutableCollection<javax.inject.Provider<T>>>
+        TypeLiteral<MutableCollection<jakarta.inject.Provider<T>>> {
+    return TypeLiteral.get(KotlinTypes.mutableCollectionOf(Types.jakartaProviderOf(elementType.type)))
+            as TypeLiteral<MutableCollection<jakarta.inject.Provider<T>>>
 }

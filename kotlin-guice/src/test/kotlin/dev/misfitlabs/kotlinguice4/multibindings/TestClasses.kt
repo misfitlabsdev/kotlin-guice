@@ -18,8 +18,8 @@
 package dev.misfitlabs.kotlinguice4.multibindings
 
 import com.google.inject.BindingAnnotation
+import jakarta.inject.Inject
 import java.util.concurrent.Callable
-import javax.inject.Inject
 
 interface A {
     fun get(): String

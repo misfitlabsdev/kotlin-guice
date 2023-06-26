@@ -22,8 +22,8 @@ import com.google.inject.Key
 import com.google.inject.Provider
 import com.google.inject.Scope
 import com.google.inject.ScopeAnnotation
+import jakarta.inject.Inject
 import java.util.concurrent.Callable
-import javax.inject.Inject
 
 interface A {
     fun get(): String

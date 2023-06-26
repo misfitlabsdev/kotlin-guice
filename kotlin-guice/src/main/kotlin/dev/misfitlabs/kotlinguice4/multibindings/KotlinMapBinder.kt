@@ -228,10 +228,10 @@ internal fun <K, V> mapOfProviderOf(
 
 @Suppress("UNCHECKED_CAST")
 internal fun <K, V> mapOfJavaxProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
-        TypeLiteral<Map<K, javax.inject.Provider<V>>> {
-    val providerType = Types.javaxProviderOf(valueType.type)
+        TypeLiteral<Map<K, jakarta.inject.Provider<V>>> {
+    val providerType = Types.jakartaProviderOf(valueType.type)
     val type = KotlinTypes.mapOf(keyType.type, providerType)
-    return TypeLiteral.get(type) as TypeLiteral<Map<K, javax.inject.Provider<V>>>
+    return TypeLiteral.get(type) as TypeLiteral<Map<K, jakarta.inject.Provider<V>>>
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -244,10 +244,10 @@ internal fun <K, V> mapOfSetOfProviderOf(keyType: TypeLiteral<K>, valueType: Typ
 
 @Suppress("UNCHECKED_CAST")
 internal fun <K, V> mapOfSetOfJavaxProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
-        TypeLiteral<Map<K, Set<javax.inject.Provider<V>>>> {
+        TypeLiteral<Map<K, Set<jakarta.inject.Provider<V>>>> {
     return TypeLiteral.get(KotlinTypes.mapOf(keyType.type,
-        KotlinTypes.setOf(Types.javaxProviderOf(valueType.type))))
-            as TypeLiteral<Map<K, Set<javax.inject.Provider<V>>>>
+        KotlinTypes.setOf(Types.jakartaProviderOf(valueType.type))))
+            as TypeLiteral<Map<K, Set<jakarta.inject.Provider<V>>>>
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -262,10 +262,10 @@ internal fun <K, V> mapOfCollectionOfProviderOf(keyType: TypeLiteral<K>, valueTy
 internal fun <K, V> mapOfCollectionOfJavaxProviderOf(
     keyType: TypeLiteral<K>,
     valueType: TypeLiteral<V>
-): TypeLiteral<Map<K, Collection<javax.inject.Provider<V>>>> {
+): TypeLiteral<Map<K, Collection<jakarta.inject.Provider<V>>>> {
     return TypeLiteral.get(KotlinTypes.mapOf(keyType.type,
-        KotlinTypes.collectionOf(Types.javaxProviderOf(valueType.type))))
-            as TypeLiteral<Map<K, Collection<javax.inject.Provider<V>>>>
+        KotlinTypes.collectionOf(Types.jakartaProviderOf(valueType.type))))
+            as TypeLiteral<Map<K, Collection<jakarta.inject.Provider<V>>>>
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -283,14 +283,14 @@ internal fun <K, V> entryOfProviderOf(
 
 @Suppress("UNCHECKED_CAST")
 internal fun <K, V> entryOfJavaxProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
-        TypeLiteral<Entry<K, javax.inject.Provider<V>>> {
+        TypeLiteral<Entry<K, jakarta.inject.Provider<V>>> {
     return TypeLiteral.get(
             Types.newParameterizedTypeWithOwner(
                     Map::class.java,
                     Entry::class.java,
                     keyType.type,
-                    Types.javaxProviderOf(valueType.type)))
-            as TypeLiteral<Entry<K, javax.inject.Provider<V>>>
+                    Types.jakartaProviderOf(valueType.type)))
+            as TypeLiteral<Entry<K, jakarta.inject.Provider<V>>>
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -309,10 +309,10 @@ internal fun <K, V> mutableMapOfProviderOf(keyType: TypeLiteral<K>, valueType: T
 
 @Suppress("UNCHECKED_CAST")
 internal fun <K, V> mutableMapOfJavaxProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
-        TypeLiteral<MutableMap<K, javax.inject.Provider<V>>> {
+        TypeLiteral<MutableMap<K, jakarta.inject.Provider<V>>> {
     return TypeLiteral.get(KotlinTypes.mutableMapOf(keyType.type,
-        Types.javaxProviderOf(valueType.type)))
-            as TypeLiteral<MutableMap<K, javax.inject.Provider<V>>>
+        Types.jakartaProviderOf(valueType.type)))
+            as TypeLiteral<MutableMap<K, jakarta.inject.Provider<V>>>
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -329,10 +329,10 @@ internal fun <K, V> mutableMapOfMutableSetOfProviderOf(
 internal fun <K, V> mutableMapOfMutableSetOfJavaxProviderOf(
     keyType: TypeLiteral<K>,
     valueType: TypeLiteral<V>
-): TypeLiteral<MutableMap<K, MutableSet<javax.inject.Provider<V>>>> {
+): TypeLiteral<MutableMap<K, MutableSet<jakarta.inject.Provider<V>>>> {
     return TypeLiteral.get(KotlinTypes.mutableMapOf(keyType.type,
-        KotlinTypes.mutableSetOf(Types.javaxProviderOf(valueType.type))))
-            as TypeLiteral<MutableMap<K, MutableSet<javax.inject.Provider<V>>>>
+        KotlinTypes.mutableSetOf(Types.jakartaProviderOf(valueType.type))))
+            as TypeLiteral<MutableMap<K, MutableSet<jakarta.inject.Provider<V>>>>
 }
 
 @Suppress("UNCHECKED_CAST")
@@ -349,8 +349,8 @@ internal fun <K, V> mutableMapOfMutableCollectionOfProviderOf(
 internal fun <K, V> mutableMapOfMutableCollectionOfJavaxProviderOf(
     keyType: TypeLiteral<K>,
     valueType: TypeLiteral<V>
-): TypeLiteral<MutableMap<K, MutableCollection<javax.inject.Provider<V>>>> {
+): TypeLiteral<MutableMap<K, MutableCollection<jakarta.inject.Provider<V>>>> {
     return TypeLiteral.get(KotlinTypes.mutableMapOf(keyType.type,
-        KotlinTypes.mutableCollectionOf(Types.javaxProviderOf(valueType.type))))
-            as TypeLiteral<MutableMap<K, MutableCollection<javax.inject.Provider<V>>>>
+        KotlinTypes.mutableCollectionOf(Types.jakartaProviderOf(valueType.type))))
+            as TypeLiteral<MutableMap<K, MutableCollection<jakarta.inject.Provider<V>>>>
 }
