@@ -36,19 +36,19 @@ internal class MapBindingSelection<K, V>(
     }
     val mutableProviderMapKey by lazy { mapKey.ofType(mutableMapOfProviderOf(keyType, valueType)) }
 
-    val javaxProviderMapKey by lazy {
-        mapKey.ofType(mapOfJavaxProviderOf(keyType, valueType))
+    val jakartaProviderMapKey by lazy {
+        mapKey.ofType(mapOfJakartaProviderOf(keyType, valueType))
     }
-    val mutableJavaxProviderMapKey by lazy {
-        mapKey.ofType(mutableMapOfJavaxProviderOf(keyType, valueType))
-    }
-
-    val setOfEntryOfJavaxProviderKey by lazy {
-        mapKey.ofType(setOf(entryOfJavaxProviderOf(keyType, valueType)))
+    val mutableJakartaProviderMapKey by lazy {
+        mapKey.ofType(mutableMapOfJakartaProviderOf(keyType, valueType))
     }
 
-    val mutableSetOfEntryOfJavaxProviderKey by lazy {
-        mapKey.ofType(mutableSetOf(entryOfJavaxProviderOf(keyType, valueType)))
+    val setOfEntryOfJakartaProviderKey by lazy {
+        mapKey.ofType(setOf(entryOfJakartaProviderOf(keyType, valueType)))
+    }
+
+    val mutableSetOfEntryOfJakartaProviderKey by lazy {
+        mapKey.ofType(mutableSetOf(entryOfJakartaProviderOf(keyType, valueType)))
     }
 
     val collectionOfProviderOfEntryOfProviderKey by lazy {
@@ -58,11 +58,11 @@ internal class MapBindingSelection<K, V>(
         mapKey.ofType(mutableCollectionOf(providerOf(entryOfProviderOf(keyType, valueType))))
     }
 
-    val collectionOfJavaxProviderOfEntryOfProviderKey by lazy {
-        mapKey.ofType(collectionOf(javaxProviderOf(entryOfProviderOf(keyType, valueType))))
+    val collectionOfJakartaProviderOfEntryOfProviderKey by lazy {
+        mapKey.ofType(collectionOf(jakartaProviderOf(entryOfProviderOf(keyType, valueType))))
     }
-    val mutableCollectionOfJavaxProviderOfEntryOfProviderKey by lazy {
-        mapKey.ofType(mutableCollectionOf(javaxProviderOf(entryOfProviderOf(keyType, valueType))))
+    val mutableCollectionOfJakartaProviderOfEntryOfProviderKey by lazy {
+        mapKey.ofType(mutableCollectionOf(jakartaProviderOf(entryOfProviderOf(keyType, valueType))))
     }
 
     val multimapKey by lazy { mapKey.ofType(mapOf(keyType, setOf(valueType))) }
@@ -77,11 +77,11 @@ internal class MapBindingSelection<K, V>(
         mapKey.ofType(mutableMapOfMutableSetOfProviderOf(keyType, valueType))
     }
 
-    val javaxProviderSetMultimapKey by lazy {
-        mapKey.ofType(mapOfSetOfJavaxProviderOf(keyType, valueType))
+    val jakartaProviderSetMultimapKey by lazy {
+        mapKey.ofType(mapOfSetOfJakartaProviderOf(keyType, valueType))
     }
-    val mutableJavaxProviderSetMultimapKey by lazy {
-        mapKey.ofType(mutableMapOfMutableSetOfJavaxProviderOf(keyType, valueType))
+    val mutableJakartaProviderSetMultimapKey by lazy {
+        mapKey.ofType(mutableMapOfMutableSetOfJakartaProviderOf(keyType, valueType))
     }
 
     val providerCollectionMultimapKey by lazy {
@@ -91,11 +91,11 @@ internal class MapBindingSelection<K, V>(
         mapKey.ofType(mutableMapOfMutableCollectionOfProviderOf(keyType, valueType))
     }
 
-    val javaxProviderCollectionMultimapKey by lazy {
-        mapKey.ofType(mapOfCollectionOfJavaxProviderOf(keyType, valueType))
+    val jakartaProviderCollectionMultimapKey by lazy {
+        mapKey.ofType(mapOfCollectionOfJakartaProviderOf(keyType, valueType))
     }
-    val mutableJavaxProviderCollectionMultimapKey by lazy {
-        mapKey.ofType(mutableMapOfMutableCollectionOfJavaxProviderOf(keyType, valueType))
+    val mutableJakartaProviderCollectionMultimapKey by lazy {
+        mapKey.ofType(mutableMapOfMutableCollectionOfJakartaProviderOf(keyType, valueType))
     }
 
     override fun equals(other: Any?): Boolean {

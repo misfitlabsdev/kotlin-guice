@@ -161,15 +161,15 @@ internal class RealKotlinMapBinder<K, V>(
 
     override fun configure() {
         bind(bindingSelection.providerMapKey).to(bindingSelection.mutableProviderMapKey)
-        bind(bindingSelection.javaxProviderMapKey).to(bindingSelection.mutableJavaxProviderMapKey)
+        bind(bindingSelection.jakartaProviderMapKey).to(bindingSelection.mutableJakartaProviderMapKey)
 
-        bind(bindingSelection.setOfEntryOfJavaxProviderKey)
-                .to(bindingSelection.mutableSetOfEntryOfJavaxProviderKey)
+        bind(bindingSelection.setOfEntryOfJakartaProviderKey)
+                .to(bindingSelection.mutableSetOfEntryOfJakartaProviderKey)
 
         bind(bindingSelection.collectionOfProviderOfEntryOfProviderKey)
                 .to(bindingSelection.mutableCollectionOfProviderOfEntryOfProviderKey)
-        bind(bindingSelection.collectionOfJavaxProviderOfEntryOfProviderKey)
-                .to(bindingSelection.mutableCollectionOfJavaxProviderOfEntryOfProviderKey)
+        bind(bindingSelection.collectionOfJakartaProviderOfEntryOfProviderKey)
+                .to(bindingSelection.mutableCollectionOfJakartaProviderOfEntryOfProviderKey)
     }
 
     override fun permitDuplicates(): KotlinMapBinder<K, V> {
@@ -227,7 +227,7 @@ internal fun <K, V> mapOfProviderOf(
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <K, V> mapOfJavaxProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
+internal fun <K, V> mapOfJakartaProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
         TypeLiteral<Map<K, jakarta.inject.Provider<V>>> {
     val providerType = Types.jakartaProviderOf(valueType.type)
     val type = KotlinTypes.mapOf(keyType.type, providerType)
@@ -243,7 +243,7 @@ internal fun <K, V> mapOfSetOfProviderOf(keyType: TypeLiteral<K>, valueType: Typ
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <K, V> mapOfSetOfJavaxProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
+internal fun <K, V> mapOfSetOfJakartaProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
         TypeLiteral<Map<K, Set<jakarta.inject.Provider<V>>>> {
     return TypeLiteral.get(KotlinTypes.mapOf(keyType.type,
         KotlinTypes.setOf(Types.jakartaProviderOf(valueType.type))))
@@ -259,7 +259,7 @@ internal fun <K, V> mapOfCollectionOfProviderOf(keyType: TypeLiteral<K>, valueTy
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <K, V> mapOfCollectionOfJavaxProviderOf(
+internal fun <K, V> mapOfCollectionOfJakartaProviderOf(
     keyType: TypeLiteral<K>,
     valueType: TypeLiteral<V>
 ): TypeLiteral<Map<K, Collection<jakarta.inject.Provider<V>>>> {
@@ -282,7 +282,7 @@ internal fun <K, V> entryOfProviderOf(
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <K, V> entryOfJavaxProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
+internal fun <K, V> entryOfJakartaProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
         TypeLiteral<Entry<K, jakarta.inject.Provider<V>>> {
     return TypeLiteral.get(
             Types.newParameterizedTypeWithOwner(
@@ -308,7 +308,7 @@ internal fun <K, V> mutableMapOfProviderOf(keyType: TypeLiteral<K>, valueType: T
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <K, V> mutableMapOfJavaxProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
+internal fun <K, V> mutableMapOfJakartaProviderOf(keyType: TypeLiteral<K>, valueType: TypeLiteral<V>):
         TypeLiteral<MutableMap<K, jakarta.inject.Provider<V>>> {
     return TypeLiteral.get(KotlinTypes.mutableMapOf(keyType.type,
         Types.jakartaProviderOf(valueType.type)))
@@ -326,7 +326,7 @@ internal fun <K, V> mutableMapOfMutableSetOfProviderOf(
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <K, V> mutableMapOfMutableSetOfJavaxProviderOf(
+internal fun <K, V> mutableMapOfMutableSetOfJakartaProviderOf(
     keyType: TypeLiteral<K>,
     valueType: TypeLiteral<V>
 ): TypeLiteral<MutableMap<K, MutableSet<jakarta.inject.Provider<V>>>> {
@@ -346,7 +346,7 @@ internal fun <K, V> mutableMapOfMutableCollectionOfProviderOf(
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <K, V> mutableMapOfMutableCollectionOfJavaxProviderOf(
+internal fun <K, V> mutableMapOfMutableCollectionOfJakartaProviderOf(
     keyType: TypeLiteral<K>,
     valueType: TypeLiteral<V>
 ): TypeLiteral<MutableMap<K, MutableCollection<jakarta.inject.Provider<V>>>> {

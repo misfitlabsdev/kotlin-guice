@@ -105,12 +105,12 @@ internal class RealKotlinMultibinder<T>(private val delegate: Multibinder<T>, ke
     private val elementType = key.typeLiteral
     private val setKey = setKeyFor(key)
     private val collectionOfProvidersKey = setKey.ofType(collectionOfProvidersOf(elementType))
-    private val collectionOfJavaxProvidersKey = setKey
-            .ofType(collectionOfJavaxProvidersOf(elementType))
+    private val collectionOfJakartaProvidersKey = setKey
+            .ofType(collectionOfJakartaProvidersOf(elementType))
     private val mutableCollectionOfProvidersKey = setKey
             .ofType(mutableCollectionOfProvidersOf(elementType))
-    private val mutableCollectionOfJavaxProvidersKey = setKey
-            .ofType(mutableCollectionOfJavaxProvidersOf(elementType))
+    private val mutableCollectionOfJakartaProvidersKey = setKey
+            .ofType(mutableCollectionOfJakartaProvidersOf(elementType))
     private val setName = RealElement.nameOf(key)
 
     private fun setKeyFor(key: Key<T>): Key<Set<T>> {
@@ -125,7 +125,7 @@ internal class RealKotlinMultibinder<T>(private val delegate: Multibinder<T>, ke
 
     override fun configure() {
         bind(collectionOfProvidersKey).to(mutableCollectionOfProvidersKey)
-        bind(collectionOfJavaxProvidersKey).to(mutableCollectionOfJavaxProvidersKey)
+        bind(collectionOfJakartaProvidersKey).to(mutableCollectionOfJakartaProvidersKey)
     }
 
     override fun addBinding(): KotlinLinkedBindingBuilder<T> {
@@ -188,7 +188,7 @@ internal fun <T> collectionOfProvidersOf(elementType: TypeLiteral<T>):
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <T> collectionOfJavaxProvidersOf(elementType: TypeLiteral<T>):
+internal fun <T> collectionOfJakartaProvidersOf(elementType: TypeLiteral<T>):
         TypeLiteral<Collection<jakarta.inject.Provider<T>>> {
     return TypeLiteral.get(KotlinTypes.collectionOf(Types.jakartaProviderOf(elementType.type)))
             as TypeLiteral<Collection<jakarta.inject.Provider<T>>>
@@ -207,7 +207,7 @@ internal fun <T> mutableCollectionOf(elementType: TypeLiteral<T>): TypeLiteral<M
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <T> javaxProviderOf(elementType: TypeLiteral<T>): TypeLiteral<jakarta.inject.Provider<T>> {
+internal fun <T> jakartaProviderOf(elementType: TypeLiteral<T>): TypeLiteral<jakarta.inject.Provider<T>> {
     return TypeLiteral.get(Types.jakartaProviderOf(elementType.type))
             as TypeLiteral<jakarta.inject.Provider<T>>
 }
@@ -220,7 +220,7 @@ internal fun <T> mutableCollectionOfProvidersOf(elementType: TypeLiteral<T>):
 }
 
 @Suppress("UNCHECKED_CAST")
-internal fun <T> mutableCollectionOfJavaxProvidersOf(elementType: TypeLiteral<T>):
+internal fun <T> mutableCollectionOfJakartaProvidersOf(elementType: TypeLiteral<T>):
         TypeLiteral<MutableCollection<jakarta.inject.Provider<T>>> {
     return TypeLiteral.get(KotlinTypes.mutableCollectionOf(Types.jakartaProviderOf(elementType.type)))
             as TypeLiteral<MutableCollection<jakarta.inject.Provider<T>>>

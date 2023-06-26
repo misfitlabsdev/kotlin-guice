@@ -30,11 +30,11 @@ internal class KotlinMultimapModule<K, V>(private val bindingSelection: MapBindi
         bind(bindingSelection.multimapKey).to(bindingSelection.mutableMultimapKey)
         bind(bindingSelection.providerSetMultimapKey)
                 .to(bindingSelection.mutableProviderSetMultimapKey)
-        bind(bindingSelection.javaxProviderSetMultimapKey)
-                .to(bindingSelection.mutableJavaxProviderSetMultimapKey)
+        bind(bindingSelection.jakartaProviderSetMultimapKey)
+                .to(bindingSelection.mutableJakartaProviderSetMultimapKey)
         bind(bindingSelection.providerCollectionMultimapKey)
                 .to(bindingSelection.mutableProviderCollectionMultimapKey)
-        bind(bindingSelection.javaxProviderCollectionMultimapKey)
-                .to(bindingSelection.mutableJavaxProviderCollectionMultimapKey)
+        bind(bindingSelection.jakartaProviderCollectionMultimapKey)
+                .to(bindingSelection.mutableJakartaProviderCollectionMultimapKey)
     }
 }
