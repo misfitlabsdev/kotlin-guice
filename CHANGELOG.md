@@ -1,7 +1,7 @@
 Change Log
 ==========
 
-## [3.0.0] - _In Development_
+## [3.0.0] - _2023-06-26_
 
 ### Changed
 Upgrade to Guice 7.0.0
