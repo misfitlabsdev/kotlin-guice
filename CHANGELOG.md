@@ -1,7 +1,11 @@
 Change Log
 ==========
 
-## [1.7.0] - _In Development_
+## [3.0.0] - _In Development_
+
+### Changed
+Upgrade to Guice 7.0.0
+Move from javax to jakarta namespace
 
 ## [1.6.0] - _2022-02-12_
 
